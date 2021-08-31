@@ -379,10 +379,10 @@ knitr::include_graphics("img/unsupervised.png")
 ## Conceptos Importantes `r emo::ji("bulb")`
 
 
-* __Parámetros__ son variables que definen el modelo entrenado mediante aprendizaje. Los parámetros son directamente modificados por el algoritmos de aprendizaje basado en los datos de entrenamiento. Ej, la pendiente y la ordenada de una recta en regresión lineal simple. 
+* __Parámetros__ son variables que definen el modelo entrenado mediante aprendizaje. Los parámetros son directamente modificados por el algoritmo de aprendizaje basado en los datos de entrenamiento. Ej, la pendiente y la ordenada de una recta en regresión lineal simple. 
 <br>
 
-* __Hiperparámetros__ son entradas de un algoritmo de ML que influencian la performance del modelo. No pertenecen a los datos de entrenamiento y no pueden ser aprendidos mediante el algoritmo de ML. Generalmente hacemos una búsqueda de hiperparámetros (en grilla o de manera aleatoria).
+* __Hiperparámetros__ son *variables internas* de un algoritmo de ML que influencian la performance del modelo. No pueden ser aprendidos mediante el algoritmo de ML, ya que son definidos por el usuario, aunque lo más común es realizar una búsqueda de hiperparámetros (en grilla o de manera aleatoria son las formas de búsqueda más comunes).
 Ej: profundidad de un árbol en árboles de decisión, el K óptima en KNN.
 
 
@@ -406,6 +406,13 @@ knitr::include_graphics("img/leo-b.png")
 
 ## Modelado Estadístico
 
+
+  
+```{r echo=FALSE, out.width = '50%',  fig.align='center'}
+knitr::include_graphics("img/stats-model.png")
+```
+
+
 * Énfasis en f(x). El modelo se postula en base a supuestos sobre f(x)
 * Conocimiento acumulado, teoría, diseño de experimentos.
 * Los parámetros son estimados con los datos y luego se realizan las
@@ -419,6 +426,14 @@ varianza.
 ---
 
 ## Modelado Algorítmico (a.k.a ML)
+
+
+  
+```{r echo=FALSE, out.width = '50%',  fig.align='center'}
+knitr::include_graphics("img/alg-model.png")
+```
+
+
 
 * Énfasis en la predicción. 
 * El enfoque es encontrar una función f (x) -un algoritmo- que opera
@@ -921,6 +936,55 @@ Veamos un ejemplo práctico
 
 
 
+```{r echo=FALSE, out.width = '70%',  fig.align='center'}
+knitr::include_graphics("img/cia-market.png")
+```
+
+
+Consideremos dos clientes potenciales de un sistema de huellas dactilares. 
+
+* Uno es un **supermercado** que lo usará en el mostrador de pago para verificar que usted es miembro
+de un programa de descuento. 
+* El otro es la **CIA** que lo usará en la entrada de una instalación, para verificar que Ud es personal autorizado para ingresar a esa instalación.
+
+
+---
+
+### FP vs FN
+
+
+* Para el supermercado, un **falso rechazo (falso negativo) es costoso** porque si un cliente recibe un 
+rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro. 
+* Por otro lado, el costo de una **falsa aceptación (falso positivo) es menor**. El supermercado regala un descuento a alguien que no se lo merecía, sin mayores prejuicios para el supermercado. 
+
+
+--
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/MARKET.png")
+```
+
+
+
+
+---
+
+### FP vs FN
+
+* Para la CIA, sin embargo, una **falsa aceptación (falso positivo) es un desastre**. Una persona no autorizada se beneficiará del acceso a una instalación muy sensible. 
+* **El falso rechazo (falso negativo)**, sin embargo, **puede tolerarse**, ya que las personas autorizadas son empleados (en lugar de clientes como el caso del supermercado).
+
+
+--
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/CIA.png")
+```
+
 
 
 ---
@@ -958,6 +1022,22 @@ La curva ROC nos permite obtener el AUC o área bajo la curva. El AUC oscila en 
 Fuente: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es
 
 
+
+---
+
+## 
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt5[
+
+La curva ROC es independiente del threshold seleccionado.
+
+]
+
+![](https://raw.githubusercontent.com/dariyasydykova/open_projects/master/ROC_animation/animations/cutoff.gif) 
+
+
+Fuente: https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/
 
 ---
 
@@ -1031,7 +1111,7 @@ knitr::include_graphics("img/bias-variance22.png")
 
 
 
-
+.footnote[<sup>*</sup> Machine Learning Engineering]
 
 ---
 
