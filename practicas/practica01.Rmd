@@ -1,0 +1,72 @@
+---
+title: "Practica 1 - Introducción a ML y tidymodels"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mi primer modelo de Machine Learning
+
+## Dataset
+
+El dataset corresponde a Titanic, que se encuentra disponible en Kaggle; una plataforma de competencia de machine learning. 
+Más info en: https://www.kaggle.com/c/titanic/overview 
+
+#### Cargo las librerias
+
+```{r eval=FALSE}
+#si no tengo instalado la libreria, la instalo
+install.packages(tidymodels)
+```
+
+
+```{r warning=FALSE, message=FALSE}
+library(tidymodels)
+library(tidyverse)
+```
+
+#### Ingreso los datos
+
+```{r}
+#ingreso los datos para entrenar el modelo (training)
+train <- read.csv("https://raw.githubusercontent.com/data-datum/datasets/main/train-titanic.csv")
+```
+
+### Importante
+
+En esta instancia se deben dividir los datos en train y test. 
+Como nos proporcionan separados ambos datasets, no debemos preocuparnos, pero si es importante en esta instancia, dividirlos. 
+
+
+### Los datos
+```{r}
+glimpse(train)
+```
+
+Como podemos ver tenemos 12 variables (columnas) y 891 filas de datos. 
+Nuestra variable a predecir es Survived, es decir, si el pasajero sobrevivió o no. 
+Después tenemo variables numéricas y también categóricas. 
+
+
+**Es importante que borremos la variable PassengerID para evitar que el algoritmo memorice la posición junto con la variable a predecir**
+
+
+```{r}
+train_limpio <- train %>%
+  drop_na() %>%
+  select(-PassengerId, -Name, -Cabin) 
+head(train)
+```
+
+
+## Pequeño análisis exploratorio 
+Esta etapa nos ayuda a visualizar distribuciones de probabilidad de las variables, si hay algun outlier y demás. 
+
+```{r}
+#veamos si hay valores perdidos
+is.na(train) %>% colSums()
+```
+
+

@@ -50,9 +50,6 @@ class: animated slideInRight fadeOutLeft, middle
 ### Clase 1a: Genearalidades. Conceptos Fundamentales
 
 
----
-
-### Presentación
 
 ---
 
@@ -78,15 +75,22 @@ class: animated slideInRight fadeOutLeft, middle
 
 ---
 
-## Machine Learning. Concepto
+## Campo de ML
 
-
-
-* El aprendizaje automático se trata de extraer conocimiento de los datos. 
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+El aprendizaje automático se trata de **extraer conocimiento de los datos** 
 (*Andreas Müeller - Introduction to Machine Learning with Python*)
+]
 
-* 
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
+El aprendizaje automático se ocupa de la **construcción de algoritmos que, para ser útiles, se basan en una colección de ejemplos de algún fenómeno.** Los ejemplos pueden provenir de la naturaleza, ser recolectados por humanos o generados por otro algoritmo.
+
+El aprendizaje automático también se puede definir como el proceso de resolución de un **problema práctico** mediante,
+1) recopilar un conjunto de datos y
+2) entrenar algorítmicamente un modelo estadístico basado en ese conjunto de datos
+(*Andriy Burkov - Machine Learning Engineering*)
+]
 
 
 ---
@@ -94,11 +98,22 @@ class: animated slideInRight fadeOutLeft, middle
 ## ¿Qué es el aprendizaje automático?
 
 
-&lt;img src="img/AI-ml.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+.left-column[
+
+* Subcampo de la inteligencia artificial. 
+
+* Machine Learning vs Deep Learning
+
+ 
+]
+
+.right-column[
+
+&lt;img src="img/AI-ml.png" width="60%" style="display: block; margin: auto;" /&gt;
 
 
-El aprendizaje automático es un subcampo de la inteligencia artificial. 
-
+]
 
 
 ---
@@ -112,15 +127,29 @@ El aprendizaje automático es un subcampo de la inteligencia artificial.
 Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine-Learning.pdf)
 
 
----
 
-##  Problemas de ML
-
-* 
 
 ---
 
+## Cuando es apropiado utilizar ML para un problema
 
+* Cuando el problema es muy complejo para programarlo. 
+
+
+* Cuando el problema está constantemente cambiando.
+
+
+* Cuando es un problema en el orden de la percepción (visión, lenguaje)
+
+
+* Cuando es un fenómeno no estudiado. 
+
+
+* Cuando es un problema con un objetivo simple.
+
+
+.footnote[Fuente: *Machine Learning Engineering*]
+---
 
 ## Tipos de aprendizaje
         
@@ -144,15 +173,14 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 **Usado para:**
 
-* Filtro de Spam
+* Filtro de Spam (spam/jam)
 
-* Detección de lenguaje
+* Detección de lenguaje (español, francés, etc)
 
-* Análisis de sentimientos
+* Análisis de sentimientos (positivo/negativo)
 
-* Reconocer dígitos escritos a mano
+* Reconocer dígitos escritos a mano (0 al 9)
 
-* Detección de fraude
 
 ]
 
@@ -175,7 +203,11 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 **Usado para:**
 
-*  Predicción de precios
+* Predicción de precios de casas según variables geográficas
+
+* Establecer relaciones entre el ingreso y variables demográficas
+
+* Predicción de accidentes automovilísticos
 
 
 ]
@@ -196,7 +228,7 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 &lt;img src="img/supervised1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -208,7 +240,7 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 &lt;img src="img/supervised.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -227,7 +259,6 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 *  Analizar y agregar un rótulo en nuevos datos. 
 
-*
 
 
 ]
@@ -257,7 +288,7 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 - Modelado de tópicos
 
-- 
+
 
 
 ]
@@ -277,7 +308,7 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 &lt;img src="img/unsupervised1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -289,7 +320,7 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 
 &lt;img src="img/unsupervised.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -308,14 +339,14 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 * __Set de prueba__ son los datos utilizados para medir el desempeño del modelo, entre un conjunto de candidatos. 
 &lt;br&gt;
 
-* __Atributos, predictores, variables independientes o descriptores__ son los datos de entrada para la ecuación de predicción.
+* __Atributos, predictores, features, variables independientes o descriptores__ son los datos de entrada para la ecuación de predicción.
 &lt;br&gt; 
-* __Salida, variable dependiente, variable respuesta, clase, o "target"__ es la cantidad a ser predicha. 
+* __Salida, variable dependiente, variable respuesta, clase, o "target"__ es la cantidad/clase a ser predicha. 
 &lt;br&gt;
 
 
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Applied Predictive Modeling]
+.footnote[Fuente: *Applied Predictive Modeling*]
 
 
 
@@ -331,7 +362,7 @@ Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine
 Ej: profundidad de un árbol en árboles de decisión, el K óptima en KNN.
 
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning Engineering]
+.footnote[Fuente: *Machine Learning Engineering*]
 
 
 ---
@@ -342,7 +373,7 @@ Ej: profundidad de un árbol en árboles de decisión, el K óptima en KNN.
 
 &lt;img src="img/leo-b.png" width="70%" style="display: block; margin: auto;" /&gt;
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; http://www2.math.uu.se/~thulin/mm/breiman.pdf]
+.footnote[Fuente: *http://www2.math.uu.se/~thulin/mm/breiman.pdf*]
 
 
 ---
@@ -362,7 +393,7 @@ predicciones.
 varianza. 
 
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; http://www2.math.uu.se/~thulin/mm/breiman.pdf]
+.footnote[Fuente: *http://www2.math.uu.se/~thulin/mm/breiman.pdf*]
 
 ---
 
@@ -381,7 +412,7 @@ sobre las x para predecir las y.
 * Evaluación del modelo: performance predictiva
 
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; http://www2.math.uu.se/~thulin/mm/breiman.pdf]
+.footnote[Fuente: *http://www2.math.uu.se/~thulin/mm/breiman.pdf*]
 
 
 
@@ -419,7 +450,7 @@ sobre las x para predecir las y.
 * **Entrenar el modelo final** con todos los datos disponibles.
 
 
-.footnote[https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels]
+.footnote[Fuente: *https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels*]
 ---
 
 
@@ -438,7 +469,7 @@ sobre las x para predecir las y.
 #### - **En base a lo aprendido, refinas tus preguntas e incluso, generas nuevas.**
 
 ]
-.footnote[Fuente: [R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]
+.footnote[Fuente:*[R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]*
 
 ---
 
@@ -459,7 +490,7 @@ sobre las x para predecir las y.
 
 ]
 
-.footnote[Fuente: [R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]
+.footnote[Fuente: *[R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]*
 ---
 
 ## ¿Por qué es importante el Análisis exploratorio de datos? 💡
@@ -566,7 +597,7 @@ Podemos decir que modelar (mediante ML) implica pensar en todos estos aspectos:
 &lt;img src="img/train-val-test.jpeg" width="40%" style="display: block; margin: auto;" /&gt;
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 
 
 
@@ -582,7 +613,7 @@ El resampleo se utiliza en ML para estimar el desempeño de un modelo.
 &lt;img src="img/resampling.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 
 ---
 
@@ -595,7 +626,7 @@ El resampleo se utiliza en ML para estimar el desempeño de un modelo.
 &lt;img src="img/CV.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 
 ---
 
@@ -619,7 +650,7 @@ El resampleo se utiliza en ML para estimar el desempeño de un modelo.
 
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 ---
 
 
@@ -628,13 +659,6 @@ El resampleo se utiliza en ML para estimar el desempeño de un modelo.
 ### La diferencia radica en que la validación cruzada no es con reemplazo mientras que bootstrap sí lo es. 
 ]
 
-
-
----
-
-### Error de entrenamiento y generalización 
-
-Cuando entrenamos nuestro modelo de ML, al estar trabajando en situaciones estocásticas (probabilísticas), vamos a tener dos fuentes de error:
 
 
 
@@ -773,7 +797,7 @@ Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el 
   
 &lt;img src="img/f1.svg" width="80%" style="display: block; margin: auto;" /&gt;
 
-.footnote[https://deepai.org/machine-learning-glossary-and-terms/f-score]
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
 ---
 
@@ -787,7 +811,7 @@ Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de
 
 
 
-.footnote[https://deepai.org/machine-learning-glossary-and-terms/f-score]
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
 ---
 
@@ -799,7 +823,7 @@ Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de
 &lt;img src="img/f1-c.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
-.footnote[https://deepai.org/machine-learning-glossary-and-terms/f-score]
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
 
 ---
@@ -815,7 +839,7 @@ Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de
 
 ]
 
-.footnote[https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/]
+.footnote[*https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/*]
 
 
 ---
@@ -846,7 +870,7 @@ Consideremos dos clientes potenciales de un sistema de huellas dactilares.
 de un programa de descuento. 
 * El otro es la **CIA** que lo usará en la entrada de una instalación, para verificar que Ud es personal autorizado para ingresar a esa instalación.
 
-
+.footnote[Fuente: *Learning from data*]
 ---
 
 ### FP vs FN
@@ -857,6 +881,8 @@ rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro.
 * Por otro lado, el costo de una **falsa aceptación (falso positivo) es menor**. El supermercado regala un descuento a alguien que no se lo merecía, sin mayores prejuicios para el supermercado. 
 
 
+.footnote[Fuente: *Learning from data*]
+
 --
 
 
@@ -865,6 +891,7 @@ rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro.
 
 
 
+.footnote[Fuente: *Learning from data*]
 
 ---
 
@@ -874,6 +901,8 @@ rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro.
 * **El falso rechazo (falso negativo)**, sin embargo, **puede tolerarse**, ya que las personas autorizadas son empleados (en lugar de clientes como el caso del supermercado).
 
 
+.footnote[Fuente: *Learning from data*]
+
 --
 
 
@@ -881,6 +910,7 @@ rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro.
 &lt;img src="img/CIA.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
+.footnote[Fuente: *Learning from data*]
 
 ---
 
@@ -896,7 +926,7 @@ El AUC es conveniente por las dos razones siguientes:
 * El AUC es invariable con respecto al umbral de clasificación. Mide la calidad de las predicciones del modelo, sin tener en cuenta qué umbral de clasificación se elige.
 
 
-Fuente: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es
+.footnote[Fuente: *https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es*]
 
 
 ---
@@ -912,7 +942,7 @@ Fuente: https://developers.google.com/machine-learning/crash-course/classificati
 La curva ROC nos permite obtener el AUC o área bajo la curva. El AUC oscila en valor del 0 al 1. Un modelo cuyas predicciones son un 100% incorrectas tiene un AUC de 0.0; otro cuyas predicciones son un 100% correctas tiene un AUC de 1.0.
 
 
-Fuente: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es
+.footnote[Fuente: *https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es*]
 
 
 
@@ -930,16 +960,16 @@ La curva ROC es independiente del threshold seleccionado.
 ![](https://raw.githubusercontent.com/dariyasydykova/open_projects/master/ROC_animation/animations/cutoff.gif) 
 
 
-Fuente: https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/
+.footnote[Fuente: *https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/*]
 
 ---
 
 ### Underfitting - Overfitting
 
   
-&lt;img src="img/under-over.png" width="90%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/under-over.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks
+.footnote[*https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks*]
 
 ---
 
@@ -956,7 +986,7 @@ Cuando un modelo comete muchos errores en el entrenamiento, decimos que tienen u
 * Mejores Features
 * Conseguir más datoss.
 
-
+.footnote[*Machine Learning Engineering*]
 ---
 
 ### Overfitting
@@ -974,7 +1004,7 @@ Cuando un modelo tiene una buena performance en el set de validación pero mala 
 
 
 
-
+.footnote[*Machine Learning Engineering*]
 
 ---
 
@@ -996,11 +1026,11 @@ Cuando un modelo tiene una buena performance en el set de validación pero mala 
 En la práctica, por reducir la varianza, se incrementa el bias, y viceversa. En otras palabras, por reducir el overfitting se aumenta el underfitting y viceversa. A esto llamamos bias-variance tradeoff. Por tener un modelo que ajuste de manera perfecta el set de training terminamos con un modelo pobre para los datos de test. 
 
   
-&lt;img src="img/bias-variance22.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/bias-variance22.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning Engineering]
+.footnote[*Machine Learning Engineering*]
 
 ---
 
@@ -1024,11 +1054,9 @@ En la práctica, por reducir la varianza, se incrementa el bias, y viceversa. En
 *Para una introducción visual ver: http://www.r2d3.us/visual-intro-to-machine-learning-part-2/*
 
 
-.footnote[&lt;sup&gt;*&lt;/sup&gt; Machine Learning with R, the tidyverse and mlr]
 
 
-
-
+.footnote[*Machine Learning with R, the tidyverse and mlr*]
 ---
 
 class: inverse, center, middle
@@ -1066,7 +1094,7 @@ El objetivo de Tidymodels es además hacerlo **en un formato ordenado**.
   
 &lt;img src="img/modeling.png" width="100%" style="display: block; margin: auto;" /&gt;
 
-.footnote[Sitio web: https://www.tmwr.org/software-modeling.html]
+.footnote[Fuente: *https://www.tmwr.org/software-modeling.html*]
 
 
 ---
@@ -1219,7 +1247,9 @@ http://www2.math.uu.se/~thulin/mm/breiman.pdf
 for physicists (paper)
 https://www.sciencedirect.com/science/article/pii/S0370157319300766 
 
-* Imágenes tomadas de https://vas3k.com/blog/machine_learning/
+* Imágenes tomadas de https://vas3k.com/blog/machine_learning/ 
+
+* Machine Learning Engineering http://www.mlebook.com/wiki/doku.php
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

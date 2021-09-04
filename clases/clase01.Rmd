@@ -81,9 +81,6 @@ xaringanExtra::use_fit_screen()
 ### Clase 1a: Genearalidades. Conceptos Fundamentales
 
 
----
-
-### Presentación
 
 ---
 
@@ -109,15 +106,22 @@ xaringanExtra::use_fit_screen()
 
 ---
 
-## Machine Learning. Concepto
+## Campo de ML
 
-
-
-* El aprendizaje automático se trata de extraer conocimiento de los datos. 
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+El aprendizaje automático se trata de **extraer conocimiento de los datos** 
 (*Andreas Müeller - Introduction to Machine Learning with Python*)
+]
 
-* 
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
+El aprendizaje automático se ocupa de la **construcción de algoritmos que, para ser útiles, se basan en una colección de ejemplos de algún fenómeno.** Los ejemplos pueden provenir de la naturaleza, ser recolectados por humanos o generados por otro algoritmo.
+
+El aprendizaje automático también se puede definir como el proceso de resolución de un **problema práctico** mediante,
+1) recopilar un conjunto de datos y
+2) entrenar algorítmicamente un modelo estadístico basado en ese conjunto de datos
+(*Andriy Burkov - Machine Learning Engineering*)
+]
 
 
 ---
@@ -125,13 +129,24 @@ xaringanExtra::use_fit_screen()
 ## ¿Qué es el aprendizaje automático?
 
 
-```{r echo=FALSE, out.width = '50%',  fig.align='center'}
+
+.left-column[
+
+* Subcampo de la inteligencia artificial. 
+
+* Machine Learning vs Deep Learning
+
+ 
+]
+
+.right-column[
+
+```{r echo=FALSE, out.width = '60%',  fig.align='center'}
 knitr::include_graphics("img/AI-ml.png")
 ```
 
 
-El aprendizaje automático es un subcampo de la inteligencia artificial. 
-
+]
 
 
 ---
@@ -147,15 +162,29 @@ knitr::include_graphics("img/ml-related.png")
 Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine-Learning.pdf)
 
 
----
 
-##  Problemas de ML
-
-* 
 
 ---
 
+## Cuando es apropiado utilizar ML para un problema
 
+* Cuando el problema es muy complejo para programarlo. 
+
+
+* Cuando el problema está constantemente cambiando.
+
+
+* Cuando es un problema en el orden de la percepción (visión, lenguaje)
+
+
+* Cuando es un fenómeno no estudiado. 
+
+
+* Cuando es un problema con un objetivo simple.
+
+
+.footnote[Fuente: *Machine Learning Engineering*]
+---
 
 ## Tipos de aprendizaje
         
@@ -183,15 +212,14 @@ knitr::include_graphics("img/classicML.jpg")
 
 **Usado para:**
 
-* Filtro de Spam
+* Filtro de Spam (spam/jam)
 
-* Detección de lenguaje
+* Detección de lenguaje (español, francés, etc)
 
-* Análisis de sentimientos
+* Análisis de sentimientos (positivo/negativo)
 
-* Reconocer dígitos escritos a mano
+* Reconocer dígitos escritos a mano (0 al 9)
 
-* Detección de fraude
 
 ]
 
@@ -216,7 +244,11 @@ knitr::include_graphics("img/classification.jpg")
 
 **Usado para:**
 
-*  Predicción de precios
+* Predicción de precios de casas según variables geográficas
+
+* Establecer relaciones entre el ingreso y variables demográficas
+
+* Predicción de accidentes automovilísticos
 
 
 ]
@@ -241,7 +273,7 @@ knitr::include_graphics("img/regression.jpg")
 knitr::include_graphics("img/supervised1.png")
 ```
 
-.footnote[<sup>*</sup> Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -255,7 +287,7 @@ knitr::include_graphics("img/supervised1.png")
 knitr::include_graphics("img/supervised.png")
 ```
 
-.footnote[<sup>*</sup> Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -274,7 +306,6 @@ knitr::include_graphics("img/supervised.png")
 
 *  Analizar y agregar un rótulo en nuevos datos. 
 
-*
 
 
 ]
@@ -306,7 +337,7 @@ knitr::include_graphics("img/clustering.jpg")
 
 - Modelado de tópicos
 
-- 
+
 
 
 ]
@@ -330,7 +361,7 @@ knitr::include_graphics("img/PCA.jpg")
 knitr::include_graphics("img/unsupervised1.png")
 ```
 
-.footnote[<sup>*</sup> Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -344,7 +375,7 @@ knitr::include_graphics("img/unsupervised1.png")
 knitr::include_graphics("img/unsupervised.png")
 ```
 
-.footnote[<sup>*</sup> Machine Learning with R, the tidyverse and mlr]
+.footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
 
@@ -363,14 +394,14 @@ knitr::include_graphics("img/unsupervised.png")
 * __Set de prueba__ son los datos utilizados para medir el desempeño del modelo, entre un conjunto de candidatos. 
 <br>
 
-* __Atributos, predictores, variables independientes o descriptores__ son los datos de entrada para la ecuación de predicción.
+* __Atributos, predictores, features, variables independientes o descriptores__ son los datos de entrada para la ecuación de predicción.
 <br> 
-* __Salida, variable dependiente, variable respuesta, clase, o "target"__ es la cantidad a ser predicha. 
+* __Salida, variable dependiente, variable respuesta, clase, o "target"__ es la cantidad/clase a ser predicha. 
 <br>
 
 
 
-.footnote[<sup>*</sup> Applied Predictive Modeling]
+.footnote[Fuente: *Applied Predictive Modeling*]
 
 
 
@@ -386,7 +417,7 @@ knitr::include_graphics("img/unsupervised.png")
 Ej: profundidad de un árbol en árboles de decisión, el K óptima en KNN.
 
 
-.footnote[<sup>*</sup> Machine Learning Engineering]
+.footnote[Fuente: *Machine Learning Engineering*]
 
 
 ---
@@ -399,7 +430,7 @@ Ej: profundidad de un árbol en árboles de decisión, el K óptima en KNN.
 knitr::include_graphics("img/leo-b.png")
 ```
 
-.footnote[<sup>*</sup> http://www2.math.uu.se/~thulin/mm/breiman.pdf]
+.footnote[Fuente: *http://www2.math.uu.se/~thulin/mm/breiman.pdf*]
 
 
 ---
@@ -421,7 +452,7 @@ predicciones.
 varianza. 
 
 
-.footnote[<sup>*</sup> http://www2.math.uu.se/~thulin/mm/breiman.pdf]
+.footnote[Fuente: *http://www2.math.uu.se/~thulin/mm/breiman.pdf*]
 
 ---
 
@@ -442,7 +473,7 @@ sobre las x para predecir las y.
 * Evaluación del modelo: performance predictiva
 
 
-.footnote[<sup>*</sup> http://www2.math.uu.se/~thulin/mm/breiman.pdf]
+.footnote[Fuente: *http://www2.math.uu.se/~thulin/mm/breiman.pdf*]
 
 
 
@@ -480,7 +511,7 @@ sobre las x para predecir las y.
 * **Entrenar el modelo final** con todos los datos disponibles.
 
 
-.footnote[https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels]
+.footnote[Fuente: *https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels*]
 ---
 
 
@@ -499,7 +530,7 @@ sobre las x para predecir las y.
 #### - **En base a lo aprendido, refinas tus preguntas e incluso, generas nuevas.**
 
 ]
-.footnote[Fuente: [R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]
+.footnote[Fuente:*[R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]*
 
 ---
 
@@ -520,7 +551,7 @@ sobre las x para predecir las y.
 
 ]
 
-.footnote[Fuente: [R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]
+.footnote[Fuente: *[R para Ciencia de  Datos](https://es.r4ds.hadley.nz/an%C3%A1lisis-exploratorio-de-datos-eda.html)]*
 ---
 
 ## ¿Por qué es importante el Análisis exploratorio de datos? `r emo::ji("bulb")`
@@ -631,7 +662,7 @@ knitr::include_graphics("img/train-val-test.jpeg")
 ```
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 
 
 
@@ -649,7 +680,7 @@ knitr::include_graphics("img/resampling.png")
 ```
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 
 ---
 
@@ -664,7 +695,7 @@ knitr::include_graphics("img/CV.png")
 ```
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 
 ---
 
@@ -690,7 +721,7 @@ knitr::include_graphics("img/bootstrap.png")
 
 
 
-.footnote[Fuente: https://www.tmwr.org/resampling.html]
+.footnote[Fuente: *https://www.tmwr.org/resampling.html*]
 ---
 
 
@@ -699,13 +730,6 @@ knitr::include_graphics("img/bootstrap.png")
 ### La diferencia radica en que la validación cruzada no es con reemplazo mientras que bootstrap sí lo es. 
 ]
 
-
-
----
-
-### Error de entrenamiento y generalización 
-
-Cuando entrenamos nuestro modelo de ML, al estar trabajando en situaciones estocásticas (probabilísticas), vamos a tener dos fuentes de error:
 
 
 
@@ -866,7 +890,7 @@ Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el 
 knitr::include_graphics("img/f1.svg")
 ```
 
-.footnote[https://deepai.org/machine-learning-glossary-and-terms/f-score]
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
 ---
 
@@ -882,7 +906,7 @@ knitr::include_graphics("img/ripe-apples.png")
 
 
 
-.footnote[https://deepai.org/machine-learning-glossary-and-terms/f-score]
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
 ---
 
@@ -898,7 +922,7 @@ knitr::include_graphics("img/f1-c.png")
 ```
 
 
-.footnote[https://deepai.org/machine-learning-glossary-and-terms/f-score]
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
 
 ---
@@ -914,7 +938,7 @@ knitr::include_graphics("img/f1-c.png")
 
 ]
 
-.footnote[https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/]
+.footnote[*https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/*]
 
 
 ---
@@ -947,7 +971,7 @@ Consideremos dos clientes potenciales de un sistema de huellas dactilares.
 de un programa de descuento. 
 * El otro es la **CIA** que lo usará en la entrada de una instalación, para verificar que Ud es personal autorizado para ingresar a esa instalación.
 
-
+.footnote[Fuente: *Learning from data*]
 ---
 
 ### FP vs FN
@@ -957,6 +981,8 @@ de un programa de descuento.
 rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro. 
 * Por otro lado, el costo de una **falsa aceptación (falso positivo) es menor**. El supermercado regala un descuento a alguien que no se lo merecía, sin mayores prejuicios para el supermercado. 
 
+
+.footnote[Fuente: *Learning from data*]
 
 --
 
@@ -968,6 +994,7 @@ knitr::include_graphics("img/MARKET.png")
 
 
 
+.footnote[Fuente: *Learning from data*]
 
 ---
 
@@ -976,6 +1003,8 @@ knitr::include_graphics("img/MARKET.png")
 * Para la CIA, sin embargo, una **falsa aceptación (falso positivo) es un desastre**. Una persona no autorizada se beneficiará del acceso a una instalación muy sensible. 
 * **El falso rechazo (falso negativo)**, sin embargo, **puede tolerarse**, ya que las personas autorizadas son empleados (en lugar de clientes como el caso del supermercado).
 
+
+.footnote[Fuente: *Learning from data*]
 
 --
 
@@ -986,6 +1015,7 @@ knitr::include_graphics("img/CIA.png")
 ```
 
 
+.footnote[Fuente: *Learning from data*]
 
 ---
 
@@ -1001,7 +1031,7 @@ El AUC es conveniente por las dos razones siguientes:
 * El AUC es invariable con respecto al umbral de clasificación. Mide la calidad de las predicciones del modelo, sin tener en cuenta qué umbral de clasificación se elige.
 
 
-Fuente: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es
+.footnote[Fuente: *https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es*]
 
 
 ---
@@ -1019,7 +1049,7 @@ knitr::include_graphics("img/roc-auc.png")
 La curva ROC nos permite obtener el AUC o área bajo la curva. El AUC oscila en valor del 0 al 1. Un modelo cuyas predicciones son un 100% incorrectas tiene un AUC de 0.0; otro cuyas predicciones son un 100% correctas tiene un AUC de 1.0.
 
 
-Fuente: https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es
+.footnote[Fuente: *https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc?hl=es*]
 
 
 
@@ -1037,18 +1067,18 @@ La curva ROC es independiente del threshold seleccionado.
 ![](https://raw.githubusercontent.com/dariyasydykova/open_projects/master/ROC_animation/animations/cutoff.gif) 
 
 
-Fuente: https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/
+.footnote[Fuente: *https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/*]
 
 ---
 
 ### Underfitting - Overfitting
 
   
-```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+```{r echo=FALSE, out.width = '80%',  fig.align='center'}
 knitr::include_graphics("img/under-over.png")
 ```
 
-https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks
+.footnote[*https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks*]
 
 ---
 
@@ -1065,7 +1095,7 @@ Cuando un modelo comete muchos errores en el entrenamiento, decimos que tienen u
 * Mejores Features
 * Conseguir más datoss.
 
-
+.footnote[*Machine Learning Engineering*]
 ---
 
 ### Overfitting
@@ -1083,7 +1113,7 @@ Cuando un modelo tiene una buena performance en el set de validación pero mala 
 
 
 
-
+.footnote[*Machine Learning Engineering*]
 
 ---
 
@@ -1105,13 +1135,13 @@ Cuando un modelo tiene una buena performance en el set de validación pero mala 
 En la práctica, por reducir la varianza, se incrementa el bias, y viceversa. En otras palabras, por reducir el overfitting se aumenta el underfitting y viceversa. A esto llamamos bias-variance tradeoff. Por tener un modelo que ajuste de manera perfecta el set de training terminamos con un modelo pobre para los datos de test. 
 
   
-```{r echo=FALSE, out.width = '60%',  fig.align='center'}
+```{r echo=FALSE, out.width = '50%',  fig.align='center'}
 knitr::include_graphics("img/bias-variance22.png")
 ```
 
 
 
-.footnote[<sup>*</sup> Machine Learning Engineering]
+.footnote[*Machine Learning Engineering*]
 
 ---
 
@@ -1139,11 +1169,9 @@ knitr::include_graphics("img/bias-variance.png")
 *Para una introducción visual ver: http://www.r2d3.us/visual-intro-to-machine-learning-part-2/*
 
 
-.footnote[<sup>*</sup> Machine Learning with R, the tidyverse and mlr]
 
 
-
-
+.footnote[*Machine Learning with R, the tidyverse and mlr*]
 ---
 
 class: inverse, center, middle
@@ -1183,7 +1211,7 @@ El objetivo de Tidymodels es además hacerlo **en un formato ordenado**.
 knitr::include_graphics("img/modeling.png")
 ```
 
-.footnote[Sitio web: https://www.tmwr.org/software-modeling.html]
+.footnote[Fuente: *https://www.tmwr.org/software-modeling.html*]
 
 
 ---
@@ -1351,3 +1379,5 @@ for physicists (paper)
 https://www.sciencedirect.com/science/article/pii/S0370157319300766 
 
 * Imágenes tomadas de https://vas3k.com/blog/machine_learning/ 
+
+* Machine Learning Engineering http://www.mlebook.com/wiki/doku.php 
