@@ -136,7 +136,7 @@ El aprendizaje automático también se puede definir como el proceso de resoluci
 
 * Machine Learning vs Deep Learning
 
- 
+* Funciones convexas - no convexas
 ]
 
 .right-column[
@@ -740,11 +740,14 @@ knitr::include_graphics("img/bootstrap.png")
 
 ## Modelos 
 
+*Interpretabilidad vs Flexibilidad*
 
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/models.png")
 ```
 
+
+.footnote[Fuente: *Introduction to Statistical Learning*]
 
 ---
 
@@ -796,7 +799,7 @@ knitr::include_graphics("img/mae.png")
 
 Supongamos que se desea realizar una clasificación en la que disponemos de dos clases etiquetadas como Positivo y Negativo. 
 
-A su vez, disponemos de un modelo en el cual las clases no coinciden 100%
+A su vez, disponemos de un modelo en el cual las predicciones no coinciden 100% con las clases verdaderas. 
   
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/metricas1.png")
@@ -885,7 +888,7 @@ NEGATIVOS.
 
 Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el F1-score. 
 
-  
+<br><br><br>
 ```{r echo=FALSE, out.width = '80%',  fig.align='center'}
 knitr::include_graphics("img/f1.svg")
 ```
@@ -1365,7 +1368,7 @@ knitr::include_graphics("img/yardstick.png")
 * Introduction to Statistical Learning. 
 https://www.statlearning.com/ 
 
-* Predictive Modelling
+* Applied Predictive Modelling
 
 * Learning from data
 
