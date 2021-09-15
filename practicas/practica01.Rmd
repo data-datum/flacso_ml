@@ -11,8 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Dataset
 
-El dataset corresponde a Titanic, que se encuentra disponible en Kaggle; una plataforma de competencia de machine learning. 
-Más info en: https://www.kaggle.com/c/titanic/overview 
+El dataset corresponde a Boston, que se encuentra disponible en Kaggle; una plataforma de competencia de machine learning. 
+Más info en: 
 
 #### Cargo las librerias
 
@@ -57,7 +57,7 @@ Después tenemo variables numéricas y también categóricas.
 train_limpio <- train %>%
   drop_na() %>%
   select(-PassengerId, -Name, -Cabin) 
-head(train)
+head(train_limpio)
 ```
 
 
@@ -66,7 +66,11 @@ Esta etapa nos ayuda a visualizar distribuciones de probabilidad de las variable
 
 ```{r}
 #veamos si hay valores perdidos
-is.na(train) %>% colSums()
+is.na(train_limpio) %>% colSums()
 ```
 
+
+```{r}
+
+```
 

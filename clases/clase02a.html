@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>clase02a.utf8</title>
+    <meta charset="utf-8" />
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+background-image: url(img/portada-flacso.png)
+background-size: cover
+class: animated slideInRight fadeOutLeft, middle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Machine Learning en Aplicaciones Espaciales
+
+
+### Clase 2a
+
+
+
+---
+
+## Que vemos hoy
+
+
+### Repaso de Métricas 
+#### F1 score y AUC
+
+
+### Repaso de árboles 
+
+
+### Random Forest (teoría y práctica)
+
+
+---
+
+# Repaso de Métricas
+
+---
+
+
+## Matriz de confusión
+
+        
+&lt;img src="img/conf-m.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Exactitud (accuracy)
+        
+&lt;img src="img/conf-m2.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+## Precision
+
+        
+&lt;img src="img/conf-m3.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Recall
+
+       
+&lt;img src="img/conf-m4.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Repaso
+
+       
+&lt;img src="img/metrics00.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+
+## Precision vs Recall 
+
+* Uno podria elegir trabajar con las métricas de Precision o Recall para un problema desbalanceado. 
+Maximinar la precisión minimizará los FALSOS POSITIVOS, mientras que el Recall minimizará los FALSOS
+NEGATIVOS. 
+* Entonces, podria ser adecuado trabajar con:
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+#### Precisión: Cuando el objetivo es minimizar los falsos positivos. 
+
+
+#### Recall: Cuando el objetivo es minimizar los falsos negativos. 
+
+
+]
+
+
+
+---
+
+## F1 score
+
+
+Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el F1-score. 
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="img/f1.svg" width="80%" style="display: block; margin: auto;" /&gt;
+
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
+
+---
+
+### Entendamos el F1-Score
+
+Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de ellas están maduras y otras no. 
+
+
+  
+&lt;img src="img/ripe-apples.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
+
+---
+
+
+&lt;img src="img/apple-ripe2.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+
+&lt;img src="img/f1-c.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
+
+
+---
+
+### Importante  💡
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+### La accuracy o exactitud es una métrica apropiada en datasets balanceados. 
+
+### En caso de estar lidiando con datasets desbalanceados deberemos usar la métrica apropiada (o balancear nuestros datos).  
+
+]
+
+.footnote[*https://machinelearningmastery.com/tour-of-evaluation-metrics-for-imbalanced-classification/*]
+
+
+---
+
+### Importante  💡
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+## Determinar que error es más grave (FP o FN) lo determina el contexto de aplicación del problema.
+
+Veamos un ejemplo práctico
+]
+
+
+---
+
+## FP vs FN
+
+
+
+&lt;img src="img/cia-market.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+Consideremos dos clientes potenciales de un sistema de huellas dactilares. 
+
+* Uno es un **supermercado** que lo usará en el mostrador de pago para verificar que usted es miembro
+de un programa de descuento. 
+* El otro es la **CIA** que lo usará en la entrada de una instalación, para verificar que Ud es personal autorizado para ingresar a esa instalación.
+
+.footnote[Fuente: *Learning from data*]
+---
+
+### FP vs FN
+
+
+* Para el supermercado, un **falso rechazo (falso negativo) es costoso** porque si un cliente recibe un 
+rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro. 
+* Por otro lado, el costo de una **falsa aceptación (falso positivo) es menor**. El supermercado regala un descuento a alguien que no se lo merecía, sin mayores prejuicios para el supermercado. 
+
+
+.footnote[Fuente: *Learning from data*]
+
+--
+
+
+
+&lt;img src="img/MARKET.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+.footnote[Fuente: *Learning from data*]
+
+---
+
+### FP vs FN
+
+* Para la CIA, sin embargo, una **falsa aceptación (falso positivo) es un desastre**. Una persona no autorizada se beneficiará del acceso a una instalación muy sensible. 
+* **El falso rechazo (falso negativo)**, sin embargo, **puede tolerarse**, ya que las personas autorizadas son empleados (en lugar de clientes como el caso del supermercado).
+
+
+.footnote[Fuente: *Learning from data*]
+
+--
+
+
+
+&lt;img src="img/CIA.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+.footnote[Fuente: *Learning from data*]
+
+
+
+---
+
+
+## Curva AUC
+
+
+
+---
+
+
+## Repaso de Àrboles
+
+
+---
+
+## Ventajas y Desventajas
+
+---
+
+
+## Ventajas
+
+
+* Los árboles son fáciles de interpretar aun cuando las relaciones entre predictores son complejas.
+
+* Los modelos basados en un solo árbol (no es el caso de Random Forest y Boosting) se pueden representar gráficamente aun cuando el número de predictores es mayor de 3.
+
+* Los árboles pueden, en teoría, manejar tanto predictores numéricos como categóricos sin tener que crear variables dummy o one-hot-encoding. En la práctica, esto depende de la implementación del algoritmo que tenga cada librería.
+
+* Al tratarse de métodos no paramétricos, no es necesario que se cumpla ningún tipo de distribución específica.
+
+* Por lo general, requieren mucha menos limpieza y preprocesado de los datos en comparación con otros métodos de aprendizaje estadístico (por ejemplo, no requieren estandarización).
+
+---
+
+## Ventajas 
+
+* No se ven muy influenciados por outliers.
+
+* Si para alguna observación, el valor de un predictor no está disponible, a pesar de no poder llegar a ningún nodo terminal, se puede conseguir una predicción empleando todas las observaciones que pertenecen al último nodo alcanzado. La precisión de la predicción se verá reducida pero al menos podrá obtenerse.
+
+* Son muy útiles en la exploración de datos, permiten identificar de forma rápida y eficiente las variables (predictores) más importantes.
+
+* Son capaces de seleccionar predictores de forma automática.
+
+* Pueden aplicarse a problemas de regresión y clasificación.
+
+
+---
+
+## Desventajas
+
+* La capacidad predictiva de los modelos basados en un único árbol es bastante inferior a la conseguida con otros modelos. Esto es debido a su tendencia al overfitting y alta varianza. Sin embargo, existen técnicas más complejas que, haciendo uso de la combinación de múltiples árboles (bagging, random forest, boosting), consiguen mejorar en gran medida este problema.
+
+* Son sensibles a datos de entrenamiento desbalanceados (una de las clases domina sobre las demás).
+
+* Cuando tratan con predictores continuos, pierden parte de su información al categorizarlos en el momento de la división de los nodos.
+
+* Tal y como se describe más adelante, la creación de las ramificaciones de los árboles se consigue mediante el algoritmo de recursive binary splitting. Este algoritmo identifica y evalúa las posibles divisiones de cada predictor acorde a una determinada medida (RSS, Gini, entropía…). Los predictores continuos tienen mayor probabilidad de contener, solo por azar, algún punto de corte óptimo, por lo que suelen verse favorecidos en la creación de los árboles.
+
+* No son capaces de extrapolar fuera del rango de los predictores observado en los datos de entrenamiento.
+
+---
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
