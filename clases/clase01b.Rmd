@@ -87,13 +87,13 @@ xaringanExtra::use_fit_screen()
 
 
 
-* Los árboles de decisión son modelos predictivos formados por reglas binarias (si/no) con las que se consigue repartir las observaciones en función de sus atributos y predecir así el valor de la variable respuesta.
+* Los **árboles de decisión** son modelos predictivos formados por reglas binarias (si/no) con las que se consigue repartir las observaciones en función de sus atributos y predecir así el valor de la variable respuesta.
 
 
 
 --
 
-* Los árboles de regresión son el subtipo de árboles de predicción que se aplica cuando la variable respuesta es continua. En términos generales, en el entrenamiento de un árbol de regresión, las observaciones se van distribuyendo por bifurcaciones (nodos) generando la estructura del árbol hasta alcanzar un nodo terminal. Cuando se quiere predecir una nueva observación, se recorre el árbol acorde al valor de sus predictores hasta alcanzar uno de los nodos terminales. La predicción del árbol es la media de la variable respuesta de las observaciones de entrenamiento que están en ese mismo nodo terminal.
+* Los **árboles de regresión** son el subtipo de árboles de predicción que se aplica cuando la **variable respuesta es continua**. En términos generales, en el entrenamiento de un árbol de regresión, las observaciones se van distribuyendo por **bifurcaciones (nodos)** generando la estructura del árbol hasta alcanzar un **nodo terminal**. Cuando se quiere predecir una nueva observación, se recorre el árbol acorde al valor de sus predictores hasta alcanzar uno de los nodos terminales. La **predicción del árbol es la media de la variable respuesta de las observaciones de entrenamiento que están en ese mismo nodo terminal**.
 
 --
 
@@ -106,11 +106,39 @@ xaringanExtra::use_fit_screen()
 
 ### Veamoslo en un ejemplo de regresión
 
-El set de datos Hitter contiene información sobre 322 jugadores de béisbol de la liga profesional. Entre las variables registradas para cada jugador se encuentran: el salario (Salary), años de experiencia (Years) y el número de bateos durante los últimos años (Hits). Utilizando estos datos, se quiere predecir el salario (en unidades logarítmicas) de un jugador en base a su experiencia y número de bateos.
+El set de datos `Hitter` contiene información sobre 322 jugadores de béisbol de la liga profesional. 
 
 --
 
+Entre las variables registradas para cada jugador se encuentran: el **salario (Salary)**, **años de experiencia (Years)** y el **número de bateos durante los últimos años (Hits)**. Utilizando estos datos, se quiere **predecir el salario (en unidades logarítmicas)** de un jugador en base a su experiencia y número de bateos.
 
+--
+
+```{r message=FALSE, warning=FALSE}
+library(ISLR)
+library(magrittr)
+library(tidyverse)
+data(Hitters)
+head(Hitters) %>%
+  select(Years, Salary, Hits) 
+```
+
+
+
+---
+```{r}
+Hitters %>%
+  select(Years, Salary, Hits) %>%
+  summary()
+```
+
+
+
+
+
+---
+
+Si realizamos un *árbol de regresión con estas variables*:
 
 ```{r echo=FALSE, out.width = '50%',  fig.align='center'}
 knitr::include_graphics("img/tree-11.png")
@@ -150,7 +178,7 @@ class: inverse, center, middle
 ## ¿Podemos seguir dividiendo el árbol?
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
-En el caso de los árboles de regresión, el criterio empleado con más frecuencia para identificar las divisiones es el **Residual Sum of Squares (RSS)**. El objetivo es encontrar las J regiones (R1,…, Rj) que minimizan el Residual Sum of Squares (RSS) total
+En el caso de los **árboles de regresión**, el criterio empleado con más frecuencia para identificar las divisiones es el **Residual Sum of Squares (RSS)**. El objetivo es encontrar las J regiones (R1,…, Rj) que minimizan el Residual Sum of Squares (RSS) total
 
 $RSS = \sum_{j=1}^{J}\sum_{i \epsilon R_{j}}^{} (y_{i} - \widehat{y}_{R_{j}})^{2}$
 
