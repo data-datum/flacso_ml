@@ -14,3 +14,5 @@
 * Clase 2a: 
 
 * Clase 2b: https://data-datum.github.io/flacso_ml/clases/clase02b.html#1
+
+* Práctica: 
