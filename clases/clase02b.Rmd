@@ -1,0 +1,299 @@
+---
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+background-image: url(img/portada-flacso.png)
+background-size: cover
+class: animated slideInRight fadeOutLeft, middle
+
+```{r xaringan-extra-styles, include=FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+```
+
+
+
+```{r , echo=FALSE}
+xaringanExtra::use_tachyons()
+xaringanExtra::use_panelset()
+```
+
+
+```{r include=FALSE}
+library(countdown)
+```
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+#style_duo_accent(
+#  primary_color = "#23395b",
+#  secondary_color = "#23395b",
+#  inverse_header_color = "#FFFFFF"
+#)
+
+style_duo_accent(
+  header_font_google = google_font("Roboto", "500"),
+  text_font_google   = google_font("Roboto", "400", "300i"),
+  code_font_google   = google_font("Roboto")
+)
+```
+
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+style_mono_accent(base_color = "#43418A")
+```
+
+```{r , message=FALSE, warning=FALSE, include=FALSE} 
+library(fontawesome)
+library(emo)
+```
+
+
+```{r xaringan-logo, echo=FALSE}
+#xaringanExtra::use_fit_screen()
+#xaringanExtra::use_logo("img/logo-tidymodels.png")
+```
+
+
+
+```{r xaringan-tachyons, echo=FALSE}
+xaringanExtra::use_tachyons()
+xaringanExtra::use_fit_screen()
+```
+
+
+# Machine Learning en Aplicaciones Espaciales
+
+
+### Clase 2b: Ensembles
+
+
+---
+
+
+## Ensembles
+
+
+Con el nombre de ensembles se conocen a los modelos de:
+
+--
+* Variedades de Bagging (Bagged Trees, Random Forest)
+
+--
+* Variedades de Boosting (Adaboost, XGBoost)
+
+--
+
+La idea es combinar modelos simples (árboles de decisión) para lograr **una mejor predicción**.
+
+--
+
+Usados en regresión y clasificación.
+
+---
+
+## Bias y Varianza en árboles de decisión
+
+* Por lo general, los árboles pequeños (pocas ramificaciones) tienen poca varianza pero no consiguen representar bien la relación entre las variables, es decir, tienen bias alto. En contraposición, los árboles grandes se ajustan mucho a los datos de entrenamiento, por lo que tienen muy poco bias pero mucha varianza. Una forma de solucionar este problema son los métodos de ensemble.
+
+* Los **métodos de ensemble** combinan múltiples modelos en uno nuevo con el objetivo de **lograr un equilibro entre bias y varianza**, consiguiendo así mejores predicciones que cualquiera de los modelos individuales originales.
+
+---
+
+## Bias y varianza en bagging / boosting
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+###  En bagging, se emplean modelos con muy poco bias pero mucha varianza, agregándolos se consigue reducir la varianza sin apenas inflar el bias. 
+###  En boosting, se emplean modelos con muy poca varianza pero mucho bias, ajustando secuencialmente los modelos se reduce el bias. Por lo tanto, cada una de las estrategias reduce una parte del error total.
+
+]
+
+
+
+---
+
+## Bagging para clasificación
+
+* También llamado *bootstrap resampling*. 
+
+
+.left-column[
+```{r echo=FALSE, out.width = '400%',  fig.align='center'}
+knitr::include_graphics("img/bagging0.svg")
+```
+
+
+]
+
+.right-column[
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/bagging.svg")
+```
+
+]
+
+
+
+---
+## Bagging para clasificación
+
+.left-column[
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/bagging0.svg")
+```
+
+
+]
+
+.right-column[
+
+```{r echo=FALSE, out.width = '200%',  fig.align='center'}
+knitr::include_graphics("img/bagging_line.svg")
+```
+
+
+```{r echo=FALSE, out.width = '200%',  fig.align='center'}
+knitr::include_graphics("img/bagging_trees.svg")
+```
+
+
+]
+
+
+---
+
+## Bagging para clasificación
+
+
+
+.left-column[
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/bagging0_cross.svg")
+```
+
+
+]
+
+.right-column[
+
+```{r echo=FALSE, out.width = '120%',  fig.align='center'}
+knitr::include_graphics("img/bagging_cross.svg")
+```
+
+
+```{r echo=FALSE, out.width = '120%',  fig.align='center'}
+knitr::include_graphics("img/bagging_trees_predict.svg")
+```
+
+
+```{r echo=FALSE, out.width = '120%',  fig.align='center'}
+knitr::include_graphics("img/bagging_vote.svg")
+```
+
+
+]
+
+
+
+---
+
+
+## Baggging para regresión
+
+
+
+.left-column[
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/bagging_reg_data.svg")
+```
+
+
+]
+
+.right-column[
+
+```{r echo=FALSE, out.width = '120%',  fig.align='center'}
+knitr::include_graphics("img/bagging_reg_grey.svg")
+```
+
+
+```{r echo=FALSE, out.width = '120%',  fig.align='center'}
+knitr::include_graphics("img/bagging_reg_grey_fitted.svg")
+```
+
+Promediamos
+
+
+```{r echo=FALSE, out.width = '40%',  fig.align='center'}
+knitr::include_graphics("img/bagging_reg_blue.svg")
+```
+]
+
+
+
+
+
+---
+
+## Random Forest
+
+Los métodos de random forest y bagging siguen el mismo algoritmo con la única diferencia de que, en random forest, **antes de cada división, se seleccionan aleatoriamente m predictores**. La diferencia en el resultado dependerá del valor m escogido. 
+
+* Si m=p, los resultados de random forest y bagging son equivalentes. 
+
+Algunas recomendaciones son:
+
+* La raíz cuadrada del número total de predictores para problemas de clasificación. m = sqrt(p)
+
+* Un tercio del número de predictores para problemas de regresión. m = p/3
+
+Si los predictores están muy correlacionados, valores pequeños de m, consiguen mejores resultados.
+
+---
+
+
+## Retomando 
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph3.mt4[
+### Bagging es una estrategia general para cualquier tipo de modelo. 
+
+### Random forest, sin embargo, son *randomized bagged decision trees*, es decir, los modelos que vamos a ajustar son árboles, en un conjunto de muestras en la que se ha realizado bagging de manera aleatoria. A su vez, en cada árbol de decisión vamos a hacer un subsampling de variables.
+
+]
+
+
+
+---
+
+## Random Forest
+
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+### Random Forest es un algoritmo sencillo, fácil de implementar, fácil de usar y requiere tunning de pocos hiperparámetros. 
+### A diferencia de Árboles de Decisión puede ser menos interpretable. 
+
+]
+
+
+---
+
+
+class: inverse, center, middle
+
+## Manos en R! 

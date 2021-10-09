@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>clase02b.utf8</title>
+    <meta charset="utf-8" />
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+background-image: url(img/portada-flacso.png)
+background-size: cover
+class: animated slideInRight fadeOutLeft, middle
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Machine Learning en Aplicaciones Espaciales
+
+
+### Clase 2b: Ensembles
+
+
+---
+
+
+## Ensembles
+
+
+Con el nombre de ensembles se conocen a los modelos de:
+
+--
+* Variedades de Bagging (Bagged Trees, Random Forest)
+
+--
+* Variedades de Boosting (Adaboost, XGBoost)
+
+--
+
+La idea es combinar modelos simples (árboles de decisión) para lograr **una mejor predicción**.
+
+--
+
+Usados en regresión y clasificación.
+
+---
+
+## Bias y Varianza en árboles de decisión
+
+* Por lo general, los árboles pequeños (pocas ramificaciones) tienen poca varianza pero no consiguen representar bien la relación entre las variables, es decir, tienen bias alto. En contraposición, los árboles grandes se ajustan mucho a los datos de entrenamiento, por lo que tienen muy poco bias pero mucha varianza. Una forma de solucionar este problema son los métodos de ensemble.
+
+* Los **métodos de ensemble** combinan múltiples modelos en uno nuevo con el objetivo de **lograr un equilibro entre bias y varianza**, consiguiendo así mejores predicciones que cualquiera de los modelos individuales originales.
+
+---
+
+## Bias y varianza en bagging / boosting
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+###  En bagging, se emplean modelos con muy poco bias pero mucha varianza, agregándolos se consigue reducir la varianza sin apenas inflar el bias. 
+###  En boosting, se emplean modelos con muy poca varianza pero mucho bias, ajustando secuencialmente los modelos se reduce el bias. Por lo tanto, cada una de las estrategias reduce una parte del error total.
+
+]
+
+
+
+---
+
+## Bagging para clasificación
+
+* También llamado *bootstrap resampling*. 
+
+
+.left-column[
+&lt;img src="img/bagging0.svg" width="400%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+## Bagging para clasificación
+
+.left-column[
+&lt;img src="img/bagging0.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging_line.svg" width="200%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_trees.svg" width="200%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+## Bagging para clasificación
+
+
+
+.left-column[
+&lt;img src="img/bagging0_cross.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging_cross.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_trees_predict.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_vote.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+
+---
+
+
+## Baggging para regresión
+
+
+
+.left-column[
+&lt;img src="img/bagging_reg_data.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging_reg_grey.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_reg_grey_fitted.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+Promediamos
+
+
+&lt;img src="img/bagging_reg_blue.svg" width="40%" style="display: block; margin: auto;" /&gt;
+]
+
+
+
+
+
+---
+
+## Random Forest
+
+Los métodos de random forest y bagging siguen el mismo algoritmo con la única diferencia de que, en random forest, **antes de cada división, se seleccionan aleatoriamente m predictores**. La diferencia en el resultado dependerá del valor m escogido. 
+
+* Si m=p, los resultados de random forest y bagging son equivalentes. 
+
+Algunas recomendaciones son:
+
+* La raíz cuadrada del número total de predictores para problemas de clasificación. m = sqrt(p)
+
+* Un tercio del número de predictores para problemas de regresión. m = p/3
+
+Si los predictores están muy correlacionados, valores pequeños de m, consiguen mejores resultados.
+
+---
+
+
+## Retomando 
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph3.mt4[
+### Bagging es una estrategia general para cualquier tipo de modelo. 
+
+### Random forest, sin embargo, son *randomized bagged decision trees*, es decir, los modelos que vamos a ajustar son árboles, en un conjunto de muestras en la que se ha realizado bagging de manera aleatoria. A su vez, en cada árbol de decisión vamos a hacer un subsampling de variables.
+
+]
+
+
+
+---
+
+## Random Forest
+
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+### Random Forest es un algoritmo sencillo, fácil de implementar, fácil de usar y requiere tunning de pocos hiperparámetros. 
+### A diferencia de Árboles de Decisión puede ser menos interpretable. 
+
+]
+
+
+---
+
+
+class: inverse, center, middle
+
+## Manos en R!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

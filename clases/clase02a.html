@@ -57,10 +57,10 @@ class: animated slideInRight fadeOutLeft, middle
 
 
 ### Repaso de Métricas 
-#### F1 score y AUC
+#### F1 score / AUC Curva / Precision - Recall Curva
 
 
-### Repaso de árboles 
+### Árboles de decisión (Tunning)
 
 
 ### Random Forest (teoría y práctica)
@@ -135,10 +135,30 @@ NEGATIVOS.
 
 ---
 
+## F score
+
+
+La medida F equilibra la precisión y el recall. En algunos problemas, puede que nos interese
+en una medida F con más atención puesta en la precisión, como cuando los falsos positivos son más  importante minimizar, pero los falsos negativos siguen siendo importantes. En otros problemas, podríamos estar interesados en una medida F con más atención puesta en el recall, como cuando los falsos negativos son más importantes minimizar, pero los falsos positivos siguen siendo importantes.
+La solución es la medida Fbeta (medida F β). 
+--
+La medida Fbeta es una abstracción de la medida F donde el equilibrio de precisión y recall en el cálculo de la media armónica está controlado por un coeficiente llamado beta (β).
+
+
+&lt;img src="img/fbeta.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+* F0.5-measure (β = 0.5): Mayor peso en la **precisión**, menos peso en el recall. 
+* F1-measure (β = 1): **Balance del peso en la precisión y el recall**.
+* F2-measure (β = 2): Menor peso en la precisión, mas peso en el **recall**.
+
+.footnote[*Imbalanced classification with Python. Jason Brownlee*]
+
+---
+
 ## F1 score
 
 
-Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el F1-score. 
+**Cuando me interesan tanto los FP como los FN, de igual forma**, voy a utilizar el F1-score. 
 
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 &lt;img src="img/f1.svg" width="80%" style="display: block; margin: auto;" /&gt;
@@ -174,6 +194,40 @@ Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de
 
 ---
 
+## F2 score
+
+Imaginemos que hemos tenemos un clasificador de mamografías. Lo probamos en una serie de diez mamografías.
+
+
+
+
+&lt;img src="img/mamm1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+---
+
+En una segunda instancia tenemos esta matriz de confusión. 
+**Si prestamos atención, los TP y los TN siguen siendo los mismos en ambos casos, pero hubo un cambio en los FP y FN**
+
+&lt;img src="img/f2-mammogram.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+--
+
+**¿Qué tipo de error es más grave? ¿Un FP o FN?**
+
+--
+
+Claramente un **FALSO NEGATIVO**, debo poner un énfasis en el **recall**.
+
+---
+
+
+&lt;img src="img/f2.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
 ### Importante  💡
 
 
@@ -263,64 +317,374 @@ rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro.
 ---
 
 
-## Curva AUC
+## Repaso Curva AUC
+
+
+.right-column[
+**Una curva ROC es apropiada cuando**:
+- Quiero ver la performance global del modelo. 
+- Quiero comparar diferentes modelos a diferentes thresholds (umbrales).
+
+- Los valores más pequeños en el eje x del gráfico indican menos FP y más TN.
+- Los valores más grandes en el eje y del gráfico indican más TP  y menos FN.
+]
+
+
+---
+
+## Curva Precision - Recall 
+
+* La curva de Precision-Recall muestra la compensación entre precisión y recall para diferentes umbrales. Un área alta debajo de la curva representa tanto una alta recall como una alta precisión, donde la alta precisión se relaciona con una tasa baja de falsos positivos y el alto recall se relaciona con una tasa baja de falsos negativos. Los puntajes altos para ambos muestran que el clasificador está arrojando resultados precisos (alta precisión), así como también arroja la mayoría de todos los resultados positivos (alta recall).
+
+* Un sistema con alta recall pero baja precisión arroja muchos resultados, pero la mayoría de las etiquetas previstas son incorrectas en comparación con las etiquetas de entrenamiento. Un sistema con alta precisión pero poca recall es todo lo contrario, arrojando muy pocos resultados, pero la mayoría de las etiquetas predichas son correctas en comparación con las etiquetas de entrenamiento. Un sistema ideal con alta precisión y alta recall devolverá muchos resultados, con todos los resultados etiquetados correctamente.
+
+
+.footnote[https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html]
+
+---
+
+## Curva Precision - Recall
+
+Como podemos ver al aumentar la AUC en clases balanceadas, también aumenta el score en la curva Precision-Recall
+
+![](https://raw.githubusercontent.com/dariyasydykova/open_projects/master/ROC_animation/animations/PR.gif) 
+
+
+.footnote[*https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/*]
+---
+
+## Curvas Precision - Recall 
+
+Veamos que sucede con el desbalanceo de clase. 
+
+![](https://raw.githubusercontent.com/dariyasydykova/open_projects/master/ROC_animation/animations/imbalance.gif) 
+
+**Como se observa la AUC no se ve casi influenciada por el desbalanceo, lo que nos da una idea que no es una métrica apropiada cuando el desbalanceo de las clases es severo.**
+
+
+.footnote[*https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/*]
+
+---
+
+## Quizz 
+
+
+
 
 
 
 ---
 
+## Tunning de Hiperparámetros
 
-## Repaso de Àrboles
+Cuando hacemos tunning de hiperparámetros, lo que hacemos es encontrar valores óptimos para un modelo de regresión o clasificación. 
+
+
+Esa búsqueda la podemos hacer **en grilla (grid search)** o **random (aleatoria)**
+--
+
+&lt;img src="img/grid-random-search.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
+class: inverse, center, middle 
+
+## Árboles de decisión 
+
+## ¿Cómo se deciden los splits?
 
 
 ---
 
-## Ventajas y Desventajas
+## Entropía
 
----
+La entropía es una medida de la aleatoriedad de la información que se procesa. **Cuanto mayor sea la entropía, más difícil será sacar conclusiones de esa información.**
+
+El concepto de entropía viene del campo de la teoría de la información. 
 
 
-## Ventajas
+&lt;img src="img/entropy-math-eq.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 
-* Los árboles son fáciles de interpretar aun cuando las relaciones entre predictores son complejas.
-
-* Los modelos basados en un solo árbol (no es el caso de Random Forest y Boosting) se pueden representar gráficamente aun cuando el número de predictores es mayor de 3.
-
-* Los árboles pueden, en teoría, manejar tanto predictores numéricos como categóricos sin tener que crear variables dummy o one-hot-encoding. En la práctica, esto depende de la implementación del algoritmo que tenga cada librería.
-
-* Al tratarse de métodos no paramétricos, no es necesario que se cumpla ningún tipo de distribución específica.
-
-* Por lo general, requieren mucha menos limpieza y preprocesado de los datos en comparación con otros métodos de aprendizaje estadístico (por ejemplo, no requieren estandarización).
-
----
-
-## Ventajas 
-
-* No se ven muy influenciados por outliers.
-
-* Si para alguna observación, el valor de un predictor no está disponible, a pesar de no poder llegar a ningún nodo terminal, se puede conseguir una predicción empleando todas las observaciones que pertenecen al último nodo alcanzado. La precisión de la predicción se verá reducida pero al menos podrá obtenerse.
-
-* Son muy útiles en la exploración de datos, permiten identificar de forma rápida y eficiente las variables (predictores) más importantes.
-
-* Son capaces de seleccionar predictores de forma automática.
-
-* Pueden aplicarse a problemas de regresión y clasificación.
+&lt;img src="img/entropy2.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
-## Desventajas
+## Entropía
 
-* La capacidad predictiva de los modelos basados en un único árbol es bastante inferior a la conseguida con otros modelos. Esto es debido a su tendencia al overfitting y alta varianza. Sin embargo, existen técnicas más complejas que, haciendo uso de la combinación de múltiples árboles (bagging, random forest, boosting), consiguen mejorar en gran medida este problema.
 
-* Son sensibles a datos de entrenamiento desbalanceados (una de las clases domina sobre las demás).
+&lt;img src="img/shannon.png" width="80%" style="display: block; margin: auto;" /&gt;
 
-* Cuando tratan con predictores continuos, pierden parte de su información al categorizarlos en el momento de la división de los nodos.
 
-* Tal y como se describe más adelante, la creación de las ramificaciones de los árboles se consigue mediante el algoritmo de recursive binary splitting. Este algoritmo identifica y evalúa las posibles divisiones de cada predictor acorde a una determinada medida (RSS, Gini, entropía…). Los predictores continuos tienen mayor probabilidad de contener, solo por azar, algún punto de corte óptimo, por lo que suelen verse favorecidos en la creación de los árboles.
 
-* No son capaces de extrapolar fuera del rango de los predictores observado en los datos de entrenamiento.
+--
+A partir del gráfico anterior, es bastante evidente que la entropía es cero cuando la probabilidad es 0 o 1. La entropía es máxima cuando la probabilidad es 0.5 porque proyecta una aleatoriedad perfecta en los datos y no hay posibilidad si determinando perfectamente el resultado.
+
+
+
+---
+
+### Ganancia de Información (Information Gain)
+
+
+La ganancia de información es una propiedad estadística que mide qué tan bien un atributo determinado separa los ejemplos de entrenamiento de acuerdo con su clasificación de destino. La construcción de un árbol de decisiones consiste en encontrar un atributo que devuelva la **mayor ganancia de información y la menor entropía.**
+
+
+
+`\(IG = Entropy(parent) - weighted \hspace{1mm} average [Entropy (children)]\)`
+
+
+--
+
+
+
+&lt;img src="img/IG.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Veamos como funciona en un árbol de decisión 
+
+Supongamos que tenemos que decidir si entregar o no un préstamo, y tenemos 2 variables para decidir si lo hacemos:
+
+* Balance:
+* Residence:
+
+
+---
+
+
+&lt;img src="img/entropy-balance.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+&lt;img src="img/entrop-balance.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+&lt;img src="img/entropy-residence.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+
+
+&lt;img src="img/entrop-residenc.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+## Conclusión
+
+Cuanto más homogeneas son las ramas del árbol que se genera al seleccionar el algoritmo una variable, 
+
+* hay mayor ganancia de información.
+
+&lt;br&gt;
+
+* hay menos entropía 
+
+&lt;br&gt;&lt;br&gt;
+
+**Eso se traduce en un mejor modelo para la predicción que deseamos realizar**
+
+---
+
+## Relación de Ganancia (Gain Ratio)
+
+
+
+
+---
+
+## Índice de Gini (Index Gini)
+
+
+
+
+
+---
+
+## Tunning de hiperparámetros en Árboles de decisión 
+
+* Vamos a hacer tunning de los hiperparámetros del modelo. 
+Documentación: https://parsnip.tidymodels.org/reference/decision_tree.html 
+
+#### Hiperparámetros del modelo:
+&lt;br&gt;
+* **cost_complexity**: Un número positivo para el parámetro de costo / complejidad 
+
+&lt;br&gt;
+* **tree_depth**: Un número entero para la profundidad máxima del árbol.
+
+&lt;br&gt;
+* **min_n**: Un número entero para el número mínimo de puntos de datos en un nodo que se requieren para que el nodo se divida más.
+
+
+---
+
+## Búsqueda en grilla (grid search)
+
+
+
+
+
+
+```r
+set.seed(123) 
+trees_spec &lt;- decision_tree() %&gt;% 
+  set_engine("rpart") %&gt;% 
+  set_mode("classification") %&gt;% 
+  set_args(min_n = tune(),
+           cost_complexity = tune(),
+           tree_depth= tune())
+```
+
+
+---
+## Búsqueda random
+
+En **set_args()** voy a especificar los hiperparámetros y dejarlos variar libremente con la funcion tune().
+
+
+
+```r
+set.seed(123) 
+trees_spec &lt;- decision_tree() %&gt;% 
+  set_engine("rpart") %&gt;% 
+  set_mode("classification") %&gt;% 
+  set_args(min_n = tune(),
+           cost_complexity = tune(),
+           tree_depth= tune())
+```
+
+
+
+---
+
+## Búsqueda en grilla
+
+
+
+
+---
+
+class: inverse, center, middle
+
+## Manos en R!
+
+
+---
+
+
+class: inverse, center, middle
+
+## Ensembles
+
+
+---
+
+## Ensembles
+
+
+Con el nombre de ensembles se conocen a los modelos de:
+
+--
+* Variedades de Bagging (Bagged Trees, Random Forest)
+
+--
+* Variedades de Boosting (Adaboost, XGBoost)
+
+--
+
+La idea es combinar modelos simples (árboles de decisión) para lograr una mejor predicción. 
+
+--
+
+Usados en regresión y clasificación.
+
+---
+
+## Bagging para clasificación
+
+* También llamado *bootstrap resampling*. 
+
+
+.left-column[
+&lt;img src="img/bagging0.svg" width="400%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+
+---
+## Bagging para clasificación
+
+.left-column[
+&lt;img src="img/bagging0.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging_line.svg" width="200%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_trees.svg" width="200%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+## Bagging para clasificación
+
+
+
+.left-column[
+&lt;img src="img/bagging0_cross.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+.right-column[
+
+&lt;img src="img/bagging_cross.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_trees_predict.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+&lt;img src="img/bagging_vote.svg" width="120%" style="display: block; margin: auto;" /&gt;
+
+
+]
+
+
+---
+
+
+## Baggging para regresión
+
+
 
 ---
     </textarea>
