@@ -47,7 +47,7 @@ class: animated slideInRight fadeOutLeft, middle
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 1b: Árboles de Decisión
+### Clase 1b: Introducción a Árboles de Decisión
 
 
 ---
@@ -73,7 +73,32 @@ class: animated slideInRight fadeOutLeft, middle
 
 ---
 
-### Veamoslo en un ejemplo de regresión
+## Árboles para regresión y clasificación
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+###  En *clasificación*, nuestro objetivo es que un nodo permita la separación de los datos en grupos lo más homogéneos posibles. 
+###  En *regresión*, en cambio, nos interesa que los nodos permitan separar los datos en grupos en los cuales el error de predicción sea bajo. 
+]
+
+
+
+
+
+
+
+
+---
+
+## Árbol de clasificación
+
+
+
+
+
+
+---
+## Árbol de regresión
 
 El set de datos `Hitter` contiene información sobre 322 jugadores de béisbol de la liga profesional. 
 
@@ -144,9 +169,10 @@ Como resultado de las bifurcaciones, se han generado 3 regiones que pueden ident
 
 `\(R_{3} = \left \{ X | Year \geq   4.5, Hits  \geq   117.5 \right \}\)` : jugadores que han jugado 4.5 años o más y que han conseguido 117.5 o más bateos.
 
-
+El valor que aparece en cada hoja es la media de las observaciones que están en esa hoja. 
 
 &lt;img src="img/decision-t1.png" width="60%" style="display: block; margin: auto;" /&gt;
+
 
 
 ---
@@ -173,17 +199,41 @@ En el caso de los **árboles de regresión**, el criterio empleado con más frec
 ]
 
 
---
-
-## ¿Hasta cuando?
-
-
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
-Si el árbol sigue creciendo se va a volver muy bueno para nuestros datos, es decir, va a disminuir el error de entrenamiento, pero no va a ser capaz de generalizar a nuevos ejemplos (no vistos).
-En árboles esto se logra mediante el **prunning** o **early stopping (parada temprana)**.
-
+En el caso de los **árboles de clasificación**, nos van a interesar en partícular, la impureza. 
 
 ]
+
+---
+
+## ¿Hasta cuándo?
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+## Podríamos detenernos cuando todas las hojas tengan exactamente las mismas muestras, aún siendo, muy pocas. Esto es factible, pero la profundidad del árbol sería alta, y nos llevaría a sobreajustar el modelo. 
+]
+
+---
+
+## Overfitting en árboles
+
+
+&lt;img src="img/overfit-tree.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Overfitting en árboles de regresión 
+
+
+&lt;img src="img/trees-UO.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+**¿Cómo controlo el overfitting en árboles?**
+
+* Controlar profundidad del árbol.
+* Controlar la cantidad de hojas (para armar una cantidad fija de grupos de datos).
+* Controlar la mínima cantidad de datos que están contenidos dentro de cada hoja (para hacer, por ejemplo, promedios más robustos).
+* Controlar el hiperparámetro de regularización. 
 
 ---
 
@@ -259,6 +309,19 @@ class: inverse, center, middle
 
 
 # Manos en R 🙌
+
+---
+
+## Bibliografía
+
+* Apuntes de Germán Rossatti. 
+
+
+* Laboratorio de Ciencia de Datos - Exactas UBA
+
+
+* Introduction to Statistical Learning. Capítulo 8. 
+
 
 ---
     </textarea>

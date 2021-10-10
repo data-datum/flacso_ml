@@ -78,7 +78,7 @@ xaringanExtra::use_fit_screen()
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 1b: Árboles de Decisión
+### Clase 1b: Introducción a Árboles de Decisión
 
 
 ---
@@ -104,7 +104,32 @@ xaringanExtra::use_fit_screen()
 
 ---
 
-### Veamoslo en un ejemplo de regresión
+## Árboles para regresión y clasificación
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+###  En *clasificación*, nuestro objetivo es que un nodo permita la separación de los datos en grupos lo más homogéneos posibles. 
+###  En *regresión*, en cambio, nos interesa que los nodos permitan separar los datos en grupos en los cuales el error de predicción sea bajo. 
+]
+
+
+
+
+
+
+
+
+---
+
+## Árbol de clasificación
+
+
+
+
+
+
+---
+## Árbol de regresión
 
 El set de datos `Hitter` contiene información sobre 322 jugadores de béisbol de la liga profesional. 
 
@@ -154,11 +179,12 @@ $R_{2} = \left \{ X | Year \geq   4.5, Hits <  117.5 \right \}$ : jugadores que 
 
 $R_{3} = \left \{ X | Year \geq   4.5, Hits  \geq   117.5 \right \}$ : jugadores que han jugado 4.5 años o más y que han conseguido 117.5 o más bateos.
 
-
+El valor que aparece en cada hoja es la media de las observaciones que están en esa hoja. 
 
 ```{r echo=FALSE, out.width = '60%',  fig.align='center'}
 knitr::include_graphics("img/decision-t1.png")
 ```
+
 
 
 ---
@@ -185,17 +211,45 @@ $RSS = \sum_{j=1}^{J}\sum_{i \epsilon R_{j}}^{} (y_{i} - \widehat{y}_{R_{j}})^{2
 ]
 
 
---
-
-## ¿Hasta cuando?
-
-
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
-Si el árbol sigue creciendo se va a volver muy bueno para nuestros datos, es decir, va a disminuir el error de entrenamiento, pero no va a ser capaz de generalizar a nuevos ejemplos (no vistos).
-En árboles esto se logra mediante el **prunning** o **early stopping (parada temprana)**.
-
+En el caso de los **árboles de clasificación**, nos van a interesar en partícular, la impureza. 
 
 ]
+
+---
+
+## ¿Hasta cuándo?
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+## Podríamos detenernos cuando todas las hojas tengan exactamente las mismas muestras, aún siendo, muy pocas. Esto es factible, pero la profundidad del árbol sería alta, y nos llevaría a sobreajustar el modelo. 
+]
+
+---
+
+## Overfitting en árboles
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/overfit-tree.png")
+```
+
+
+---
+
+## Overfitting en árboles de regresión 
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/trees-UO.png")
+```
+
+
+**¿Cómo controlo el overfitting en árboles?**
+
+* Controlar profundidad del árbol.
+* Controlar la cantidad de hojas (para armar una cantidad fija de grupos de datos).
+* Controlar la mínima cantidad de datos que están contenidos dentro de cada hoja (para hacer, por ejemplo, promedios más robustos).
+* Controlar el hiperparámetro de regularización. 
 
 ---
 
@@ -271,5 +325,18 @@ class: inverse, center, middle
 
 
 # Manos en R `r emo::ji("raised_hands")`
+
+---
+
+## Bibliografía
+
+* Apuntes de Germán Rossatti. 
+
+
+* Laboratorio de Ciencia de Datos - Exactas UBA
+
+
+* Introduction to Statistical Learning. Capítulo 8. 
+
 
 ---

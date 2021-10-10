@@ -86,6 +86,7 @@ xaringanExtra::use_fit_screen()
 
 ## Que vemos hoy
 
+### Principios del aprendizaje
 
 ### Repaso de Métricas 
 #### F1 score / AUC Curva / Precision - Recall Curva
@@ -97,7 +98,9 @@ xaringanExtra::use_fit_screen()
 ### Ensembles 
 
 
+
 ---
+class: inverse, center, middle
 
 # Repaso de Métricas
 
@@ -144,7 +147,7 @@ knitr::include_graphics("img/conf-m4.png")
 
 ---
 
-## Repaso
+## Resumiendo
 
        
 ```{r echo=FALSE, out.width = '90%',  fig.align='center'}
@@ -676,118 +679,3 @@ class: inverse, center, middle
 
 
 ---
-
-## Ensembles
-
-
-Con el nombre de ensembles se conocen a los modelos de:
-
---
-* Variedades de Bagging (Bagged Trees, Random Forest)
-
---
-* Variedades de Boosting (Adaboost, XGBoost)
-
---
-
-La idea es combinar modelos simples (árboles de decisión) para lograr una mejor predicción. 
-
---
-
-Usados en regresión y clasificación.
-
----
-
-## Bagging para clasificación
-
-* También llamado *bootstrap resampling*. 
-
-
-.left-column[
-```{r echo=FALSE, out.width = '400%',  fig.align='center'}
-knitr::include_graphics("img/bagging0.svg")
-```
-
-
-]
-
-.right-column[
-
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/bagging.svg")
-```
-
-]
-
-
-
----
-## Bagging para clasificación
-
-.left-column[
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/bagging0.svg")
-```
-
-
-]
-
-.right-column[
-
-```{r echo=FALSE, out.width = '200%',  fig.align='center'}
-knitr::include_graphics("img/bagging_line.svg")
-```
-
-
-```{r echo=FALSE, out.width = '200%',  fig.align='center'}
-knitr::include_graphics("img/bagging_trees.svg")
-```
-
-
-]
-
-
----
-
-## Bagging para clasificación
-
-
-
-.left-column[
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/bagging0_cross.svg")
-```
-
-
-]
-
-.right-column[
-
-```{r echo=FALSE, out.width = '120%',  fig.align='center'}
-knitr::include_graphics("img/bagging_cross.svg")
-```
-
-
-```{r echo=FALSE, out.width = '120%',  fig.align='center'}
-knitr::include_graphics("img/bagging_trees_predict.svg")
-```
-
-
-```{r echo=FALSE, out.width = '120%',  fig.align='center'}
-knitr::include_graphics("img/bagging_vote.svg")
-```
-
-
-]
-
-
----
-
-
-## Baggging para regresión
-
-
-
----
-
-
