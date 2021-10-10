@@ -86,8 +86,8 @@ Usados en regresión y clasificación.
 
 
 .bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
-###  En bagging, se emplean modelos con muy poco bias pero mucha varianza, agregándolos se consigue reducir la varianza sin apenas inflar el bias. 
-###  En boosting, se emplean modelos con muy poca varianza pero mucho bias, ajustando secuencialmente los modelos se reduce el bias. Por lo tanto, cada una de las estrategias reduce una parte del error total.
+###  En *bagging*, se emplean **modelos con muy poco bias pero mucha varianza**, agregándolos se consigue reducir la varianza sin apenas aumentar el bias. 
+###  En *boosting*, se emplean **modelos con muy poca varianza pero mucho bias**, ajustando secuencialmente los modelos se reduce el bias. Por lo tanto, cada una de las estrategias reduce una parte del error total.
 
 ]
 
@@ -197,15 +197,30 @@ Promediamos
 
 Los métodos de random forest y bagging siguen el mismo algoritmo con la única diferencia de que, en random forest, **antes de cada división, se seleccionan aleatoriamente m predictores**. La diferencia en el resultado dependerá del valor m escogido. 
 
-* Si m=p, los resultados de random forest y bagging son equivalentes. 
+* Si **m=p**, los resultados de random forest y bagging son equivalentes. 
 
 Algunas recomendaciones son:
 
-* La raíz cuadrada del número total de predictores para problemas de clasificación. m = sqrt(p)
+* La raíz cuadrada del número total de predictores para problemas de clasificación. **m = sqrt(p)**
 
-* Un tercio del número de predictores para problemas de regresión. m = p/3
+* Un tercio del número de predictores para problemas de regresión. **m = p/3**
 
 Si los predictores están muy correlacionados, valores pequeños de m, consiguen mejores resultados.
+
+---
+
+## ¿Cómo sucede esto?
+
+* Supongamosque hay un predictor muy bueno en el conjunto de datos, junto con otros varios predictores moderadamente buenos. Luego en la colección de *bagged trees*, la mayoría o todos los árboles utilizarán este potente conjunto de predictores para realizar los splits. 
+
+--
+En consecuencia, todos los *bagged trees* se verán bastante similares entre sí. **Por lo tanto, las predicciones de los árboles en bolsas estarán altamente correlacionadas.** Desafortunadamente, promediar muchas cantidades altamente correlacionadas no conduce a una reducción en la varianza tan grande como promediar muchas cantidades no correlacionadas.  En particular, esto significa que el bagging no dará lugar a una reducción de la varianza sobre un solo árbol en este entorno.
+
+--
+
+* *Random Forest* superan este problema obligando a cada división a considerar solo un subconjunto de los predictores. Por lo tanto, en promedio (p - m) / p de las divisiones ni siquiera considerarán el predictor fuerte, por lo que otros predictores tendrá más posibilidades. **Podemos pensar en este proceso como una decorrelación los árboles**, lo que hace que el promedio de los árboles resultantes sea menos variable
+y por lo tanto más confiable.
+La principal diferencia entre *bagged trees* y *random forest* es la elección del tamaño del subconjunto de predictores m.
 
 ---
 
@@ -215,14 +230,38 @@ Si los predictores están muy correlacionados, valores pequeños de m, consiguen
 .bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph3.mt4[
 ### Bagging es una estrategia general para cualquier tipo de modelo. 
 
-### Random forest, sin embargo, son *randomized bagged decision trees*, es decir, los modelos que vamos a ajustar son árboles, en un conjunto de muestras en la que se ha realizado bagging de manera aleatoria. A su vez, en cada árbol de decisión vamos a hacer un subsampling de variables.
 
+### En Random Forest, en particular, aparte de bagging, hago un sampling de variables, que me permite reducir la varianza y obtener mejores predicciones. 
 ]
 
 
 
 ---
 
+## Out-of-Bag error
+
+* El hecho de que los árboles se ajusten empleando muestras generadas por bootstrapping conlleva que, en promedio, cada ajuste use solo aproximadamente dos tercios de las observaciones originales. Al tercio restante se le llama out-of-bag (OOB).
+
+
+--
+
+* Si para cada árbol ajustado en el proceso de bagging se registran las observaciones empleadas, se puede predecir la respuesta de la observación i haciendo uso de aquellos árboles en los que esa observación ha sido excluida y promediándolos (la moda en el caso de los árboles de clasificación). Siguiendo este proceso, se pueden obtener las predicciones para las n observaciones y con ellas calcular el **OOB-mean square error (para regresión)** o el **OOB-classification error (para árboles de clasificación)**. 
+
+
+---
+
+## Limitaciones del out-of-bag error
+
+* No adecuado para datos que guardan una relación temporal (series temporales).
+
+&lt;br&gt;&lt;br&gt;
+
+--
+
+
+* El preprocesado de los datos de entrenamiento se hace de forma conjunta, por lo que las observaciones out-of-bag pueden sufrir data leakage. De ser así, las estimaciones del OOB-error son demasiado optimistas.
+
+---
 ## Random Forest
 
 
@@ -236,6 +275,11 @@ Si los predictores están muy correlacionados, valores pequeños de m, consiguen
 
 ---
 
+
+
+
+
+---
 
 class: inverse, center, middle
 
