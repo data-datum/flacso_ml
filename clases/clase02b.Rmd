@@ -78,7 +78,7 @@ xaringanExtra::use_fit_screen()
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 2b: Ensembles
+### Clase 2b: Introducción a ensembles y a random forest. 
 
 
 ---

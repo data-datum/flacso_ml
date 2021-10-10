@@ -47,7 +47,7 @@ class: animated slideInRight fadeOutLeft, middle
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 2b: Ensembles
+### Clase 2b: Introducción a ensembles y a random forest. 
 
 
 ---
@@ -199,13 +199,11 @@ Los métodos de random forest y bagging siguen el mismo algoritmo con la única 
 
 * Si **m=p**, los resultados de random forest y bagging son equivalentes. 
 
-Algunas recomendaciones son:
+* Para *clasificación*, por defecto, el valor de m, es la raíz cuadrada del número total de predictores. **m = sqrt(p)**
 
-* La raíz cuadrada del número total de predictores para problemas de clasificación. **m = sqrt(p)**
+* Para *regresión*, el valor por defecto de m, es un tercio del número de predictores. **m = p/3**
 
-* Un tercio del número de predictores para problemas de regresión. **m = p/3**
-
-Si los predictores están muy correlacionados, valores pequeños de m, consiguen mejores resultados.
+Si los predictores están muy correlacionados, valores pequeños de m, consiguen mejores resultados. En la práctica, tuneamos el valor de **m** con **mtry**. 
 
 ---
 
@@ -275,6 +273,8 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 
 ---
 
+## Importancia de las variables
+
 
 
 
@@ -283,7 +283,17 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 
 class: inverse, center, middle
 
-## Manos en R!
+## Manos en R! 🙌
+
+
+---
+
+## Bibliografía 
+
+
+* Introduction to Statistical Learning. Capítulo 8. 
+
+* The Elements of Statistical Learning. Capítulo 15.
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
