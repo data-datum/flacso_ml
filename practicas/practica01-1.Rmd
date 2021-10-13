@@ -207,7 +207,7 @@ library(rpart.plot)
 ```{r}
 tree_fit %>%
   extract_fit_engine() %>%
-  rpart.plot(roundint = FALSE)
+  rpart.plot(roundint = FALSE, extra=1)
 ```
 
 
