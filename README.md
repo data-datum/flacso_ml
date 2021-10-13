@@ -9,7 +9,7 @@
 
 * Clase 1b: https://data-datum.github.io/flacso_ml/clases/clase01b.html#1
 
-* Práctica: 
+* Práctica guiada: https://data-datum.github.io/flacso_ml/practicas/practica01-1.html#1
 
 * Clase 2a: 
 
