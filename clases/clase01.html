@@ -47,7 +47,7 @@ class: animated slideInRight fadeOutLeft, middle
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 1a: Genearalidades. Conceptos Fundamentales
+### Clase 1a: Generalidades. Conceptos Fundamentales
 
 
 
@@ -69,7 +69,13 @@ class: animated slideInRight fadeOutLeft, middle
 
 
 ### Segunda Parte  ⏰
-* Un primer modelo paso a paso
+* Árboles de decisión + Práctica guíada
+
+--
+
+#### Recreo  🍵
+
+--
 
 ### Manos en R! 💻
 
@@ -118,15 +124,27 @@ El aprendizaje automático también se puede definir como el proceso de resoluci
 
 ---
 
-## El aprendizaje automático y otros campos relacionados
 
 
+## ML vs Deep leraning
 
-&lt;img src="img/ml-related.png" width="90%" style="display: block; margin: auto;" /&gt;
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+* Costo computacional. 
 
-Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine-Learning.pdf)
+* Dificultad en el entrenamiento. 
+
+* Ingenieria de features vs Ingeniería de arquitecturas. 
 
 
+]
+
+## ML vs Data Science
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+* En ML se hace énfasis en el modelado de los datos (algoritmo, error, división de los datos), en la ciencia de datos, hacemos foco en todo el proceso desde la delimitación del problema (problem framing) hasta su resolución y despliegue*. 
+
+
+]
 
 
 ---
@@ -580,9 +598,10 @@ Podemos decir que modelar (mediante ML) implica pensar en todos estos aspectos:
 
 ## Train - Test Split
 
+#### Opción 1: Holdout 
+La manera más simple de dividir un dataset es dividirlo en TRAIN y TEST. 
 
-
-&lt;img src="img/train-test-split.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="img/holdout-dataset.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -592,7 +611,7 @@ Podemos decir que modelar (mediante ML) implica pensar en todos estos aspectos:
 
 ## Entrenamiento, validación y testeo
 
-
+#### Opción 2: Dividir en 3 partes el dataset
 
 &lt;img src="img/train-val-test.jpeg" width="40%" style="display: block; margin: auto;" /&gt;
 
@@ -606,9 +625,7 @@ Podemos decir que modelar (mediante ML) implica pensar en todos estos aspectos:
 
 ## Resampleo 
 
-El resampleo se utiliza en ML para estimar el desempeño de un modelo. 
-
-
+#### Opción 3: Hacer validación cruzada. 
 
 &lt;img src="img/resampling.png" width="100%" style="display: block; margin: auto;" /&gt;
 
@@ -789,46 +806,6 @@ NEGATIVOS.
 ]
 
 
-
----
-
-## F1 score
-
-
-Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el F1-score. 
-
-&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;img src="img/f1.svg" width="80%" style="display: block; margin: auto;" /&gt;
-
-.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
-
----
-
-### Entendamos el F1-Score
-
-Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de ellas están maduras y otras no. 
-
-
-  
-&lt;img src="img/ripe-apples.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-
-.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
-
----
-
-
-&lt;img src="img/apple-ripe2.png" width="50%" style="display: block; margin: auto;" /&gt;
-
-
-
-&lt;img src="img/f1-c.png" width="80%" style="display: block; margin: auto;" /&gt;
-
-
-.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
-
-
 ---
 
 ### Importante  💡
@@ -956,7 +933,7 @@ La curva ROC nos permite obtener el AUC o área bajo la curva. El AUC oscila en 
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt5[
 
-La curva ROC es independiente del threshold seleccionado.
+La curva ROC es independiente del umbral seleccionado.
 
 ]
 
@@ -964,6 +941,43 @@ La curva ROC es independiente del threshold seleccionado.
 
 
 .footnote[Fuente: *https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/*]
+
+---
+
+## ¿Qué significa que sea independiente del umbral seleccionado?
+
+Supongamos que tenemos un modelo de clasificación binaria 
+
+&lt;img src="img/thresh-01.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+--
+
+
+&lt;img src="img/thesh02.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+&lt;img src="img/thresh03.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+--
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt5[
+
+Vamos a buscar clasificadores que rankeen **alto en Y**, es decir que tengan una alta sensibilidad (recall), o alta tasa de verdaderos positivos, y **bajo en X**, es decir, valores bajos en falsos positivos. 
+
+]
+
+---
+
+## ¿Cuál de estas curvas es ROC tiene mejor performance?
+
+ 
+&lt;img src="img/roc-question.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
 
 ---
 
