@@ -124,8 +124,134 @@ xaringanExtra::use_fit_screen()
 ## Árbol de clasificación
 
 
+Vamos a suponer que tenemos un dataset que tiene la siguiente forma. La idea es que nos ayude a predecir si podemos o no jugar al golf cuando llueve. 
 
 
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas01.png")
+```
+
+
+
+
+---
+
+
+La primer variable que vamos a considerar es el **Pronóstico**, vemos como esa variable se relaciona con la que intentamos predecir. 
+<br>
+Las posibilidades en **Pronóstico** son:
+
+* Nublado
+* Soleado
+* Lluvia
+
+Veamos que pasa cuando el **Pronóstico** es NUBLADO. 
+
+--
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas02.png")
+```
+
+---
+
+Veamos que sucede cuando el **Pronóstico** es SOLEADO 
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas03.png")
+```
+
+
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+¿Qué variable nos conviene para tener nodos más homógeneos?
+]
+
+
+---
+
+
+Vamos a elegir la variable **Humedad**
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas04.png")
+```
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Cuando la humedad es ALTA, no voy a jugar al golf. 
+]
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas05.png")
+```
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Sin embargo, cuando la humedad es NORMAL, sí voy a jugar al golf. 
+]
+
+
+---
+
+Veamos que sucede ahora con **Pronóstico** de Lluvia
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas06.png")
+```
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Debemos dividir el nodo eligiendo una nueva variable que nos permita tener los nodos más homogeneos.
+]
+
+
+
+---
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas07.png")
+```
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Si elegimos la variable VIENTO, puedo obtener nodos más homogeneos. 
+]
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas08.png")
+```
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Cuando llueve, y el viento es DEBIL, voy a jugar al golf. 
+]
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/trees-clas09.png")
+```
+
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Sin embargo, cuando llueve, pero el viento es FUERTE, no voy a jugar al golf. 
+]
 
 
 ---
@@ -212,7 +338,7 @@ $RSS = \sum_{j=1}^{J}\sum_{i \epsilon R_{j}}^{} (y_{i} - \widehat{y}_{R_{j}})^{2
 
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
-En el caso de los **árboles de clasificación**, nos van a interesar en partícular, la impureza. 
+En el caso de los **árboles de clasificación**, nos van a interesar en partícular, la impureza. Dicho en otras palabras, que los nodos que vamos a crear, sean los más homogeneos posibles. 
 
 ]
 
@@ -333,10 +459,10 @@ class: inverse, center, middle
 * Apuntes de Germán Rossatti. 
 
 
-* Laboratorio de Ciencia de Datos - Exactas UBA
-
-
 * Introduction to Statistical Learning. Capítulo 8. 
+
+
+* The Elements of Statistical Learning. 
 
 
 ---

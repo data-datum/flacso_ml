@@ -93,8 +93,116 @@ class: animated slideInRight fadeOutLeft, middle
 ## Árbol de clasificación
 
 
+Vamos a suponer que tenemos un dataset que tiene la siguiente forma. La idea es que nos ayude a predecir si podemos o no jugar al golf cuando llueve. 
 
 
+
+&lt;img src="img/trees-clas01.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+
+
+La primer variable que vamos a considerar es el **Pronóstico**, vemos como esa variable se relaciona con la que intentamos predecir. 
+&lt;br&gt;
+Las posibilidades en **Pronóstico** son:
+
+* Nublado
+* Soleado
+* Lluvia
+
+Veamos que pasa cuando el **Pronóstico** es NUBLADO. 
+
+--
+
+
+&lt;img src="img/trees-clas02.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+Veamos que sucede cuando el **Pronóstico** es SOLEADO 
+&lt;img src="img/trees-clas03.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+¿Qué variable nos conviene para tener nodos más homógeneos?
+]
+
+
+---
+
+
+Vamos a elegir la variable **Humedad**
+
+&lt;img src="img/trees-clas04.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Cuando la humedad es ALTA, no voy a jugar al golf. 
+]
+
+
+---
+
+
+&lt;img src="img/trees-clas05.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Sin embargo, cuando la humedad es NORMAL, sí voy a jugar al golf. 
+]
+
+
+---
+
+Veamos que sucede ahora con **Pronóstico** de Lluvia
+
+&lt;img src="img/trees-clas06.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Debemos dividir el nodo eligiendo una nueva variable que nos permita tener los nodos más homogeneos.
+]
+
+
+
+---
+
+
+
+&lt;img src="img/trees-clas07.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Si elegimos la variable VIENTO, puedo obtener nodos más homogeneos. 
+]
+
+
+---
+
+
+&lt;img src="img/trees-clas08.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Cuando llueve, y el viento es DEBIL, voy a jugar al golf. 
+]
+
+
+---
+
+
+&lt;img src="img/trees-clas09.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+Sin embargo, cuando llueve, pero el viento es FUERTE, no voy a jugar al golf. 
+]
 
 
 ---
@@ -317,10 +425,10 @@ class: inverse, center, middle
 * Apuntes de Germán Rossatti. 
 
 
-* Laboratorio de Ciencia de Datos - Exactas UBA
-
-
 * Introduction to Statistical Learning. Capítulo 8. 
+
+
+* The Elements of Statistical Learning. 
 
 
 ---
