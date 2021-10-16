@@ -78,7 +78,7 @@ xaringanExtra::use_fit_screen()
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 1a: Genearalidades. Conceptos Fundamentales
+### Clase 1a: Generalidades. Conceptos Fundamentales
 
 
 
@@ -100,7 +100,13 @@ xaringanExtra::use_fit_screen()
 
 
 ### Segunda Parte  `r emo::ji("alarm_clock")`
-* Un primer modelo paso a paso
+* Árboles de decisión + Práctica guíada
+
+--
+
+#### Recreo  `r emo::ji("tea")`
+
+--
 
 ### Manos en R! `r emo::ji("computer")`
 
@@ -151,17 +157,27 @@ knitr::include_graphics("img/AI-ml.png")
 
 ---
 
-## El aprendizaje automático y otros campos relacionados
 
 
+## ML vs Deep leraning
 
-```{r echo=FALSE, out.width = '90%',  fig.align='center'}
-knitr::include_graphics("img/ml-related.png")
-```
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+* Costo computacional. 
 
-Fuente: [link](https://ldi.upenn.edu/sites/default/files/Introduction-to-Machine-Learning.pdf)
+* Dificultad en el entrenamiento. 
+
+* Ingenieria de features vs Ingeniería de arquitecturas. 
 
 
+]
+
+## ML vs Data Science
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+* En ML se hace énfasis en el modelado de los datos (algoritmo, error, división de los datos), en la ciencia de datos, hacemos foco en todo el proceso desde la delimitación del problema (problem framing) hasta su resolución y despliegue*. 
+
+
+]
 
 
 ---
@@ -641,10 +657,11 @@ Podemos decir que modelar (mediante ML) implica pensar en todos estos aspectos:
 
 ## Train - Test Split
 
-
+#### Opción 1: Holdout 
+La manera más simple de dividir un dataset es dividirlo en TRAIN y TEST. 
 
 ```{r echo=FALSE, out.width = '70%',  fig.align='center'}
-knitr::include_graphics("img/train-test-split.jpg")
+knitr::include_graphics("img/holdout-dataset.png")
 ```
 
 
@@ -655,7 +672,7 @@ knitr::include_graphics("img/train-test-split.jpg")
 
 ## Entrenamiento, validación y testeo
 
-
+#### Opción 2: Dividir en 3 partes el dataset
 
 ```{r echo=FALSE, out.width = '40%',  fig.align='center'}
 knitr::include_graphics("img/train-val-test.jpeg")
@@ -671,9 +688,7 @@ knitr::include_graphics("img/train-val-test.jpeg")
 
 ## Resampleo 
 
-El resampleo se utiliza en ML para estimar el desempeño de un modelo. 
-
-
+#### Opción 3: Hacer validación cruzada. 
 
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/resampling.png")
@@ -880,54 +895,6 @@ NEGATIVOS.
 ]
 
 
-
----
-
-## F1 score
-
-
-Cuando me interesan tanto los FP como los FN, de igual forma, voy a utilizar el F1-score. 
-
-<br><br><br>
-```{r echo=FALSE, out.width = '80%',  fig.align='center'}
-knitr::include_graphics("img/f1.svg")
-```
-
-.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
-
----
-
-### Entendamos el F1-Score
-
-Supongamos que tenemos una máquina recolectora de frutas, siendo que algunas de ellas están maduras y otras no. 
-
-
-  
-```{r echo=FALSE, out.width = '80%',  fig.align='center'}
-knitr::include_graphics("img/ripe-apples.png")
-```
-
-
-
-.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
-
----
-
-
-```{r echo=FALSE, out.width = '50%',  fig.align='center'}
-knitr::include_graphics("img/apple-ripe2.png")
-```
-
-
-
-```{r echo=FALSE, out.width = '80%',  fig.align='center'}
-knitr::include_graphics("img/f1-c.png")
-```
-
-
-.footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
-
-
 ---
 
 ### Importante  `r emo::ji("bulb")`
@@ -1063,7 +1030,7 @@ La curva ROC nos permite obtener el AUC o área bajo la curva. El AUC oscila en 
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt5[
 
-La curva ROC es independiente del threshold seleccionado.
+La curva ROC es independiente del umbral seleccionado.
 
 ]
 
@@ -1071,6 +1038,51 @@ La curva ROC es independiente del threshold seleccionado.
 
 
 .footnote[Fuente: *https://paulvanderlaken.com/2019/08/16/roc-auc-precision-and-recall-visually-explained/*]
+
+---
+
+## ¿Qué significa que sea independiente del umbral seleccionado?
+
+Supongamos que tenemos un modelo de clasificación binaria 
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/thresh-01.png")
+```
+
+--
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/thesh02.png")
+```
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/thresh03.png")
+```
+
+--
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt5[
+
+Vamos a buscar clasificadores que rankeen **alto en Y**, es decir que tengan una alta sensibilidad (recall), o alta tasa de verdaderos positivos, y **bajo en X**, es decir, valores bajos en falsos positivos. 
+
+]
+
+---
+
+## ¿Cuál de estas curvas es ROC tiene mejor performance?
+
+ 
+```{r echo=FALSE, out.width = '70%',  fig.align='center'}
+knitr::include_graphics("img/roc-question.png")
+```
+
+
 
 ---
 
