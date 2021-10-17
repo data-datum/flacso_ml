@@ -802,8 +802,8 @@ knitr::include_graphics("img/rmse.png")
 * Mean Absolute Error (MAE)
 
 
-```{r echo=FALSE, out.width = '40%',  fig.align='center'}
-knitr::include_graphics("img/mae.png")
+```{r echo=FALSE, out.width = '50%',  fig.align='center'}
+knitr::include_graphics("img/mae-n.jpg")
 ```
 
 
