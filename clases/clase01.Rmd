@@ -524,7 +524,6 @@ sobre las x para predecir las y.
 
 * **Evaluar la capacidad del modelo final** con el conjunto de test para tener una estimación de la capacidad que tiene el modelo cuando predice nuevas observaciones.
 
-* **Entrenar el modelo final** con todos los datos disponibles.
 
 
 .footnote[Fuente: *https://www.cienciadedatos.net/documentos/59_machine_learning_con_r_y_tidymodels*]
@@ -608,7 +607,7 @@ sobre las x para predecir las y.
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
-#### Imputación de datos ruidosos, perdidos o erroneos. 
+#### Imputación de datos ruidosos, perdidos o erróneos. 
 
 #### Codificación de variables categóricas. 
 
@@ -832,7 +831,7 @@ knitr::include_graphics("img/metricas2.png")
 
 ---
 
-### Falsos positivos 
+### Falsos Negativos 
   
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/metricas3.png")
@@ -849,7 +848,7 @@ knitr::include_graphics("img/metricas4.png")
 
 ---
 
-### Falsos Negativos  
+### Falsos Positivos 
   
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/metricas5.png")
@@ -877,7 +876,7 @@ knitr::include_graphics("img/matriz-confusion.png")
 
 ---
 
-## Precision vs Recall 
+## Precision vs Sensibilidad (Recall) 
 
 * Uno podria elegir trabajar con las métricas de Precision o Recall para un problema desbalanceado. 
 Maximinar la precisión minimizará los FALSOS POSITIVOS, mientras que el Recall minimizará los FALSOS
@@ -889,7 +888,7 @@ NEGATIVOS.
 #### Precisión: Cuando el objetivo es minimizar los falsos positivos. 
 
 
-#### Recall: Cuando el objetivo es minimizar los falsos negativos. 
+#### Sensibilidad (Recall): Cuando el objetivo es minimizar los falsos negativos. 
 
 
 ]
@@ -1069,7 +1068,9 @@ knitr::include_graphics("img/thresh03.png")
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt5[
 
-Vamos a buscar clasificadores que rankeen **alto en Y**, es decir que tengan una alta sensibilidad (recall), o alta tasa de verdaderos positivos, y **bajo en X**, es decir, valores bajos en falsos positivos. 
+Vamos a buscar clasificadores que rankeen:
+* **alto en Y**, es decir que tengan una alta sensibilidad (recall), o alta tasa de verdaderos positivos, y
+* **bajo en X**, es decir, valores bajos en falsos positivos. 
 
 ]
 
@@ -1396,3 +1397,14 @@ https://www.sciencedirect.com/science/article/pii/S0370157319300766
 * Imágenes tomadas de https://vas3k.com/blog/machine_learning/ 
 
 * Machine Learning Engineering http://www.mlebook.com/wiki/doku.php 
+
+
+---
+
+class: center, middle
+
+
+## `r emo::ji("link")`
+## Para ver en web estas slides
+
+https://data-datum.github.io/flacso_ml/clases/clase01.html#1
