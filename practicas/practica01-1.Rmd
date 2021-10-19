@@ -18,7 +18,7 @@ Más info en: https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html
 
 ```{r eval=FALSE}
 #si no tengo instalado la libreria, la instalo
-install.packages(tidymodels)
+#install.packages(tidymodels)
 ```
 
 
@@ -96,6 +96,7 @@ En esta instancia se deben dividir los datos en train y test.
 Como nos proporcionan separados ambos datasets, no debemos preocuparnos, pero si es importante en esta instancia, dividirlos. 
 
 ```{r}
+set.seed(123)
 p_split <- Boston %>%
   initial_split(prop=0.75) # divido en 75%
 p_train <- training(p_split)
@@ -105,6 +106,17 @@ p_split
 
 Esta división es arbitraria, podemos hacer divisiones de 75/25, 80/20, 90/10, etc. 
 
+```{r}
+#Ejecutamos este comando para corrobar que la data de TRAIN haya sido randomizada al hacer el sampling. 
+p_train %>%
+  head()
+```
+
+
+```{r}
+p_test %>%
+  head()
+```
 
 
 ## Receta (Preprocesamiento de los datos)
@@ -170,6 +182,7 @@ head(results)
 metrics(results, truth = medv, estimate = .pred_tree)
 ```
 
+### Error de estimacion del modelo en TEST
 
 ```{r}
 results_test <- p_test %>%
