@@ -7,12 +7,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Mi primer modelo de Machine Learning
+## Un primer modelo de Machine Learning
 
 ## Dataset
 
 El dataset corresponde a Boston, que se encuentra disponible en Kaggle; una plataforma de competencia de machine learning. 
-Más info en: 
+Más info en: https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html 
 
 #### Cargo las librerias
 
@@ -27,7 +27,7 @@ library(tidymodels)
 library(tidyverse)
 library(magrittr)
 library(corrr)
-library(MASS)
+library(MASS) #el dataset se encuentra en esta librería 
 ```
 
 #### Ingreso los datos
@@ -90,8 +90,6 @@ cor(Boston)
 ```
 
 
-
-
 ### Vamos a dividir los datos
 
 En esta instancia se deben dividir los datos en train y test. 
@@ -101,18 +99,25 @@ Como nos proporcionan separados ambos datasets, no debemos preocuparnos, pero si
 p_split <- Boston %>%
   initial_split(prop=0.75) # divido en 75%
 p_train <- training(p_split)
+p_test <- testing(p_split)
 p_split
+```
+
+Esta división es arbitraria, podemos hacer divisiones de 75/25, 80/20, 90/10, etc. 
+
+```{r}
+glimpse(p_train)
 ```
 
 
 ```{r}
-p_folds <- vfold_cv(p_train, v=3)
+glimpse(p_test)
 ```
 
 
-## Receta
+## Receta (Preprocesamiento de los datos)
 
-Con este nombre agrupamos todos los pre-procesamientos que vamos a realizar al dataset de *train*, con lo cual haremos el modelado. Estas mismas operaciones se realizan al final en el dataset de *test*.
+Con este nombre agrupamos todos los **pre-procesamientos** que vamos a realizar al dataset de *train*, con lo cual haremos el modelado. Estas mismas operaciones se realizan al final en el dataset de *test*.
 
 ```{r}
 recipe_dt <- p_train %>%
@@ -134,7 +139,7 @@ recipe_dt
 set.seed(123)
 tree_spec <- decision_tree() %>% #arboles de decisión
   set_engine("rpart") %>% #librería rpart
-  set_mode("regression") #modo para clasificar
+  set_mode("regression") #regresión
 tree_spec
 ```
 
@@ -155,7 +160,7 @@ tree_spec %>%
   collect_metrics()
 ```
 
-### Error de estimación del modelo en TEST
+### Error de estimación del modelo en TEST (Predicción)
 
 ```{r}
 final_fit_dt <- last_fit(tree_wf,
@@ -164,6 +169,11 @@ final_fit_dt <- last_fit(tree_wf,
 final_fit_dt %>%
   collect_metrics()
 ```
+
+
+
+
+
 
 ```{r}
 collect_predictions(final_fit_dt) %>%
@@ -174,5 +184,45 @@ collect_predictions(final_fit_dt) %>%
 ```
 
 Hay mucho para mejorar nuestro modelo, eso lo veremos en la siguiente clase :)
+
+
+
+## Vamos a ver graficamente como sería nuestro árbol de decisión
+
+```{r}
+library(rpart)
+library(rpart.plot)
+fit <- rpart(medv~., data = p_train)
+rpart.plot(fit, extra=100)
+```
+
+## Decision Tree
+
+
+```{r}
+
+final_tree <- extract_workflow(final_fit_dt)
+
+```
+
+
+
+```{r}
+library(parttree)
+
+tree_db <-
+  decision_tree() %>%
+  set_engine("rpart") %>%
+  set_mode("regression") %>%
+  fit(medv ~ lstat + rm, data = p_train)
+
+p_train %>%
+  ggplot(aes(lstat, rm)) +
+  geom_parttree(data = tree_db, aes(fill = medv), alpha = 0.3) +
+  geom_jitter(alpha = 0.7, width = 1, height = 0.5, aes(color = medv)) +
+  scale_colour_viridis_c(aesthetics = c("color", "fill"))
+```
+
+
 
 
