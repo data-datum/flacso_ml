@@ -93,7 +93,7 @@ cor(Boston)
 ### Vamos a dividir los datos
 
 En esta instancia se deben dividir los datos en train y test. 
-Como nos proporcionan separados ambos datasets, no debemos preocuparnos, pero si es importante en esta instancia, dividirlos. 
+
 
 ```{r}
 set.seed(123)
@@ -211,7 +211,7 @@ La próxima clase este modelo va a complejizarse mucho mas. :)
 ## Vamos a plotear el árbol de decisión
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(rpart)
 library(rpart.plot)
 ```
@@ -228,8 +228,7 @@ tree_fit %>%
 results %>%
     ggplot(aes(medv, .pred_tree)) +
     geom_abline(lty = 2, color = "gray50") +
-    geom_point(size = 1.5, alpha = 0.3, show.legend = FALSE) +
-    geom_smooth() 
+    geom_point(size = 1.5, alpha = 0.3, show.legend = FALSE)
 ```
 
 
