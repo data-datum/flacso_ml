@@ -159,7 +159,7 @@ knitr::include_graphics("img/AI-ml.png")
 
 
 
-## ML vs Deep leraning
+## ML vs Deep learning
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 * Costo computacional. 
