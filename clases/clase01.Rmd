@@ -394,8 +394,47 @@ knitr::include_graphics("img/unsupervised.png")
 .footnote[Fuente: *Machine Learning with R, the tidyverse and mlr*]
 
 
+---
+
+## Algunos ejemplos 
 
 
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/geo1.png")
+```
+
+
+
+
+.footnote[*Fuente: https://medium.com/geoai/using-machine-learning-to-predict-car-accident-risk-4d92c91a7d57*]
+
+
+---
+
+## Otro ejemplo
+
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/geo2.png")
+```
+
+
+.footnote[*Fuente: https://medium.com/geoai/an-end-to-end-solution-on-the-cloud-to-monitor-traffic-flow-using-deep-learning-9dfdfd00b621*]
+
+
+---
+
+## Otro ejemplo
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/geo3.png")
+```
+
+
+.footnote[*Fuente: https://medium.com/geoai/using-forest-based-classification-regression-to-model-and-estimate-house-values-5a0e26682c42*]
 
 ---
 
