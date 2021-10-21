@@ -11,6 +11,8 @@
 
 * Práctica guiada: https://data-datum.github.io/flacso_ml/practicas/practica01-1.html#1
 
+* Práctica individual: 
+
 * Clase 2a: 
 
 * Clase 2b: https://data-datum.github.io/flacso_ml/clases/clase02b.html#1
