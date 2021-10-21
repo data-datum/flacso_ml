@@ -15,7 +15,7 @@
 
 * Quizz-1: https://www.menti.com/cu3q9w32ff
 
-!![Models](overfitted.png)
+![Models](overfitted.png)
 
 * Quizz-2: https://www.menti.com/km4jbhvh1q
 
