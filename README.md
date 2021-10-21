@@ -13,6 +13,14 @@
 
 * Práctica individual: https://data-datum.github.io/flacso_ml/practicas/TP1.html#1
 
+* Quizz-1: https://www.menti.com/cu3q9w32ff
+
+![Models](overfitted.png)
+
+* Quizz-2: https://www.menti.com/km4jbhvh1q
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
 * Clase 2a: 
 
 * Clase 2b: 
