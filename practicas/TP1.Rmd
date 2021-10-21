@@ -1,0 +1,160 @@
+---
+title: "Practica 1 Individual - Regresión"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+```
+
+
+
+## Dataset
+
+
+El dataset se encuentra disponible en: 
+
+https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data
+
+Lo podemos ingresar mediante el siguiente comando
+
+```{r}
+train <- read_csv("https://raw.githubusercontent.com/data-datum/datasets/main/train_house.csv")
+```
+
+
+```{r}
+train %>%
+  glimpse()
+```
+
+**La variable a predecir es la de SalePrice.**
+
+
+Vamos a seleccionar solo las columnas numéricas y eliminamos los valores perdidos. 
+
+```{r}
+train_data <- train %>%
+  select_if(is.numeric) %>%
+  select(-Id) %>%
+  drop_na() 
+```
+
+
+```{r}
+train_data %>%
+  glimpse()
+```
+
+
+## División del dataset de train
+
+```{r}
+set.seed(123)
+p_split <- train_data %>%
+  initial_split(prop=0.75) # divido en 75%
+p_train <- training(p_split)
+p_test <- testing(p_split)
+p_split
+```
+
+
+```{r}
+p_train %>%
+  glimpse()
+```
+
+
+
+## Preprocesamiento
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+## Modelo
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+## Resultados en TRAIN
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+## Métricas en TRAIN 
+```{r}
+
+```
+
+### Error de estimacion del modelo en TEST
+
+```{r}
+
+```
+
+
+```{r}
+```
+
+
+```{r}
+```
+
+
+
+## Gráfico del árbol de decisión 
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+```{r}
+
+```
+
