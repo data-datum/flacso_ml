@@ -11,6 +11,8 @@
 
 * Práctica guiada: https://data-datum.github.io/flacso_ml/practicas/practica01-1.html#1
 
+* Práctica guiada (Rmd): https://github.com/data-datum/flacso_ml/blob/main/practicas/practica01-1.Rmd
+
 * Práctica individual: https://data-datum.github.io/flacso_ml/practicas/TP1.html#1
 
 * Quizz-1: https://www.menti.com/cu3q9w32ff
