@@ -274,6 +274,18 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 
 ---
 
+## Random Forest vs Árboles de Decisión
+
+* Train: 90%
+* Test: 10%
+
+&lt;img src="img/rf-vs-trees.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+.footnote[Fuente: *Leo Breiman. Statistical Modeling: The two cultures*]
+
+---
+
 ## Out-of-Bag error
 
 * El hecho de que los árboles se ajusten empleando muestras generadas por bootstrapping conlleva que, en promedio, cada ajuste use solo aproximadamente dos tercios de las observaciones originales. Al tercio restante se le llama out-of-bag (OOB).
@@ -326,6 +338,7 @@ class: inverse, center, middle
 ---
 
 ## Importancia de las variables 
+
 
 
 
@@ -406,7 +419,9 @@ class: inverse, center, middle
 
 * Hands on Machine learning with scikit-learn and Tensorflow. Capítulo 7.
 
-* Applied Predictive Modeling. Capítulo 8.
+* Applied Predictive Modeling. Capítulo 8. 
+
+* Variable Importance Plots. An Introduction to the vip Package https://cran.r-project.org/web/packages/vip/vignettes/vip-introduction.pdf
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
