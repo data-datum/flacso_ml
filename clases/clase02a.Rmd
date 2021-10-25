@@ -138,6 +138,20 @@ class: inverse, center, middle
 
 ---
 
+## Occam y Principio de Parsimonia
+
+
+        
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/pedro.png")
+```
+
+
+
+
+.footnote[Fuente: https://pedromdd.medium.com/ten-myths-about-machine-learning-d888b48334a3]
+---
+
 
 ### 2. Bias en el muestreo (sampling bias)
 
@@ -454,9 +468,14 @@ knitr::include_graphics("img/bias-variance1.png")
 ## Matemáticamente
 
 
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/bias-var.png")
+```
 
 
 .footnote[Fuente: https://github.com/AntonMu/BiasVarianceTradeoff/blob/master/Bias_Variance_Tradeoff.pdf]
+
+
 ---
 
 class: inverse, center, middle
@@ -569,108 +588,6 @@ knitr::include_graphics("img/rpart.png")
 * **Cuando se acerca a 0 el cost_complexity, aumenta la probabilidad de overfitting**
 
 ]
-
-
-
-
----
-
-class: inverse, center, middle
-
-
-## ¿Qué sucede cuando tenemos clases desbalanceadas?
-
-
-
----
-## Opciones de trabajo.
-
-
-1. Cambiar la métrica de evaluación del modelo. 
-
-2. Darle un determinado peso a una clase en particular, atendiendo al desbalanceo. 
-
-3. Balancearlos haciendo un:
-* **Undersampling.** Es una buena opción si tenemos muchos datos. 
-* **Oversampling.** Creamos datos sintéticos a partir de los que ya tenemos. 
-
-
----
-
-## Resampling 
-
-
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/unders-overs.png")
-```
-
-
-
-
-
-
----
-
-
-## Random Undersampling
-
-
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/random-under.png")
-```
-
-
----
-
-## Random Oversampling
-
-
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/random-over.png")
-```
-
-
----
-
-## Importante
-
-
-También podemos hacer under y oversampling mediante técnicas específicas que atiendan a criterios particulares. 
-
-
----
-
-## Que nos ofrece R
-
-
-* En R tenemos opciones de undersampling y de oversampling. 
-
-### Undersampling
-
-
-```{r echo=FALSE, out.width = '90%',  fig.align='center'}
-knitr::include_graphics("img/under-R.png")
-```
-
-
-
-
-.footnote[https://github.com/tidymodels/themis]
-
----
-
-
-### Oversampling
-
-
-```{r echo=FALSE, out.width = '90%',  fig.align='center'}
-knitr::include_graphics("img/over-R.png")
-```
-
-
-
-
-.footnote[https://github.com/tidymodels/themis]
 
 
 
@@ -788,15 +705,18 @@ knitr::include_graphics("img/entrop-residenc.png")
 
 Cuanto más homogeneas son las ramas del árbol que se genera al seleccionar el algoritmo una variable, 
 
-* hay mayor ganancia de información.
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
-<br>
+* **hay mayor ganancia de información.**
 
-* hay menos entropía 
+* **hay menos entropía**
 
-<br><br>
+]
+
+
 
 **Eso se traduce en un mejor modelo para la predicción que deseamos realizar**
+
 
 ---
 
@@ -830,14 +750,6 @@ knitr::include_graphics("img/gini.png")
 class: inverse, center, middle
 
 ## Manos en R!
-
-
----
-
-
-class: inverse, center, middle
-
-## Ensembles
 
 
 ---

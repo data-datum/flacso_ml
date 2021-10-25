@@ -107,6 +107,18 @@ class: inverse, center, middle
 
 ---
 
+## Occam y Principio de Parsimonia
+
+
+        
+&lt;img src="img/pedro.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+.footnote[Fuente: https://pedromdd.medium.com/ten-myths-about-machine-learning-d888b48334a3]
+---
+
 
 ### 2. Bias en el muestreo (sampling bias)
 
@@ -395,9 +407,12 @@ g{D1}, g{D2}, g{D3}: son las funciones que obtengo ajustando mediante un dataset
 ## Matemáticamente
 
 
+&lt;img src="img/bias-var.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 .footnote[Fuente: https://github.com/AntonMu/BiasVarianceTradeoff/blob/master/Bias_Variance_Tradeoff.pdf]
+
+
 ---
 
 class: inverse, center, middle
@@ -507,98 +522,6 @@ Documentación: https://parsnip.tidymodels.org/reference/decision_tree.html
 
 
 
-
----
-
-class: inverse, center, middle
-
-
-## ¿Qué sucede cuando tenemos clases desbalanceadas?
-
-
-
----
-## Opciones de trabajo.
-
-
-1. Cambiar la métrica de evaluación del modelo. 
-
-2. Darle un determinado peso a una clase en particular, atendiendo al desbalanceo. 
-
-3. Balancearlos haciendo un:
-* **Undersampling.** Es una buena opción si tenemos muchos datos. 
-* **Oversampling.** Creamos datos sintéticos a partir de los que ya tenemos. 
-
-
----
-
-## Resampling 
-
-
-&lt;img src="img/unders-overs.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-
-
-
-
----
-
-
-## Random Undersampling
-
-
-&lt;img src="img/random-under.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-## Random Oversampling
-
-
-&lt;img src="img/random-over.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
----
-
-## Importante
-
-
-También podemos hacer under y oversampling mediante técnicas específicas que atiendan a criterios particulares. 
-
-
----
-
-## Que nos ofrece R
-
-
-* En R tenemos opciones de undersampling y de oversampling. 
-
-### Undersampling
-
-
-&lt;img src="img/under-R.png" width="90%" style="display: block; margin: auto;" /&gt;
-
-
-
-
-.footnote[https://github.com/tidymodels/themis]
-
----
-
-
-### Oversampling
-
-
-&lt;img src="img/over-R.png" width="90%" style="display: block; margin: auto;" /&gt;
-
-
-
-
-.footnote[https://github.com/tidymodels/themis]
-
-
-
 ---
 class: inverse, center, middle 
 
@@ -697,15 +620,18 @@ Supongamos que tenemos que decidir si entregar o no un préstamo, y tenemos 2 va
 
 Cuanto más homogeneas son las ramas del árbol que se genera al seleccionar el algoritmo una variable, 
 
-* hay mayor ganancia de información.
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
-&lt;br&gt;
+* **hay mayor ganancia de información.**
 
-* hay menos entropía 
+* **hay menos entropía**
 
-&lt;br&gt;&lt;br&gt;
+]
+
+
 
 **Eso se traduce en un mejor modelo para la predicción que deseamos realizar**
+
 
 ---
 
@@ -735,14 +661,6 @@ La relación de Ganancia (Gain Ratio) es el cociente entre la ganancia de inform
 class: inverse, center, middle
 
 ## Manos en R!
-
-
----
-
-
-class: inverse, center, middle
-
-## Ensembles
 
 
 ---
