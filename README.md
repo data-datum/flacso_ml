@@ -23,8 +23,8 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
 
-* Clase 2a: 
+* Clase 2a: https://data-datum.github.io/flacso_ml/clases/clase02a.html#1
 
-* Clase 2b: 
+* Clase 2b: https://data-datum.github.io/flacso_ml/clases/clase02b.html#1
 
 * Práctica: 
