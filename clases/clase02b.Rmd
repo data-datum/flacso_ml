@@ -78,7 +78,7 @@ xaringanExtra::use_fit_screen()
 # Machine Learning en Aplicaciones Espaciales
 
 
-### Clase 2b: Introducción a ensembles y a random forest. 
+### Clase 2b: Introducción a ensembles. Random Forest 
 
 
 ---
@@ -89,11 +89,15 @@ xaringanExtra::use_fit_screen()
 
 Con el nombre de ensembles se conocen a los modelos de:
 
---
-* Variedades de Bagging (Bagged Trees, Random Forest)
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt4[
 
---
-* Variedades de Boosting (Adaboost, XGBoost)
+* **Variedades de Bagging** (Bagged Trees, Random Forest, Extra Trees)
+
+* **Variedades de Boosting** (Adaboost, XGBoost)
+
+
+]
+
 
 --
 
@@ -113,10 +117,24 @@ Usados en regresión y clasificación.
 
 ---
 
+### ¿Por qué bagging?
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/bagging-trees.png")
+```
+
+El boostrapping o bagging introduce mayor diversidad en los subsets de datos en los que cada predictor es entrenado, lo que trae como conseucencia que el bias sea más alto que si no se hiciese bagging. Esto significa que el predictor termina siendo menos correlacionado, entonces la varianza del ensemble se reduce. En general, el bagging resulta en mejores modelos, lo que explica porque se lo prefiere a DT. 
+
+
+.footnote[Fuente: Hands on Machine Learning with scikit-learn and Tensorflow]
+
+---
+
 ## Bias y varianza en bagging / boosting
 
 
-.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt3[
 ###  En *bagging*, se emplean **modelos con muy poco bias pero mucha varianza**, agregándolos se consigue reducir la varianza sin apenas aumentar el bias. 
 ###  En *boosting*, se emplean **modelos con muy poca varianza pero mucho bias**, ajustando secuencialmente los modelos se reduce el bias. Por lo tanto, cada una de las estrategias reduce una parte del error total.
 
@@ -250,6 +268,18 @@ knitr::include_graphics("img/bagging_reg_blue.svg")
 
 ---
 
+## Algoritmo de Bagging
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/Bagging-algo.png")
+```
+
+
+
+---
+
 ## Random Forest
 
 Los métodos de random forest y bagging siguen el mismo algoritmo con la única diferencia de que, en random forest, **antes de cada división, se seleccionan aleatoriamente m predictores**. La diferencia en el resultado dependerá del valor m escogido. 
@@ -277,9 +307,11 @@ En consecuencia, todos los *bagged trees* se verán bastante similares entre sí
 y por lo tanto más confiable.
 La principal diferencia entre *bagged trees* y *random forest* es la elección del tamaño del subconjunto de predictores m.
 
+
+
+
+
 ---
-
-
 ## Retomando 
 
 .bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph3.mt4[
@@ -289,6 +321,18 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 ### En Random Forest, en particular, aparte de bagging, hago un sampling de variables, que me permite reducir la varianza y obtener mejores predicciones. 
 ]
 
+
+
+---
+
+## Esquema de Random Forest
+
+
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/random-forest.png")
+```
 
 
 ---
@@ -307,14 +351,17 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 
 ## Limitaciones del out-of-bag error
 
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+
 * No adecuado para datos que guardan una relación temporal (series temporales).
 
-<br><br>
-
---
-
-
 * El preprocesado de los datos de entrenamiento se hace de forma conjunta, por lo que las observaciones out-of-bag pueden sufrir data leakage. De ser así, las estimaciones del OOB-error son demasiado optimistas.
+
+]
+
+
+
 
 ---
 ## Random Forest
@@ -330,10 +377,84 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 
 ---
 
-## Importancia de las variables
+class: inverse, center, middle
+
+## Si tenemos muchos árboles como sucede en random forest
+
+--
+
+## ¿Cómo sé que variables son más importantes?
+
+
+---
+
+## Importancia de las variables 
 
 
 
+---
+
+## Algoritmo de Random Forest
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/rf-algo.png")
+```
+
+
+
+
+
+
+---
+
+
+## Tunning en Random Forest en R
+
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/hiper-rf.png")
+```
+
+
+
+
+.footnote[Fuente: https://parsnip.tidymodels.org/reference/rand_forest.html]
+
+
+---
+
+## Extra Trees
+
+* Extra Trees = Extremely Randomized Trees
+
+Cuando crece un árbol en un Random Forest, en cada nodo solo una parte aleatoria de los features es considerada para el split. Es posible hacer los árboles aún más aleatorios usando umbrales aleatorios para cada feature (variable) en vez de buscar los mejores posibles umbrales (como se hace en árboles de decisión). 
+
+Un árbol de árboles tan aleatorios, simplemente se los llama **Extremely Randomized trees** o ExtraTrees. De vuelta, esto intercambia más bias por menos varianza. Esto hace que los ExtraTrees **más rápidos de entrenar que Random Forests** ya que encontrar el mejor umbral posible para cada feature a cada nodo es la tarea más cara computacionalmente. 
+
+
+
+.footnote[Fuente: Hands on Machine learning with scikit-learn and Tensorflow]
+
+
+
+---
+
+## Extra Trees
+
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/extra-T-comp.png")
+```
+
+
+
+
+.footnote[Fuente: https://www.youtube.com/watch?v=r5C3TUIw6Zk&t=1465s]
 
 
 ---
@@ -351,4 +472,8 @@ class: inverse, center, middle
 * Introduction to Statistical Learning. Capítulo 8. 
 
 * The Elements of Statistical Learning. Capítulo 15.
+
+* Hands on Machine learning with scikit-learn and Tensorflow. Capítulo 7.
+
+* Applied Predictive Modeling. Capítulo 8. 
 
