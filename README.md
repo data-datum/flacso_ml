@@ -28,3 +28,7 @@
 * Clase 2b: https://data-datum.github.io/flacso_ml/clases/clase02b.html#1
 
 * Práctica: 
+
+* Quiz-1 (árboles): https://www.menti.com/tzhqr8835t 
+
+* Quiz-2 (ensembles): https://www.menti.com/qk92cbopjc
