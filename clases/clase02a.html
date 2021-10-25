@@ -53,20 +53,83 @@ class: animated slideInRight fadeOutLeft, middle
 
 ---
 
-## Que vemos hoy
+## Hoja de Ruta
 
-### Principios del aprendizaje
+#### Intro teórica
 
-### Repaso de Métricas 
-#### F1 score / AUC Curva / Precision - Recall Curva
+* Principios del aprendizaje
+
+* Repaso de Métricas (F1 score / AUC Curva / Precision - Recall Curva)
+
+* Árboles de decisión (Tunning)
+
+--
+
+#### Práctica guiada
+
+--
+
+#### Recreo  🍵
+
+--
+
+#### Manos en R! 💻
+
+--
+
+#### Ensembles. Introducción a Random Forest
 
 
-### Árboles de decisión (Tunning)
+
+---
+
+class: inverse, center, middle
+
+## Principios del aprendizaje
 
 
-### Ensembles 
+---
+
+### 1. Navaja de Occam 🔪
 
 
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+
+### El modelo más simple que pueda ser ajustado es el más factible.
+
+#### Si tuviéramos para elegir entre un modelo simple y uno complejo con el mismo desempeño, debo preferir **siempre** el modelo más simple
+]
+
+
+
+
+.footnote[__Learning from data__ Abu-Mostafa, Y.]
+
+---
+
+
+### 2. Bias en el muestreo (sampling bias)
+
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+
+### Si los datos contienen un sesgo, el algoritmo tendrá ese mismo sesgo.
+]
+
+
+.footnote[__Learning from data__ Abu-Mostafa, Y.]
+
+---
+
+
+### 3. Data snooping  👀
+
+.bg-near-white.b--purple.ba.bw2.br3.shadow-5.ph4.mt5[
+
+### El set de datos de testeo no debe usarse nunca durante la fase de entrenamiento, ya que esto arrojará resultados más optimistas que los esperados. 
+]
+
+.footnote[__Learning from data__ Abu-Mostafa, Y.]
 
 ---
 class: inverse, center, middle
@@ -247,78 +310,6 @@ Claramente un **FALSO NEGATIVO**, debo poner un énfasis en el **recall**.
 
 ---
 
-### Importante  💡
-
-
-.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
-
-## Determinar que error es más grave (FP o FN) lo determina el contexto de aplicación del problema.
-
-Veamos un ejemplo práctico
-]
-
-
----
-
-## FP vs FN
-
-
-
-&lt;img src="img/cia-market.png" width="70%" style="display: block; margin: auto;" /&gt;
-
-
-Consideremos dos clientes potenciales de un sistema de huellas dactilares. 
-
-* Uno es un **supermercado** que lo usará en el mostrador de pago para verificar que usted es miembro
-de un programa de descuento. 
-* El otro es la **CIA** que lo usará en la entrada de una instalación, para verificar que Ud es personal autorizado para ingresar a esa instalación.
-
-.footnote[Fuente: *Learning from data*]
----
-
-### FP vs FN
-
-
-* Para el supermercado, un **falso rechazo (falso negativo) es costoso** porque si un cliente recibe un 
-rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro. 
-* Por otro lado, el costo de una **falsa aceptación (falso positivo) es menor**. El supermercado regala un descuento a alguien que no se lo merecía, sin mayores prejuicios para el supermercado. 
-
-
-.footnote[Fuente: *Learning from data*]
-
---
-
-
-
-&lt;img src="img/MARKET.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-
-.footnote[Fuente: *Learning from data*]
-
----
-
-### FP vs FN
-
-* Para la CIA, sin embargo, una **falsa aceptación (falso positivo) es un desastre**. Una persona no autorizada se beneficiará del acceso a una instalación muy sensible. 
-* **El falso rechazo (falso negativo)**, sin embargo, **puede tolerarse**, ya que las personas autorizadas son empleados (en lugar de clientes como el caso del supermercado).
-
-
-.footnote[Fuente: *Learning from data*]
-
---
-
-
-
-&lt;img src="img/CIA.png" width="100%" style="display: block; margin: auto;" /&gt;
-
-
-.footnote[Fuente: *Learning from data*]
-
-
-
----
-
 
 ## Repaso Curva AUC
 
@@ -331,6 +322,12 @@ rechazo erróneamente, puede desanimarse de seguir siendo cliente en el futuro.
 - Los valores más pequeños en el eje x del gráfico indican menos FP y más TN.
 - Los valores más grandes en el eje y del gráfico indican más TP  y menos FN.
 ]
+
+
+---
+
+ACA AGREGAR....
+
 
 
 ---
@@ -369,12 +366,74 @@ Veamos que sucede con el desbalanceo de clase.
 
 ---
 
-## Quizz 
+class: inverse, central, middle
+
+
+## Bias-Variance Tradeoff
+
+
+---
+
+## Espacio de hipótesis
+
+f: la funcion verdadera a estimar
+
+g: la mejor función que puedo obtener mediante diferentes modelos
+
+g{D1}, g{D2}, g{D3}: son las funciones que obtengo ajustando mediante un dataset
+
+
+&lt;img src="img/bias-variance1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+.footnote[Fuente: https://blog.insightdatascience.com/bias-variance-tradeoff-explained-fa2bc28174c4]
+
+
+
+---
+
+## Matemáticamente
 
 
 
 
+.footnote[Fuente: https://github.com/AntonMu/BiasVarianceTradeoff/blob/master/Bias_Variance_Tradeoff.pdf]
+---
 
+class: inverse, center, middle
+
+
+## ¿Cómo puedo controlar la complejidad de mi modelo?
+
+
+
+---
+
+class: inverse, center, middle
+
+
+## Recordar
+--
+
+## La complejidad está determinada mediante:
+--
+
+## Parámetros
+
+--
+
+## Hiperparámetros
+
+---
+
+class: inverse, center, middle
+
+
+## Pero sólo sobre los hiperparámetros voy a tener CONTROL
+
+--
+
+## ¿Cómo?
 
 ---
 
@@ -389,6 +448,154 @@ Esa búsqueda la podemos hacer **en grilla (grid search)** o **random (aleatoria
 &lt;img src="img/grid-random-search.png" width="80%" style="display: block; margin: auto;" /&gt;
 
 
+---
+
+class: inverse, center, middle
+
+
+## ¿Cómo queda nuestro flujo de trabajo?
+
+
+---
+
+## Flujo de trabajo
+
+
+
+&lt;img src="img/workflow-final.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## Tunning de hiperparámetros en Árboles de decisión 
+
+* Vamos a hacer tunning de los hiperparámetros del modelo. 
+Documentación: https://parsnip.tidymodels.org/reference/decision_tree.html 
+
+ Hiperparámetros del modelo:
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+* **cost_complexity**: Un número positivo para el parámetro de costo / complejidad 
+
+* **tree_depth**: Un número entero para la profundidad máxima del árbol.
+
+* **min_n**: Un número entero para el número mínimo de puntos de datos en un nodo que se requieren para que el nodo se divida más.
+
+]
+
+
+
+---
+
+### Valores por defecto
+
+
+
+
+&lt;img src="img/rpart.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+* **Cuando aumenta el tree_depth aumenta la probabilidad de overfitting**
+
+* **Cuando disminuye el min_n aumenta la probabilidad de overfitting**
+
+* **Cuando se acerca a 0 el cost_complexity, aumenta la probabilidad de overfitting**
+
+]
+
+
+
+
+---
+
+class: inverse, center, middle
+
+
+## ¿Qué sucede cuando tenemos clases desbalanceadas?
+
+
+
+---
+## Opciones de trabajo.
+
+
+1. Cambiar la métrica de evaluación del modelo. 
+
+2. Darle un determinado peso a una clase en particular, atendiendo al desbalanceo. 
+
+3. Balancearlos haciendo un:
+* **Undersampling.** Es una buena opción si tenemos muchos datos. 
+* **Oversampling.** Creamos datos sintéticos a partir de los que ya tenemos. 
+
+
+---
+
+## Resampling 
+
+
+&lt;img src="img/unders-overs.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+---
+
+
+## Random Undersampling
+
+
+&lt;img src="img/random-under.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Random Oversampling
+
+
+&lt;img src="img/random-over.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Importante
+
+
+También podemos hacer under y oversampling mediante técnicas específicas que atiendan a criterios particulares. 
+
+
+---
+
+## Que nos ofrece R
+
+
+* En R tenemos opciones de undersampling y de oversampling. 
+
+### Undersampling
+
+
+&lt;img src="img/under-R.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+.footnote[https://github.com/tidymodels/themis]
+
+---
+
+
+### Oversampling
+
+
+&lt;img src="img/over-R.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+.footnote[https://github.com/tidymodels/themis]
 
 
 
@@ -505,6 +712,14 @@ Cuanto más homogeneas son las ramas del árbol que se genera al seleccionar el 
 ## Relación de Ganancia (Gain Ratio)
 
 
+La relación de Ganancia (Gain Ratio) es el cociente entre la ganancia de información (Information Gain) y la entropía del nodo raíz (root node). 
+
+
+
+&lt;img src="img/gain.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
 
 
 ---
@@ -512,71 +727,7 @@ Cuanto más homogeneas son las ramas del árbol que se genera al seleccionar el 
 ## Índice de Gini (Index Gini)
 
 
-
-
-
----
-
-## Tunning de hiperparámetros en Árboles de decisión 
-
-* Vamos a hacer tunning de los hiperparámetros del modelo. 
-Documentación: https://parsnip.tidymodels.org/reference/decision_tree.html 
-
-#### Hiperparámetros del modelo:
-&lt;br&gt;
-* **cost_complexity**: Un número positivo para el parámetro de costo / complejidad 
-
-&lt;br&gt;
-* **tree_depth**: Un número entero para la profundidad máxima del árbol.
-
-&lt;br&gt;
-* **min_n**: Un número entero para el número mínimo de puntos de datos en un nodo que se requieren para que el nodo se divida más.
-
-
----
-
-## Búsqueda en grilla (grid search)
-
-
-
-
-
-
-```r
-set.seed(123) 
-trees_spec &lt;- decision_tree() %&gt;% 
-  set_engine("rpart") %&gt;% 
-  set_mode("classification") %&gt;% 
-  set_args(min_n = tune(),
-           cost_complexity = tune(),
-           tree_depth= tune())
-```
-
-
----
-## Búsqueda random
-
-En **set_args()** voy a especificar los hiperparámetros y dejarlos variar libremente con la funcion tune().
-
-
-
-```r
-set.seed(123) 
-trees_spec &lt;- decision_tree() %&gt;% 
-  set_engine("rpart") %&gt;% 
-  set_mode("classification") %&gt;% 
-  set_args(min_n = tune(),
-           cost_complexity = tune(),
-           tree_depth= tune())
-```
-
-
-
----
-
-## Búsqueda en grilla
-
-
+&lt;img src="img/gini.png" width="50%" style="display: block; margin: auto;" /&gt;
 
 
 ---
