@@ -29,6 +29,8 @@
 
 * Práctica guiada 2: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-2.html
 
-* Quiz-1 (árboles): https://www.menti.com/tzhqr8835t 
+* Quiz-1 (árboles): https://www.menti.com/tzhqr8835t
 
 * Quiz-2 (ensembles): https://www.menti.com/qk92cbopjc
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
