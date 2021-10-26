@@ -150,6 +150,40 @@ class: inverse, center, middle
 
 ---
 
+## MAE (Error absoluto medio)
+
+
+
+&lt;img src="img/mae-n.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+Es la media de la diferencia absoluta entre el valor observado y los valores predichos. 
+El error absoluto medio o MAE es un puntaje lineal, lo que significa que todas las diferencias individuales se ponderán por igual en el promedio. Por ejemplo, la diferencia entre 10 y 0 será el doble de la diferencia entre 5 y 0.
+
+
+---
+
+## MSE (Error cuadrático medio)
+
+
+&lt;img src="img/mse.jpg" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+---
+
+## RSME (Raiz del error cuadrático medio)
+
+
+
+
+&lt;img src="img/rmse.png" width="40%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
 
 ## Matriz de confusión
 
@@ -190,6 +224,17 @@ class: inverse, center, middle
 
 ---
 
+## Para recordar mejor
+
+
+       
+&lt;img src="img/Error_Types_print.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+.footnote[Fuente: *https://chrisalbon.com/*]
+
+
+---
 
 
 ## Precision vs Recall 
@@ -326,29 +371,51 @@ Claramente un **FALSO NEGATIVO**, debo poner un énfasis en el **recall**.
 ## Repaso Curva AUC
 
 
-.right-column[
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
 **Una curva ROC es apropiada cuando**:
 - Quiero ver la performance global del modelo. 
 - Quiero comparar diferentes modelos a diferentes thresholds (umbrales).
 
 - Los valores más pequeños en el eje x del gráfico indican menos FP y más TN.
 - Los valores más grandes en el eje y del gráfico indican más TP  y menos FN.
+
 ]
+
 
 
 ---
 
-ACA AGREGAR....
+ 
+&lt;img src="img/matriz-confusion.png" width="80%" style="display: block; margin: auto;" /&gt;
 
+
+
+* Teniendo en mente el eje X y Y de la curva ROC, nuestro foco está en el TPR, el recall o la sensibilidad, y en el False Positive Rate, o también 1-Especificidad. 
+
+
+
+mientras que en la **curva Precision-Recall**:
+
+* Precision
+* Recall (Sensibilidad)
+
+**De cierta forma, me esta interesando una sola clase, la clase positiva.** 
 
 
 ---
 
 ## Curva Precision - Recall 
 
-* La curva de Precision-Recall muestra la compensación entre precisión y recall para diferentes umbrales. Un área alta debajo de la curva representa tanto una alta recall como una alta precisión, donde la alta precisión se relaciona con una tasa baja de falsos positivos y el alto recall se relaciona con una tasa baja de falsos negativos. Los puntajes altos para ambos muestran que el clasificador está arrojando resultados precisos (alta precisión), así como también arroja la mayoría de todos los resultados positivos (alta recall).
+* La curva de Precision-Recall muestra la compensación entre **precisión y recall para diferentes umbrales**. Un área alta debajo de la curva representa tanto una alta recall como una alta precisión, donde la alta precisión se relaciona con una tasa baja de falsos positivos y el alto recall se relaciona con una tasa baja de falsos negativos. Los puntajes altos para ambos muestran que el clasificador está arrojando resultados precisos (alta precisión), así como también arroja la mayoría de todos los resultados positivos (alta recall).
 
-* Un sistema con alta recall pero baja precisión arroja muchos resultados, pero la mayoría de las etiquetas previstas son incorrectas en comparación con las etiquetas de entrenamiento. Un sistema con alta precisión pero poca recall es todo lo contrario, arrojando muy pocos resultados, pero la mayoría de las etiquetas predichas son correctas en comparación con las etiquetas de entrenamiento. Un sistema ideal con alta precisión y alta recall devolverá muchos resultados, con todos los resultados etiquetados correctamente.
+* **Un sistema con alta recall** pero baja precisión arroja muchos resultados, pero la mayoría de las etiquetas previstas son incorrectas en comparación con las etiquetas de entrenamiento. 
+
+* **Un sistema con alta precisión** pero poca recall es todo lo contrario, arrojando muy pocos resultados, pero la mayoría de las etiquetas predichas son correctas en comparación con las etiquetas de entrenamiento. 
+
+* **Un sistema ideal con alta precisión y alta recall** devolverá muchos resultados, con todos los resultados etiquetados correctamente.
 
 
 .footnote[https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html]
@@ -527,10 +594,11 @@ class: inverse, center, middle
 
 ## Árboles de decisión 
 
-## ¿Cómo se deciden los splits?
+### ¿Cómo se deciden los splits?
 
 
 ---
+
 
 ## Entropía
 
@@ -664,6 +732,15 @@ class: inverse, center, middle
 
 
 ---
+
+## Bibliografía
+
+
+* Learning from data. 
+
+* Applied Predictive Modeling.
+
+* Rashka, Sebastian. https://www.youtube.com/watch?v=z2n8kHXkwtM
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
