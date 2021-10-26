@@ -27,7 +27,7 @@
 
 * Clase 2b: https://data-datum.github.io/flacso_ml/clases/clase02b.html#1
 
-* Práctica: 
+* Práctica guiada 2: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-2.html
 
 * Quiz-1 (árboles): https://www.menti.com/tzhqr8835t 
 
