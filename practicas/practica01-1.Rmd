@@ -28,20 +28,23 @@ library(tidyverse)
 library(magrittr)
 library(corrr)
 library(MASS) #el dataset se encuentra en esta librería 
+library(corrplot)
 ```
 
 #### Ingreso los datos
 
 ```{r}
+#ingreso el dataset que esta en la libreria 
 data(Boston)
 ```
 
+Con la función head() de rbase, nos permite ver las primeras filas del dataset
 ```{r}
 head(Boston) #veamos el encabezado del dataset
 ```
 
 
-
+Con la función glimpse() de dplyr podemos ver una breve descripción de las variables del dataset, ver que tipo de dato forman parte del dataset, etc. 
 ```{r}
 glimpse(Boston)
 ```
@@ -85,9 +88,13 @@ Las variables (columnas) en total son 14; de las cuales una es la variable que n
 ## Pequeño análisis exploratorio de toda la base de datos 
 Esta etapa nos ayuda a visualizar distribuciones de probabilidad de las variables, si hay algun outlier y demás. 
 
+
+
 ```{r}
 cor(Boston)
 ```
+
+
 
 
 ### Vamos a dividir los datos
@@ -112,7 +119,7 @@ p_train %>%
   head()
 ```
 
-
+Lo mismo para TEST, vemos si han sido tomados al azar los datos que forman parte de TEST. 
 ```{r}
 p_test %>%
   head()
@@ -123,6 +130,8 @@ p_test %>%
 
 Con este nombre agrupamos todos los **pre-procesamientos** que vamos a realizar al dataset de *train*, con lo cual haremos el modelado. Estas mismas operaciones se realizan al final en el dataset de *test*.
 
+
+En este paso lo que vamos a hacer es eliminar las correlaciones, centrar, escalar los datos. 
 ```{r}
 recipe_dt <- p_train %>%
   recipe(medv~.) %>%
@@ -132,6 +141,7 @@ recipe_dt <- p_train %>%
   prep() 
 ```
 
+Vemos la receta que hemos creado
 ```{r}
 recipe_dt
 ```
@@ -139,6 +149,9 @@ recipe_dt
 
 
 ## Modelo
+
+En esta instancia vamos a elegir el modelo para el entrenamiento, tambien seleccionamos de que libreria vamos a tomar las funciones de R y también el tipo de tarea. 
+En este caso vamos a hacer, un árbol de decisión, de la libreria rpart y una tarea de regresión. 
 ```{r}
 set.seed(123)
 tree_spec <- decision_tree() %>% #arboles de decisión
@@ -147,25 +160,44 @@ tree_spec <- decision_tree() %>% #arboles de decisión
 tree_spec
 ```
 
+## Inicio el workflow
 
+En workflow nos permite trabajar de manera ordenada en MACHINE LEARNING, y es una buena práctica utilizarlo siempre que tengamos más de un paso de pre-procesamiento. 
+
+* Agregamos la receta mediante add_recipe(), y luego, 
+* agregamos el modelo. 
+
+Luego imprimo el workflow
 ```{r}
 tree_wf <- workflow() %>%
   add_recipe(recipe_dt) %>% #agrego la receta
   add_model(tree_spec) #agrego el modelo
+# Imprimo el workflow
 tree_wf
 ```
 
 ### Error de estimacion del modelo en TRAIN
+
+Esta es la primer etapa de nuestro modelo, vamos entrenarlo en esta etapa, antes SOLO LO DEFINIMOS NO HEMOS CALCULADO NADA. 
+Con la función fit(), se realiza el entrenamiento en este caso. 
+
+Depende de como decidamos modelar los datos, esta función fit(), puede cambiar por otra, por ejemplo, fit_resamples(), si hacemos validación cruzada. 
 ```{r}
 set.seed(123) 
+
 tree_fit <- tree_spec %>%
   fit(medv ~ ., data = p_train) 
 
+#imprimo el modelo
 tree_fit
 ```
 
 
+## Error en TRAIN
 
+
+En este paso lo que vamos a hacer es agregar la columna de la predicción a los datos de TRAIN, mediante la función bind_cols. 
+Esto nos va a permitir ver la diferencia entre la predicción y el valor verdadero. 
 ```{r}
 results <- p_train %>%
     bind_cols(predict(tree_fit, p_train) %>%
@@ -173,16 +205,23 @@ results <- p_train %>%
 ```
 
 
+Ahora vamos a ver las primeras filas de este nuevo dataset que hemos armado. 
 ```{r}
 #veamos nuestra nueva tabla
 head(results)
 ```
 
+
+Vamos a calcular las metricas correspondientes del modelo. Para ello utilizamos la función metrics() disponible tambien en tidymodels. 
+Agregamos los el dataset, y le decimos cual es el valor verdadero y cual es la predicción.
 ```{r}
 metrics(results, truth = medv, estimate = .pred_tree)
 ```
 
 ### Error de estimacion del modelo en TEST
+
+Esta etapa es la predicción del modelo de ML, y es el resultado que generalmente se reporta. 
+IMPORTANTE: los resultados se deben reportar SI O SI, puede o no ir acompañado de los resultados de TRAIN. 
 
 ```{r}
 results_test <- p_test %>%
@@ -190,12 +229,12 @@ results_test <- p_test %>%
                   rename(.pred_tree = .pred))
 ```
 
-
+Vemos la primera fila del dataset de test con las predicciones al final. 
 ```{r}
 head(results_test)
 ```
 
-
+Ahora vemos las métricas. 
 ```{r}
 metrics(results_test, truth = medv, estimate = .pred_tree)
 ```
@@ -210,13 +249,14 @@ La próxima clase este modelo va a complejizarse mucho mas. :)
 
 ## Vamos a plotear el árbol de decisión
 
-
+Ingreso las librerias para hacer el plot del árbol. 
 ```{r message=FALSE, warning=FALSE}
 library(rpart)
 library(rpart.plot)
 ```
 
-
+Plot del árbol, mediante dos funciones:
+extract_fit() y rpart.plot(). 
 ```{r}
 tree_fit %>%
   extract_fit_engine() %>%
@@ -224,8 +264,10 @@ tree_fit %>%
 ```
 
 
+
+Ploteo las predicciones y el valor verdadero de los resultados en TEST. 
 ```{r}
-results %>%
+results_test %>%
     ggplot(aes(medv, .pred_tree)) +
     geom_abline(lty = 2, color = "gray50") +
     geom_point(size = 1.5, alpha = 0.3, show.legend = FALSE)
