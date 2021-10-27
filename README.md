@@ -33,4 +33,6 @@
 
 * Quiz-2 (ensembles): https://www.menti.com/qk92cbopjc
 
+* Práctica guiada 3: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-3.html
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------
