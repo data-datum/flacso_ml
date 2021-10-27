@@ -192,8 +192,11 @@ knitr::include_graphics("img/mae-n.jpg")
 ```
 
 
-Es la media de la diferencia absoluta entre el valor observado y los valores predichos. 
-El error absoluto medio o MAE es un puntaje lineal, lo que significa que todas las diferencias individuales se ponderán por igual en el promedio. Por ejemplo, la diferencia entre 10 y 0 será el doble de la diferencia entre 5 y 0.
+**Es la media de la diferencia absoluta entre el valor observado y los valores predichos.**
+El error absoluto medio o MAE es un puntaje lineal, lo que significa que todas las diferencias individuales se ponderán por igual en el promedio. 
+Por ejemplo, la diferencia entre 0 y 10 es el doble de la diferencia entre 0 y 5.
+
+**Es robusto a outliers**
 
 
 ---
@@ -206,7 +209,7 @@ knitr::include_graphics("img/mse.jpg")
 ```
 
 
-
+MSE es una función diferenciable que facilita la realización de operaciones matemáticas en comparación con una función no diferenciable como MAE. Por lo tanto, en muchos modelos, RMSE se utiliza como métrica predeterminada para calcular la función de pérdida a pesar de ser más difícil de interpretar que MAE.
 
 
 ---
@@ -220,6 +223,10 @@ knitr::include_graphics("img/mse.jpg")
 knitr::include_graphics("img/rmse.png")
 ```
 
+
+* Es la raíz cuadrada del MSE. La raíz cuadrada es para que los errores esten en la misma escala de medida del valor objetivo. 
+
+* Cuanto mas bajo sea el valor de MAE, MSE, RMSE, es mejor el modelo de regresión. 
 
 ---
 
@@ -375,43 +382,6 @@ knitr::include_graphics("img/f1-c.png")
 
 .footnote[*https://deepai.org/machine-learning-glossary-and-terms/f-score*]
 
-
----
-
-## F2 score
-
-Imaginemos que hemos tenemos un clasificador de mamografías. Lo probamos en una serie de diez mamografías.
-
-
-
-
-```{r echo=FALSE, out.width = '60%',  fig.align='center'}
-knitr::include_graphics("img/mamm1.png")
-```
-
----
-
-En una segunda instancia tenemos esta matriz de confusión. 
-**Si prestamos atención, los TP y los TN siguen siendo los mismos en ambos casos, pero hubo un cambio en los FP y FN**
-
-```{r echo=FALSE, out.width = '60%',  fig.align='center'}
-knitr::include_graphics("img/f2-mammogram.png")
-```
-
---
-
-**¿Qué tipo de error es más grave? ¿Un FP o FN?**
-
---
-
-Claramente un **FALSO NEGATIVO**, debo poner un énfasis en el **recall**.
-
----
-
-
-```{r echo=FALSE, out.width = '90%',  fig.align='center'}
-knitr::include_graphics("img/f2.png")
-```
 
 
 
@@ -679,6 +649,74 @@ class: inverse, center, middle
 
 ---
 
+
+## Elecciones de diseño
+
+
+### Como dividir los splits
+
+* Que medida o criterio como bondad de ajuste. 
+
+* Splits binarios o multi-categóricos.
+
+
+### Cuando detenerse
+
+* Si un nodo contiene exactamente ejemplos de la misma clase. 
+
+* Los valores de los features son todos los mismos para las muestras. 
+
+
+---
+
+## ID3 - Iterative Dichotomizer 3
+
+* Descripto por **Quinlan, J. R. (1986). Induction of decision trees. Machine learning, 1 (1), 81-106.**
+
+* Uno de los primeros árboles de decisión
+
+* Features discretos, no puede manejar features numéricos. 
+
+* Splits multi-categóricos. 
+
+* Árboles pequeños y amplios (a diferencia de CART).
+
+* Maximiza **la ganancia de información / minimiza la entropía.**
+
+* Features discretos, binarios y multi-categóricos. 
+
+---
+
+## C4.5
+
+* Descripto por **Quinlan, J. R. (1993). C4. 5: Programming for machine learning. Morgan Kauffmann, 38, 48.**
+
+* Features continuos y discretos (los features continuos son costosos de computar ya que exigen todos los posibles rangos). 
+
+* Criterio de split: **Gain Ratio**
+
+* Puede manejar atributos (datos) faltantes (los ignora en el cómputo de la ganancia de información). 
+
+---
+
+## CART
+
+* Descripto por **Breiman, L. (1984). Classification and regression trees. Belmont, Calif:Wadsworth International Group.**
+
+* Maneja features continuos y discretos. 
+
+* Trabaja estrictamente con splits binarios (lo q resulta en árboles mas altos a diferencia de ID3 o C4.5)
+
+* Los splits binarios puede generar mejores árboles que C4.5, pero tienden a ser más grandes y más dificiles de interpretar. 
+
+* Reducción de varianza en árboles de regresión. 
+
+* Utiliza la **impureza de Gini** en árboles de clasificación. 
+
+
+
+---
+
 ## Entropía
 
 La entropía es una medida de la aleatoriedad de la información que se procesa. **Cuanto mayor sea la entropía, más difícil será sacar conclusiones de esa información.**
@@ -739,8 +777,8 @@ knitr::include_graphics("img/IG.png")
 
 Supongamos que tenemos que decidir si entregar o no un préstamo, y tenemos 2 variables para decidir si lo hacemos:
 
-* Balance:
-* Residence:
+* Balance: $$$$
+* Residence: lugar de residencia. 
 
 
 ---
@@ -810,17 +848,28 @@ knitr::include_graphics("img/gain.png")
 ```
 
 
-
+Recordar que se lo utiliza como criterio de impureza en C4.5
 
 
 ---
 
-## Índice de Gini (Index Gini)
+## Impureza de Gini
+
+* Medida de la impureza en CART como contraposición a la entropía. 
+
+```{r echo=FALSE, out.width = '50%',  fig.align='center'}
+knitr::include_graphics("img/Gini-i.png")
+```
+
+* En la práctica, no importa si usamos entropía o impureza de Gini, porque ambos criterios tienen forma de campana. 
+
+* Es más fácil de computar Gini lo que hace que el cálculo sea más eficiente en términos de rendimiento. 
 
 
 ```{r echo=FALSE, out.width = '50%',  fig.align='center'}
-knitr::include_graphics("img/gini.png")
+knitr::include_graphics("img/impurity.png")
 ```
+
 
 
 ---
@@ -835,8 +884,10 @@ class: inverse, center, middle
 ## Bibliografía
 
 
-* Learning from data. 
+* Abu-Mostafa, Y. Learning from data. 
 
-* Applied Predictive Modeling.
+* Kuhn, M. & Johnson K. Applied Predictive Modeling.
 
-* Rashka, Sebastian. https://www.youtube.com/watch?v=z2n8kHXkwtM 
+* Raschka, Sebastian. https://www.youtube.com/watch?v=z2n8kHXkwtM 
+
+* Raschka, Sebastian. Apuntes de clase. 
