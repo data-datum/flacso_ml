@@ -29,10 +29,13 @@
 
 * Práctica guiada 2: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-2.html
 
+* Práctica guiada 2 (Rmd): https://github.com/data-datum/flacso_ml/blob/main/practicas/practica-guiada-2.Rmd
+
 * Quiz-1 (árboles): https://www.menti.com/tzhqr8835t
 
 * Quiz-2 (ensembles): https://www.menti.com/qk92cbopjc
 
 * Práctica guiada 3: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-3.html
 
+* Práctica guiada 3 (Rmd): https://github.com/data-datum/flacso_ml/blob/main/practicas/practica-guiada-3.Rmd
 -----------------------------------------------------------------------------------------------------------------------------------------------------
