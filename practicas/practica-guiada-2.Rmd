@@ -159,14 +159,6 @@ final_tree
 ```
 
 
-### En esta etapa re fitea el modelo con los MEJORES HIPERPARÁMETROS y luego se lo finaliza
-```{r}
-final_fit <- fit(final_tree, medv ~ ., p_train)
-final_fit
-```
-
-
-
 ## Resultados en TEST
 
 Mediante la función **last_fit()** de tidymodels, lo que hacemos es fitear el mejor modelo y devolver los resultados en TEST. 
@@ -203,18 +195,6 @@ collect_predictions(final_rs) %>%
 ```
 
 
-
-## Importancia de variables
-
-Vamos a plotear las variables más importantes del MODELO, mediante la librería vip.
-Más información sobre esta librería en https://koalaverse.github.io/vip/ 
-```{r}
-library(vip)
-
-final_fit %>%
-  vip(geom = "col", aesthetics = list(fill = "midnightblue", alpha = 0.8)) +
-  scale_y_continuous(expand = c(0, 0))
-```
 
 
 

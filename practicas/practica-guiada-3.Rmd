@@ -181,6 +181,10 @@ final_rf
 
 
 
+### Importancia de las variables
+
+Vamos a plotear las variables más importantes del MODELO, mediante la librería vip.
+Más información sobre esta librería en https://koalaverse.github.io/vip/ 
 
 
 ```{r}
