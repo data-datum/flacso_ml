@@ -454,7 +454,7 @@ glimpse(p_train)</code></pre>
 </div>
 <div id="modelo" class="section level3">
 <h3>Modelo</h3>
-<p>Aca vamos a especificar las variables que vamos a hacer tunning, en este caso, con <strong>random search</strong>.</p>
+<p>Aca vamos a especificar las variables que vamos a hacer tunning de estas variables.</p>
 <pre class="r"><code>tree_spec &lt;- decision_tree(
   cost_complexity = tune(),
   tree_depth = tune(),
@@ -472,7 +472,7 @@ tree_spec</code></pre>
 ##   min_n = tune()
 ## 
 ## Computational engine: rpart</code></pre>
-<p>Veamos los posibles valores</p>
+<p>Veamos los posibles valores en esta grilla.</p>
 <pre class="r"><code>tree_grid &lt;- grid_regular(cost_complexity(), tree_depth(), min_n(), levels = 4)
 
 tree_grid</code></pre>
@@ -589,7 +589,7 @@ final_tree</code></pre>
 final_fit</code></pre>
 <pre><code>## parsnip model object
 ## 
-## Fit time:  28ms 
+## Fit time:  20ms 
 ## n= 379 
 ## 
 ## node), split, n, deviance, yval
