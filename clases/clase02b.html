@@ -119,10 +119,10 @@ class: inverse, center, middle
 
 &lt;img src="img/bagging-trees.png" width="90%" style="display: block; margin: auto;" /&gt;
 
-El boostrapping o bagging introduce mayor diversidad en los subsets de datos en los que cada predictor es entrenado, lo que trae como conseucencia que el bias sea más alto que si no se hiciese bagging. Esto significa que el predictor termina siendo menos correlacionado, entonces la varianza del ensemble se reduce. En general, el bagging resulta en mejores modelos, lo que explica porque se lo prefiere a DT. 
+El boostrapping o bagging introduce mayor diversidad en los subsets de datos en los que cada predictor es entrenado, lo que trae como conseucencia que el bias sea más alto que si no se hiciese bagging. Esto significa que el predictor termina siendo menos correlacionado, entonces la varianza del ensemble se reduce. En general, el bagging resulta en mejores modelos, lo que explica porque se lo prefiere a árboles de decisión. 
 
 
-.footnote[Fuente: Hands on Machine Learning with scikit-learn and Tensorflow]
+.footnote[Fuente: *Hands on Machine Learning with scikit-learn and Tensorflow*]
 
 ---
 
@@ -353,22 +353,6 @@ La principal diferencia entre *bagged trees* y *random forest* es la elección d
 ]
 
 
----
-
-class: inverse, center, middle
-
-## Si tenemos muchos árboles como sucede en random forest
-
---
-
-## ¿Cómo sé que variables son más importantes?
-
-
----
-
-## Importancia de las variables 
-
-
 
 
 ---
@@ -405,7 +389,7 @@ class: inverse, center, middle
 
 * Extra Trees = Extremely Randomized Trees
 
-Cuando crece un árbol en un Random Forest, en cada nodo solo una parte aleatoria de los features es considerada para el split. Es posible hacer los árboles aún más aleatorios usando umbrales aleatorios para cada feature (variable) en vez de buscar los mejores posibles umbrales (como se hace en árboles de decisión). 
+Cuando crece un árbol en un Random Forest, en cada nodo solo una parte aleatoria de los features es considerada para el split. **Es posible hacer los árboles aún más aleatorios usando umbrales aleatorios para cada feature (variable) en vez de buscar los mejores posibles umbrales (como se hace en árboles de decisión).** 
 
 Un árbol de árboles tan aleatorios, simplemente se los llama **Extremely Randomized trees** o ExtraTrees. De vuelta, esto intercambia más bias por menos varianza. Esto hace que los ExtraTrees **más rápidos de entrenar que Random Forests** ya que encontrar el mejor umbral posible para cada feature a cada nodo es la tarea más cara computacionalmente. 
 
@@ -428,6 +412,16 @@ Un árbol de árboles tan aleatorios, simplemente se los llama **Extremely Rando
 
 
 .footnote[Fuente: https://www.youtube.com/watch?v=r5C3TUIw6Zk&amp;t=1465s]
+
+
+---
+
+## Importante
+
+
+
+
+&lt;img src="img/flavours-bag.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 ---
