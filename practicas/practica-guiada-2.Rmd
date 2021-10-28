@@ -27,7 +27,8 @@ library(tidymodels)
 library(tidyverse)
 library(magrittr)
 library(corrr)
-library(MASS) #el dataset se encuentra en esta librería 
+library(MASS) #el dataset se encuentra en esta librería
+library(purrr)
 ```
 
 #### Ingreso los datos
@@ -69,6 +70,10 @@ Veo los splits creados en la validación cruzada
 p_folds$splits
 ```
 
+```{r}
+#para ver que muestra cae en cada fold
+map(p_folds$splits, "in_id")
+```
 
 
 

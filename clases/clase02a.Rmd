@@ -562,7 +562,15 @@ class: inverse, center, middle
 class: inverse, center, middle
 
 
-## Pero sólo sobre los hiperparámetros voy a tener CONTROL
+## Pero sólo tengo CONTROL 
+
+--
+
+## sobre los 
+
+--
+
+## HIPERPARÁMETROS 
 
 --
 
@@ -754,7 +762,7 @@ knitr::include_graphics("img/shannon.png")
 
 
 --
-A partir del gráfico anterior, es bastante evidente que la entropía es cero cuando la probabilidad es 0 o 1. La entropía es máxima cuando la probabilidad es 0.5 porque proyecta una aleatoriedad perfecta en los datos y no hay posibilidad si determinando perfectamente el resultado.
+**A partir del gráfico anterior, es bastante evidente que la entropía es cero cuando la probabilidad es 0 o 1.** La entropía es máxima cuando la probabilidad es 0.5 porque proyecta una aleatoriedad perfecta en los datos y no hay posibilidad de determinar perfectamente el resultado. 
 
 
 
@@ -847,7 +855,9 @@ Cuanto más homogeneas son las ramas del árbol que se genera al seleccionar el 
 ## Relación de Ganancia (Gain Ratio)
 
 
-La relación de Ganancia (Gain Ratio) es el cociente entre la ganancia de información (Information Gain) y la entropía del nodo raíz (root node). 
+**La relación de Ganancia (Gain Ratio) es el cociente entre la ganancia de información (Information Gain) y la entropía del nodo raíz (root node).**
+
+--
 
 
 
@@ -896,6 +906,10 @@ class: inverse, center, middle
 
 * Kuhn, M. & Johnson K. Applied Predictive Modeling.
 
+* Provost, F & Fawcett T. Data Science for Business: What You Need to Know about Data Mining and Data-Analytic Thinking
+
 * Raschka, Sebastian. https://www.youtube.com/watch?v=z2n8kHXkwtM 
 
 * Raschka, Sebastian. Apuntes de clase. 
+
+
