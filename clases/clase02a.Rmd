@@ -873,15 +873,15 @@ Recordar que se lo utiliza como criterio de impureza en C4.5
 
 ## Impureza de Gini
 
-* Medida de la impureza en CART como contraposición a la entropía. 
+* **Medida de la impureza en CART** como contraposición a la entropía. 
 
 ```{r echo=FALSE, out.width = '50%',  fig.align='center'}
 knitr::include_graphics("img/Gini-i.png")
 ```
 
-* En la práctica, no importa si usamos entropía o impureza de Gini, porque ambos criterios tienen forma de campana. 
+* En la práctica, no importa si usamos entropía o impureza de Gini, porque **ambos criterios tienen forma de campana.** 
 
-* Es más fácil de computar Gini lo que hace que el cálculo sea más eficiente en términos de rendimiento. 
+* **Es más fácil de computar Gini lo que hace que el cálculo sea más eficiente en términos de rendimiento.** 
 
 
 ```{r echo=FALSE, out.width = '50%',  fig.align='center'}
