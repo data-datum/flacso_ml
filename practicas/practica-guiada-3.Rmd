@@ -55,6 +55,15 @@ p_folds <- vfold_cv(p_train, v=3, repeats = 5)
 p_folds
 ```
 
+Veamos los splits de validación cruzada, son 3 folds que se repiten 5 veces. 
+```{r}
+p_folds$splits
+```
+
+
+
+
+**Los datos de TEST están aparte de los folds de la validación cruzada, y no los tocamos hasta el final.**
 ```{r}
 head(p_test)
 ```

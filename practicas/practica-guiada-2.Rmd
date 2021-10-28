@@ -64,9 +64,11 @@ head(p_test)
 p_folds <- vfold_cv(p_train, v=3)
 ```
 
+Veo los splits creados en la validación cruzada
 ```{r}
-p_folds 
+p_folds$splits
 ```
+
 
 
 
@@ -133,7 +135,7 @@ collect_metrics(tree_rs)
 
 ```{r}
 tree_rs %>%
-  collect_metrics(summarize=TRUE)
+  collect_metrics(summarize=FALSE)
 ```
 
 
@@ -146,12 +148,14 @@ Vamos a plotear los 3 hiperparámetros q hicimos tunning, lo hacemos mediante la
 autoplot(tree_rs) 
 ```
 
-# El mejor modelo
+### El mejor modelo
 ```{r}
 show_best(tree_rs)
 ```
 
 ## Finalizamos el modelo
+
+En esta etapa finalizamos el modelo, con el mejor valor de rsme obtenido, vamos a elegir este modelo. 
 ```{r}
 final_tree <- finalize_model(tree_spec, select_best(tree_rs, "rmse"))
 
@@ -161,7 +165,7 @@ final_tree
 
 ## Resultados en TEST
 
-Mediante la función **last_fit()** de tidymodels, lo que hacemos es fitear el mejor modelo y devolver los resultados en TEST. 
+Mediante la función **last_fit()** de tidymodels, lo que hacemos es tomar el mejor modelo que fue ajustado anteriormente y devolver los resultados en TEST. 
 
 
 ```{r}

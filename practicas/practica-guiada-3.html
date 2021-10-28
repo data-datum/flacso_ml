@@ -432,6 +432,68 @@ glimpse(p_train)</code></pre>
 ## 13 &lt;split [252/127]&gt; Repeat5 Fold1
 ## 14 &lt;split [253/126]&gt; Repeat5 Fold2
 ## 15 &lt;split [253/126]&gt; Repeat5 Fold3</code></pre>
+<p>Veamos los splits de validación cruzada, son 3 folds que se repiten 5 veces.</p>
+<pre class="r"><code>p_folds$splits</code></pre>
+<pre><code>## [[1]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;252/127/379&gt;
+## 
+## [[2]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[3]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[4]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;252/127/379&gt;
+## 
+## [[5]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[6]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[7]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;252/127/379&gt;
+## 
+## [[8]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[9]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[10]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;252/127/379&gt;
+## 
+## [[11]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[12]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[13]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;252/127/379&gt;
+## 
+## [[14]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;
+## 
+## [[15]]
+## &lt;Analysis/Assess/Total&gt;
+## &lt;253/126/379&gt;</code></pre>
+<p><strong>Los datos de TEST están aparte de los folds de la validación cruzada, y no los tocamos hasta el final.</strong></p>
 <pre class="r"><code>head(p_test)</code></pre>
 <pre><code>##       crim   zn indus chas   nox    rm   age    dis rad tax ptratio  black
 ## 1  0.00632 18.0  2.31    0 0.538 6.575  65.2 4.0900   1 296    15.3 396.90
