@@ -172,7 +172,7 @@ Por ejemplo, la diferencia entre 0 y 10 es el doble de la diferencia entre 0 y 5
 &lt;img src="img/mse.jpg" width="60%" style="display: block; margin: auto;" /&gt;
 
 
-MSE es una función diferenciable que facilita la realización de operaciones matemáticas en comparación con una función no diferenciable como MAE. Por lo tanto, en muchos modelos, RMSE se utiliza como métrica predeterminada para calcular la función de pérdida a pesar de ser más difícil de interpretar que MAE.
+**MSE es una función diferenciable** que facilita la realización de operaciones matemáticas en comparación con una función no diferenciable como MAE. Por lo tanto, en muchos modelos, RMSE se utiliza como métrica predeterminada para calcular la función de pérdida a pesar de ser más difícil de interpretar que MAE.
 
 
 ---
@@ -185,9 +185,15 @@ MSE es una función diferenciable que facilita la realización de operaciones ma
 &lt;img src="img/rmse.png" width="40%" style="display: block; margin: auto;" /&gt;
 
 
-* Es la raíz cuadrada del MSE. La raíz cuadrada es para que los errores esten en la misma escala de medida del valor objetivo. 
+* Es la raíz cuadrada del MSE. La raíz cuadrada permite que los errores esten en la misma escala de medida del valor objetivo. 
 
-* Cuanto mas bajo sea el valor de MAE, MSE, RMSE, es mejor el modelo de regresión. 
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+* **Cuanto mas bajo sea el valor de MAE, MSE, RMSE, es mejor el modelo de regresión.** 
+
+]
+
+
 
 ---
 
@@ -216,7 +222,7 @@ MSE es una función diferenciable que facilita la realización de operaciones ma
 
 ---
 
-## Recall
+## Recall (o sensibilidad)
 
        
 &lt;img src="img/conf-m4.png" width="90%" style="display: block; margin: auto;" /&gt;
@@ -268,11 +274,13 @@ NEGATIVOS.
 ## F score
 
 
-La medida F equilibra la precisión y el recall. En algunos problemas, puede que nos interese
-en una medida F con más atención puesta en la precisión, como cuando los falsos positivos son más  importante minimizar, pero los falsos negativos siguen siendo importantes. En otros problemas, podríamos estar interesados en una medida F con más atención puesta en el recall, como cuando los falsos negativos son más importantes minimizar, pero los falsos positivos siguen siendo importantes.
-La solución es la medida Fbeta (medida F β). 
+**La medida F equilibra la precisión y el recall.** 
+
+**En algunos problemas, puede que nos interese en una medida F con más atención puesta en la precisión**, como cuando los falsos positivos son más  importante minimizar, pero los falsos negativos siguen siendo importantes. **En otros problemas, podríamos estar interesados en una medida F con más atención puesta en el recall**, como cuando los falsos negativos son más importantes minimizar, pero los falsos positivos siguen siendo importantes.
+La solución es la medida Fbeta. 
+
 --
-La medida Fbeta es una abstracción de la medida F donde el equilibrio de precisión y recall en el cálculo de la media armónica está controlado por un coeficiente llamado beta (β).
+
 
 
 &lt;img src="img/fbeta.png" width="60%" style="display: block; margin: auto;" /&gt;
