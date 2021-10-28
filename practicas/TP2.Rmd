@@ -1,0 +1,38 @@
+---
+title: "Practica 2 Individual - Tunning de decision trees"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+```
+
+
+## Consigna
+
+En este notebook vamos a realizar tunning de un árbol de decisión como en la práctica guiada 2. 
+
+
+## Dataset
+
+
+El dataset es el mismo del TP1  y se encuentra disponible en: 
+
+https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data
+
+Lo podemos ingresar mediante el siguiente comando
+
+```{r}
+train <- read_csv("https://raw.githubusercontent.com/data-datum/datasets/main/train_house.csv")
+```
+
+
+**La variable a predecir es la de SalePrice.**
+
+
