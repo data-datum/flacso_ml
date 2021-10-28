@@ -508,8 +508,8 @@ glimpse(rf_res)</code></pre>
 ## $ .predictions &lt;list&gt; [&lt;tbl_df[127 x 4]&gt;], [&lt;tbl_df[126 x 4]&gt;], [&lt;tbl_df[126 x…</code></pre>
 </div>
 </div>
-<div id="estos-son-los-resultados-de-train-a-partir-de-los-modelos-en-los-distintos-folds" class="section level2">
-<h2>Estos son los resultados de TRAIN a partir de los modelos en los distintos folds</h2>
+<div id="estos-son-los-resultados-de-train" class="section level2">
+<h2>Estos son los resultados de TRAIN</h2>
 <pre class="r"><code>rf_res %&gt;%
   collect_metrics()</code></pre>
 <pre><code>## # A tibble: 2 × 6
@@ -569,13 +569,9 @@ final_rs</code></pre>
 <div id="importancia-de-las-variables" class="section level3">
 <h3>Importancia de las variables</h3>
 <p>Vamos a plotear las variables más importantes del MODELO, mediante la librería vip. Más información sobre esta librería en <a href="https://koalaverse.github.io/vip/" class="uri">https://koalaverse.github.io/vip/</a></p>
-<pre class="r"><code>library(vip)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;vip&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:utils&#39;:
-## 
-##     vi</code></pre>
-<pre class="r"><code>final_model %&gt;%
+<pre class="r"><code>library(vip)
+
+final_model %&gt;%
   set_engine(&quot;ranger&quot;, importance = &quot;permutation&quot;) %&gt;%
   fit(medv ~ .,
       data = juice(recipe_rf)) %&gt;%

@@ -163,7 +163,7 @@ Vamos a plotear las variables más importantes del MODELO, mediante la librería
 Más información sobre esta librería en https://koalaverse.github.io/vip/ 
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(vip)
 
 final_model %>%
