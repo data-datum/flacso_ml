@@ -85,6 +85,7 @@ rf_spec <- rand_forest() %>%
 
 ### Workflow
 
+Inicializo el workflow para trabajar de manera ordenada, luego visualizo los pasos. 
 ```{r}
 rf_wf <- workflow() %>%
     add_recipe(recipe_rf) %>%
@@ -95,19 +96,7 @@ rf_wf
 
 
 
-## Fit del Modelo en los folds de validación cruzada
-
-```{r}
-#seteo la semilla
-set.seed(123)
-#entrenamiento del modelo
-rf_spec %>% 
-  fit_resamples(medv ~ ., 
-                resamples = p_folds) %>% 
-  collect_metrics()
-```
-
-
+### Entrenamiento del Modelo
 ```{r}
 set.seed(123)
 rf_res <- rf_wf %>%
@@ -119,9 +108,12 @@ rf_res <- rf_wf %>%
 glimpse(rf_res)
 ```
 
-## Estos son los datos de TRAIN a partir de los modelos en los distintos folds
+
+
+## Estos son los resultados de TRAIN 
 ```{r}
-collect_metrics(rf_res)
+rf_res %>%
+  collect_metrics()
 ```
 
 ## Finalizamos el workflow
@@ -132,14 +124,13 @@ final_model <- finalize_model(rf_spec, select_best(rf_res, "rmse"))
 final_model
 ```
 
+## Predicción en TEST set
+
 
 ```{r}
-final_fit <- fit(final_model, medv ~ ., p_train)
 final_rs <- last_fit(final_model, medv ~ ., p_split)
+final_rs
 ```
-
-
-
 
 
 ```{r}
@@ -149,7 +140,6 @@ final_rs %>%
 
 
 
-## Predicción en TEST set
 
 ```{r}
 final_rs %>% 
@@ -166,20 +156,6 @@ collect_predictions(final_rs) %>%
   coord_fixed()
 ```
 
-```{r}
-best_rmse <- select_best(rf_res, "rmse")
-
-final_rf <- finalize_model(
-  rf_spec,
-  best_rmse
-)
-
-final_rf
-
-
-```
-
-
 
 ### Importancia de las variables
 
@@ -190,7 +166,7 @@ Más información sobre esta librería en https://koalaverse.github.io/vip/
 ```{r}
 library(vip)
 
-final_rf %>%
+final_model %>%
   set_engine("ranger", importance = "permutation") %>%
   fit(medv ~ .,
       data = juice(recipe_rf)) %>%
