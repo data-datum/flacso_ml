@@ -1,0 +1,224 @@
+---
+title: "Practica guiada 5 - XGBoost Regressor"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Regresión con XGBoost
+
+## Dataset
+
+El dataset corresponde a Boston, que se encuentra disponible en Kaggle; una plataforma de competencia de machine learning. 
+Más info en: https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html 
+
+
+#### Cargo las librerias
+
+```{r warning=FALSE, message=FALSE}
+library(tidymodels)
+library(tidyverse)
+library(magrittr)
+library(MASS) #el dataset se encuentra en esta librería 
+```
+
+#### Ingreso los datos
+
+```{r}
+data(Boston)
+```
+
+
+
+### División de los datos
+
+Voy a dividir los datos en train y test
+```{r}
+set.seed(1234)
+p_split <- Boston %>%
+    initial_split(prop = 0.75)
+p_train <- training(p_split)
+p_test <- testing(p_split)
+
+glimpse(p_train)
+```
+
+
+
+Los datos de TRAIN voy a dividirlos en 3-folds para hacer validación cruzada v-folds=3
+```{r}
+p_folds <- vfold_cv(p_train, v=3, repeats = 5)
+```
+
+```{r}
+p_folds
+```
+
+
+
+
+
+## Datos de TEST
+```{r}
+head(p_test)
+```
+
+
+
+
+
+### Preprocesamiento de los datos
+
+```{r}
+recipe_rf <- p_train %>%
+  recipe(medv~.) %>%
+  step_corr(all_predictors()) %>% #elimino las correlaciones
+  step_center(all_predictors(), -all_outcomes()) %>% #centrado
+  step_scale(all_predictors(), -all_outcomes()) %>% #escalado
+  prep() 
+```
+
+
+## Modelo XGBoost
+
+
+```{r}
+xgb_spec <- boost_tree(
+  trees = 1000, 
+  tree_depth = tune(), min_n = tune(), 
+  loss_reduction = tune(),                     ## first three: model complexity
+  sample_size = tune(), mtry = tune(),         ## randomness
+  learn_rate = tune(),                         ## step size
+) %>% 
+  set_engine("xgboost") %>% 
+  set_mode("regression")
+
+xgb_spec
+```
+
+Grilla de optimización de XGBoost
+
+```{r}
+xgb_grid <- grid_latin_hypercube(
+  tree_depth(),
+  min_n(),
+  loss_reduction(),
+  sample_size = sample_prop(),
+  finalize(mtry(), p_train),
+  learn_rate(),
+  size = 30
+)
+
+xgb_grid
+```
+
+## Workflow
+
+```{r}
+xgb_wf <- workflow() %>%
+  add_recipe(recipe_rf) %>%
+  add_model(xgb_spec)
+
+xgb_wf
+
+```
+
+## ENTRENAMIENTO del Modelo
+
+```{r}
+doParallel::registerDoParallel()
+
+set.seed(234)
+xgb_res <- tune_grid(
+  xgb_wf,
+  resamples = p_folds,
+  grid = xgb_grid,
+  control = control_grid(save_pred = TRUE)
+)
+
+xgb_res
+
+```
+
+## Resultados
+
+
+```{r}
+collect_metrics(xgb_res)
+```
+
+## Veamos los hiperparámetros
+```{r}
+xgb_res %>%
+  collect_metrics() %>%
+  filter(.metric == "rmse") %>% 
+  dplyr::select(mtry:sample_size, mean) %>%
+  pivot_longer(mtry:sample_size,
+               values_to = "value",
+               names_to = "parameter"
+  ) %>%
+  ggplot(aes(value, mean, color = parameter)) +
+  geom_point(alpha = 0.8, show.legend = FALSE) +
+  facet_wrap(~parameter, scales = "free_x") +
+  labs(x = NULL, y = "rmse")
+
+```
+
+```{r}
+show_best(xgb_res, "rmse")
+```
+
+
+
+## Mejor modelo. 
+
+```{r}
+best_rmse <- select_best(xgb_res, "rmse")
+best_rmse
+
+```
+
+
+## Finalizo el workflow
+
+```{r}
+final_xgb <- finalize_workflow(
+  xgb_wf,
+  best_rmse
+)
+
+final_xgb
+```
+
+
+### Importancia de las variables
+
+
+`
+```{r}
+library(vip)
+
+final_xgb %>%
+  fit(data = p_train) %>%
+  pull_workflow_fit() %>%
+  vip(geom = "point")
+```
+
+## Predicción en TEST
+```{r}
+final_res <- last_fit(final_xgb, p_split)
+
+collect_metrics(final_res)
+```
+
+
+```{r}
+collect_predictions(final_res) %>%
+  ggplot(aes(medv, .pred)) +
+  geom_abline(lty = 2, color = "gray50") +
+  geom_point(alpha = 0.5, color = "midnightblue") +
+  coord_fixed()
+```
+

@@ -1,0 +1,575 @@
+---
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+background-image: url(img/portada-flacso.png)
+background-size: cover
+class: animated slideInRight fadeOutLeft, middle
+
+```{r xaringan-extra-styles, include=FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+```
+
+
+
+```{r , echo=FALSE}
+xaringanExtra::use_tachyons()
+xaringanExtra::use_panelset()
+```
+
+
+```{r include=FALSE}
+library(countdown)
+```
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+#style_duo_accent(
+#  primary_color = "#23395b",
+#  secondary_color = "#23395b",
+#  inverse_header_color = "#FFFFFF"
+#)
+
+style_duo_accent(
+  header_font_google = google_font("Roboto", "500"),
+  text_font_google   = google_font("Roboto", "400", "300i"),
+  code_font_google   = google_font("Roboto")
+)
+```
+
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+style_mono_accent(base_color = "#43418A")
+```
+
+```{r , message=FALSE, warning=FALSE, include=FALSE} 
+library(fontawesome)
+library(emo)
+```
+
+
+```{r xaringan-logo, echo=FALSE}
+#xaringanExtra::use_fit_screen()
+#xaringanExtra::use_logo("img/logo-tidymodels.png")
+```
+
+
+
+```{r xaringan-tachyons, echo=FALSE}
+xaringanExtra::use_tachyons()
+xaringanExtra::use_fit_screen()
+```
+
+
+# Machine Learning en Aplicaciones Espaciales
+
+
+### Clase 3a. Ensembles. Boosting
+
+
+---
+
+
+## Boosting
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+### En boosting tenemos una creación secuencial de modelos, y se trata de reducir el sesgo del estimador combinando estos modelos. El foco se va a poner en los modelos que tienen una performance pobre. 
+
+### ¿Por qué?
+
+### Porque vamos a ponderar esos errores para no cometerlos a futuro. 
+
+]
+
+
+
+---
+
+## Comparación con bagging
+
+
+```{r echo=FALSE, out.width = '80%',  fig.align='center'}
+knitr::include_graphics("img/bagging-vs-boosting.jpeg")
+```
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+Recordemos que en bagging vamos a construir modelos de manera independiente, y luego hacer un promedio de esas predicciones. La combinación de modelos suele ser mas potente que un algoritmo que el estimador base por separado. 
+
+
+]
+
+---
+
+
+# Flavours de boosting
+
+
+* **Adaboost**: es el primer algoritmo de Boosting y como algoritmo base utiliza "decision stumps", o árboles de decisión simples que constan de un nodo y dos raíces. Solo opera mediante iteraciones y ponderaciones. 
+
+* **Gradient Boosting**: es una generalización de boosting para funciones de pérdida diferenciables. Es  un procedimiento preciso y efectivo que se puede usar para regresión y clasificación. 
+
+
+* **XGBoost**: a diferencia del anterior incluye tratamiento nativo de nulls, y además, soporta paralelización. Esto significa que paraleliza la construcción de cada árbol, guardandolos en bloques de memoria pre-ordenados y los reutiliza. Se paraleliza el split-finding. 
+
+
+
+---
+
+class: inverse, center, middle
+
+## AdaBoost
+
+--
+
+## =
+
+--
+
+## Adaptive Boosting
+
+---
+
+## Adaboost
+
+
+* Adaboost = Adaptive Boosting
+
+
+
+
+
+---
+
+## Adaboost 
+
+Boosting para clasificación
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/boost1.png")
+```
+
+---
+
+class: inverse, center, middle
+
+--
+
+## Veamos como sucede esto 
+
+--
+
+## Paso a paso
+
+
+---
+
+
+### Vamos a crear árboles de decisión a partir de estos datos
+
+
+```{r echo=FALSE, out.width = '80%',  fig.align='center'}
+knitr::include_graphics("img/ada1.png")
+```
+
+
+---
+
+#### Vamos a asignar un peso a cada muestra 
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada2.png")
+```
+
+---
+
+## 1er árbol de decisión
+
+Primera variable: dolor de pecho
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada3.png")
+```
+
+
+---
+
+## 1er árbol de decisión
+
+
+Segunda rama del árbol
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada4.png")
+```
+
+---
+
+## 2do árbol de decisión
+
+Operamos con la segunda variable
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada5.png")
+```
+
+
+
+---
+
+## 3er árbol de decisión
+
+Operamos con la tercer variable
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada6.png")
+```
+
+
+
+---
+
+## Calculemos el índice de Gini para nuestros árboles
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada7.png")
+```
+
+
+
+---
+
+## Veamos las importancias que debemos asignar
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada8.png")
+```
+
+---
+
+## Primer árbol de decisión
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada9.png")
+```
+
+
+---
+
+
+## Segundo árbol de decisión
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada10.png")
+```
+
+---
+
+class: inverse, center, middle
+
+
+## Vamos a recalcular los weights
+
+
+---
+
+## Cuando hay un error
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada11.png")
+```
+
+---
+
+
+
+## Cuando hay un acierto
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada12.png")
+```
+
+---
+
+
+## Tenemos los nuevos weights
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada13.png")
+```
+
+
+
+---
+
+## Normalizamos los weights
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/ada14.png")
+```
+
+
+
+---
+
+class: inverse, center, middle
+
+
+## ¿Cómo van a influir
+
+--
+
+
+## estos nuevos weights?
+
+
+---
+
+
+
+```{r echo=FALSE, out.width = '130%',  fig.align='center'}
+knitr::include_graphics("img/ada15.png")
+```
+
+
+
+
+
+
+
+
+
+---
+
+
+
+## Algoritmo de Adaboost
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/adaboost-algo.png")
+```
+
+
+.footnote[Fuente: *Applied Predictive Modeling*]
+
+---
+
+class: inverse, center, middle
+
+## Gradient Boosting Machines
+
+
+---
+
+
+## Gradient Boosting
+
+* Al igual que AdaBoost es un algoritmo secuencial. 
+
+* A diferencia de AdaBoost:
+1. utilizamos árboles de decisión, pero no necesariamente, decision stumps. 
+
+2. No computamos los pesos en cada iteración, sino que se optimiza una función de pérdida diferenciable (loss function), por ejemplo, MSE para regresión. 
+
+
+
+
+---
+
+## Gradient Boosting (intuitivamente)
+
+
+```{r echo=FALSE, out.width = '70%',  fig.align='center'}
+knitr::include_graphics("img/gbm.png")
+```
+
+
+
+---
+
+## Gradient Boosting 
+
+
+
+
+---
+
+
+## Tasa de aprendizaje
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/LR-boosting.png")
+```
+
+
+
+
+
+---
+
+## Learning rate y número de árboles
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/efecto-learning-rate-gbm.png")
+```
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+**Cuanto más pequeño sea el learning rate del algoritmo, más árboles (n_estimators) vamos a necesitar para lograr resultados óptimos**
+
+]
+
+.footnote[Fuente: *Hands On Machine Learning with Scikit-learn and Tensorflow*]
+
+---
+
+
+## Algoritmo Gradient Boosting 
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gradient-boosting-algo.png")
+```
+
+.footnote[Fuente: *Applied Predictive Modeling*]
+
+---
+
+class: inverse, center, middle
+
+## XGBoost
+
+--
+
+## =
+
+--
+
+## Extreme Gradient Boosting
+
+
+---
+
+## XGBoost
+
+* Presentado originalmente por T.Chen & C.Guestrin (2016). XGBoost: A Scalable Tree Boosting System
+
+* Implementación escalable de GBM. 
+
+* Árboles de decisión basados en CART. 
+
+* Regularización para penalizar la complejidad de los árboles. 
+
+* Derivadas de segundo orden para optimizar la función objetivo. 
+
+* Opciones para hacer sampling de columnas y filas (similar a Random Forest). 
+
+
+
+
+---
+
+## XGBoost
+
+* XGBoost = Extreme gradient boosting
+
+--
+
+**¿Qué nos ofrece XGBoost a diferencia de GBM?**
+
+--
+
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/xgboost-adv.png")
+```
+
+
+.footnote[*https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d*]
+
+---
+
+class: inverse, center, middle
+
+## Optimizaciones que implementa XGBoost
+
+## https://www.youtube.com/watch?v=oRrKeUCEbq8&t=112s 
+
+
+---
+
+### De árboles de decisión a XGBoost
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/boosting-hierarchy.jpeg")
+```
+
+.footnote[Fuente: *https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d*]
+
+
+
+---
+
+
+## Tunning XGBoost en R
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgboost-tunning.png")
+```
+
+
+
+
+---
+
+class: inverse, center, middle
+
+
+# Manos en R `r emo::ji("raised_hands")`
+
+
+---
+
+## Bibliografía
+
+
+* Sebastian Raschka. 
+https://www.youtube.com/watch?v=zblsrxc7XpM 
+
+* Stochastic Gradient Boosting (paper) https://statweb.stanford.edu/~jhf/ftp/stobst.pdf 
+
+* XGBoost: A Scalable Tree Boosting System (paper) https://arxiv.org/pdf/1603.02754.pdf 
+
+* Videos de StatQuest
+
+* AdaBoost: https://www.youtube.com/watch?v=LsK-xG1cLYA 
+
+* Gradient Boosting (Parte 1): https://www.youtube.com/watch?v=3CC4N4z3GJc&t=260s
+
+* XGBoost (Parte 1): https://www.youtube.com/watch?v=OtD8wVaFm6E&t=954s 
+
+---
