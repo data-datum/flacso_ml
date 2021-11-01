@@ -89,7 +89,7 @@ Recordemos que en bagging vamos a construir modelos de manera independiente, y l
 # Flavours de boosting
 
 
-* **Adaboost**: es el primer algoritmo de Boosting y como algoritmo base utiliza "decision stumps", o árboles de decisión simples que constan de un nodo y dos raíces. Solo opera mediante iteraciones y ponderaciones. 
+* **Adaboost**: es el primer algoritmo de Boosting y como **algoritmo base utiliza "decision stumps"**, o árboles de decisión simples que constan de un nodo y dos raíces. Solo opera mediante iteraciones y ponderaciones. 
 
 * **Gradient Boosting**: es una generalización de boosting para funciones de pérdida diferenciables. Es  un procedimiento preciso y efectivo que se puede usar para regresión y clasificación. 
 
@@ -112,13 +112,6 @@ class: inverse, center, middle
 
 ## Adaptive Boosting
 
----
-
-## Adaboost
-
-
-* Adaboost = Adaptive Boosting
-
 
 
 
@@ -127,8 +120,20 @@ class: inverse, center, middle
 
 ## Adaboost 
 
-Boosting para clasificación
+**Boosting para clasificación**
+
+
 &lt;img src="img/boost1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Adaboost 
+
+**Boosting para regresión**
+
+
+
+&lt;img src="img/boost-reg.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -143,6 +148,8 @@ class: inverse, center, middle
 ## Paso a paso
 
 
+
+
 ---
 
 
@@ -154,11 +161,34 @@ class: inverse, center, middle
 
 ---
 
+
 #### Vamos a asignar un peso a cada muestra 
 
+**Ese peso (weight) es 1/n, en este caso, 1/8**
 
 &lt;img src="img/ada2.png" width="100%" style="display: block; margin: auto;" /&gt;
 
+---
+
+## Decision stumps
+
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+
+Un **decision stump** es un árbol de decisión de 1 nodo raíz y 2 nodos hijos. Es un árbol de decisión muy simple. En el caso de tener una variable continua, en el nodo raíz tenemos un threshold, como en este caso. 
+
+
+
+]
+
+
+
+&lt;img src="img/decision-stump.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+
+.footnote[Fuente: https://en.wikipedia.org/wiki/Decision_stump]
 ---
 
 ## 1er árbol de decisión
@@ -193,6 +223,19 @@ Operamos con la segunda variable
 
 Operamos con la tercer variable
 &lt;img src="img/ada6.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+class: inverse, center, middle
+
+## Tenemos 3 árboles de decisión
+
+--
+
+## ¿Cuál va a ser el primer árbol a considerar?
+
 
 
 
@@ -289,18 +332,55 @@ class: inverse, center, middle
 
 
 
+---
 
+class: inverse, center, middle
+
+
+## Si tuviese un mayor weight,
+
+--
+
+## esa muestra va a repetirse varias veces
+
+--
+
+## en el nuevo dataset
 
 
 
 
 ---
 
-## Tasa de aprendizaje en Adaboost
+class: inverse, center, middle, 
+
+## Retomando...
 
 
-&lt;img src="img/LR-boosting.png" width="100%" style="display: block; margin: auto;" /&gt;
+---
 
+## Adaboost (pasos)
+
+1. Asignamos los pesos (1/n) a cada muestra.
+
+2. Creamos decision stumps para cada variable del dataset. 
+
+3. Calculammos el índice de Gini. 
+
+4. Según el error se calcula el Amount of Say. 
+
+5. Recalculamos los pesos. 
+
+6. Se repite el proceso. 
+
+7. Se suman todas las predicciones de todos los decision stumps. 
+
+
+---
+
+class: inverse, center, middle
+
+## Finalmente...
 
 ---
 
@@ -347,6 +427,18 @@ class: inverse, center, middle
 ---
 
 ## Gradient Boosting 
+
+
+
+
+---
+
+
+## Tasa de aprendizaje
+
+
+&lt;img src="img/LR-boosting.png" width="100%" style="display: block; margin: auto;" /&gt;
+
 
 
 
