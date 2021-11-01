@@ -405,39 +405,148 @@ class: inverse, center, middle
 
 ## Gradient Boosting
 
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 * Al igual que AdaBoost es un algoritmo secuencial. 
+
+]
+
+
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
 * A diferencia de AdaBoost:
 1. utilizamos árboles de decisión, pero no necesariamente, decision stumps. 
 
 2. No computamos los pesos en cada iteración, sino que se optimiza una función de pérdida diferenciable (loss function), por ejemplo, MSE para regresión. 
 
+]
+
+
+
 
 
 
 ---
 
-## Gradient Boosting (intuitivamente)
+class: inverse, center, middle
+
+## Veamos paso a paso
+
+
+---
+
+## Vamos a predecir el *peso* a partir de estas variables
+
+
+**Estamos ante un caso de regresión**
+&lt;img src="img/gbm1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+## Calculamos la media de esa variable 
+
+&lt;img src="img/gbm2.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+**A esa media le restamos el valor original de la variable**
+
+Decimos pseudo-residuales porque los residuales son un concepto de regresión lineal.
+
+&lt;img src="img/gbm3.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Primer árbol de decisión
+
+Uso los residuales en vez del valor verdadero 
+
+&lt;img src="img/gbm4.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+**Los valores que estan en la misma rama, los promediamos**
+
+&lt;img src="img/gbm5.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+**Si a la media aritmética de todas las muestras, le sumo el valor del residual, vemos q coincide con el valor verdadero**
+
+&lt;img src="img/gbm6.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+class: inverse, center, middle
+
+## Vamos a introducir el concepto de 
+
+--
+
+## tasa de aprendizaje
+
+
+---
+
+## Tasa de aprendizaje
+
+&lt;img src="img/learning-rate1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+**Importante: definir una tasa de aprendizaje óptima, ya que si ese valor es muy grande: el algoritmo no converge, pero si es muy pequeño: vamos a necesitar muchos pasos o épocas para la convergencia**
+
+]
+
+---
+
+
+**Agregamos la tasa de aprendizaje a nuestro modelo**
+
+En este caso, definimos, una tasa de aprendizaje igual a 0.1. 
+
+
+&lt;img src="img/gbm7.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+## Recordemos
+
+**En el contexto de una regresión lineal, siempre intentamos disminuir los residuales ya que eso implica disminuir el error en la predicción**
+
+
+&lt;img src="img/reg-res.svg" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+## Finalmente...
+
+**Los residuales han disminuido**
+&lt;img src="img/gbm8.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+**Graficamente se ve así**
 
 
 &lt;img src="img/gbm.png" width="70%" style="display: block; margin: auto;" /&gt;
 
 
 
----
 
-## Gradient Boosting 
-
-
-
-
----
-
-
-## Tasa de aprendizaje
-
-
-&lt;img src="img/LR-boosting.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
 
@@ -464,7 +573,7 @@ class: inverse, center, middle
 
 ## Algoritmo Gradient Boosting 
 
-
+*Está definido para clasificación*
 &lt;img src="img/gradient-boosting-algo.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 .footnote[Fuente: *Applied Predictive Modeling*]

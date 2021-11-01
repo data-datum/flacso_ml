@@ -476,19 +476,161 @@ class: inverse, center, middle
 
 ## Gradient Boosting
 
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 * Al igual que AdaBoost es un algoritmo secuencial. 
+
+]
+
+
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
 * A diferencia de AdaBoost:
 1. utilizamos árboles de decisión, pero no necesariamente, decision stumps. 
 
 2. No computamos los pesos en cada iteración, sino que se optimiza una función de pérdida diferenciable (loss function), por ejemplo, MSE para regresión. 
 
+]
+
+
+
 
 
 
 ---
 
-## Gradient Boosting (intuitivamente)
+class: inverse, center, middle
+
+## Veamos paso a paso
+
+
+---
+
+## Vamos a predecir el *peso* a partir de estas variables
+
+
+**Estamos ante un caso de regresión**
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/gbm1.png")
+```
+
+
+
+---
+
+## Calculamos la media de esa variable 
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm2.png")
+```
+
+---
+
+**A esa media le restamos el valor original de la variable**
+
+Decimos pseudo-residuales porque los residuales son un concepto de regresión lineal.
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm3.png")
+```
+
+---
+
+## Primer árbol de decisión
+
+Uso los residuales en vez del valor verdadero 
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm4.png")
+```
+
+
+---
+
+**Los valores que estan en la misma rama, los promediamos**
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm5.png")
+```
+
+
+---
+
+**Si a la media aritmética de todas las muestras, le sumo el valor del residual, vemos q coincide con el valor verdadero**
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm6.png")
+```
+
+
+---
+
+
+class: inverse, center, middle
+
+## Vamos a introducir el concepto de 
+
+--
+
+## tasa de aprendizaje
+
+
+---
+
+## Tasa de aprendizaje
+
+```{r echo=FALSE, out.width = '50%',  fig.align='center'}
+knitr::include_graphics("img/learning-rate1.png")
+```
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
+
+**Importante: definir una tasa de aprendizaje óptima, ya que si ese valor es muy grande: el algoritmo no converge, pero si es muy pequeño: vamos a necesitar muchos pasos o épocas para la convergencia**
+
+]
+
+---
+
+
+**Agregamos la tasa de aprendizaje a nuestro modelo**
+
+En este caso, definimos, una tasa de aprendizaje igual a 0.1. 
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm7.png")
+```
+
+---
+
+## Recordemos
+
+**En el contexto de una regresión lineal, siempre intentamos disminuir los residuales ya que eso implica disminuir el error en la predicción**
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/reg-res.svg")
+```
+
+
+
+---
+
+## Finalmente...
+
+**Los residuales han disminuido**
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/gbm8.png")
+```
+
+
+---
+
+**Graficamente se ve así**
 
 
 ```{r echo=FALSE, out.width = '70%',  fig.align='center'}
@@ -497,22 +639,7 @@ knitr::include_graphics("img/gbm.png")
 
 
 
----
 
-## Gradient Boosting 
-
-
-
-
----
-
-
-## Tasa de aprendizaje
-
-
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/LR-boosting.png")
-```
 
 
 
@@ -541,7 +668,7 @@ knitr::include_graphics("img/efecto-learning-rate-gbm.png")
 
 ## Algoritmo Gradient Boosting 
 
-
+*Está definido para clasificación*
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
 knitr::include_graphics("img/gradient-boosting-algo.png")
 ```
