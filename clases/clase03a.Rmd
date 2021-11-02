@@ -311,6 +311,17 @@ knitr::include_graphics("img/ada8.png")
 
 ---
 
+## ¿Cómo interpretar este gráfico?
+
+
+```{r echo=FALSE, out.width = '70%',  fig.align='center'}
+knitr::include_graphics("img/amount-of-say.png")
+```
+
+
+
+---
+
 ## Primer árbol de decisión
 
 
@@ -319,13 +330,6 @@ knitr::include_graphics("img/ada9.png")
 ```
 
 
----
-
-
-## Segundo árbol de decisión
-```{r echo=FALSE, out.width = '100%',  fig.align='center'}
-knitr::include_graphics("img/ada10.png")
-```
 
 ---
 
@@ -737,6 +741,7 @@ knitr::include_graphics("img/xgboost-adv.png")
 
 ---
 
+
 class: center, middle
 
 ## Optimizaciones que implementa XGBoost
@@ -746,6 +751,200 @@ class: center, middle
 
 ---
 
+class: inverse, center, middle
+
+## XGBoost
+
+--
+
+## Paso a paso
+
+
+---
+
+**Supongamos que nos interesa predecir la efectividad de una droga a partir de la dosis aplicada**
+
+```{r echo=FALSE, out.width = '90%',  fig.align='center'}
+knitr::include_graphics("img/xgb1.png")
+```
+
+
+---
+
+### Vamos a calcular la predicción por default
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb2.png")
+```
+
+
+---
+
+### Calculamos los residuales para cada predicción
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb3.png")
+```
+
+---
+
+
+## Similarity Score
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb5.png")
+```
+
+---
+
+### Fijamos en cero la regularización
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb6.png")
+```
+
+
+---
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb7.png")
+```
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb8.png")
+```
+
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb9.png")
+```
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb10.png")
+```
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb11.png")
+```
+
+
+---
+
+class: inverse, center, middle
+
+
+## Este árbol lo creamos con un threshold < 15
+
+--
+
+## Pero ese thresold podemos modificarlo
+
+---
+
+## Threshold < 22.5
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb12.png")
+```
+
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb-13.png")
+```
+
+
+
+---
+
+## Threshold < 30
+
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb-14.png")
+```
+
+
+
+---
+
+
+class: inverse, center, middle
+
+## Recien tenemos el nodo raíz de nuestro árbol
+
+---
+
+## Rama con Dosage < 22.5
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb15.png")
+```
+
+
+---
+
+## Rama con Dosage < 30
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb16.png")
+```
+
+
+
+
+---
+
+class: inverse, center, middle
+
+
+## ¿Cómo actua el gamma?
+
+
+
+
+
+---
+
+
+```{r echo=FALSE, out.width = '100%',  fig.align='center'}
+knitr::include_graphics("img/xgb-gamma.png")
+```
+
+
+
+---
+
+class: inverse, center, middle
+
+## Resumen
+
+
+---
 ### De árboles de decisión a XGBoost
 
 ```{r echo=FALSE, out.width = '100%',  fig.align='center'}
