@@ -479,7 +479,7 @@ class: inverse, center, middle
 
 
 .bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
-* Al igual que AdaBoost es un algoritmo secuencial. 
+* Al igual que AdaBoost es un algoritmo secuencial, y tiene en cuenta el error de los antiguos predictores. 
 
 ]
 
@@ -492,6 +492,10 @@ class: inverse, center, middle
 1. utilizamos árboles de decisión, pero no necesariamente, decision stumps. 
 
 2. No computamos los pesos en cada iteración, sino que se optimiza una función de pérdida diferenciable (loss function), por ejemplo, MSE para regresión. 
+
+3. Para un ejemplo de regresión, el nodo raíz, va a ser la media (average) de esa variable que intentamos predecir. 
+
+
 
 ]
 
@@ -687,12 +691,15 @@ class: inverse, center, middle
 
 --
 
-## Extreme Gradient Boosting
+## eXtreme Gradient Boosting
 
 
 ---
 
 ## XGBoost
+
+
+.bg-near-white.b--dark-blue.ba.bw2.br3.shadow-5.ph4.mt2[
 
 * Presentado originalmente por T.Chen & C.Guestrin (2016). XGBoost: A Scalable Tree Boosting System
 
@@ -707,13 +714,12 @@ class: inverse, center, middle
 * Opciones para hacer sampling de columnas y filas (similar a Random Forest). 
 
 
-
+]
 
 ---
 
 ## XGBoost
 
-* XGBoost = Extreme gradient boosting
 
 --
 
@@ -731,7 +737,7 @@ knitr::include_graphics("img/xgboost-adv.png")
 
 ---
 
-class: inverse, center, middle
+class: center, middle
 
 ## Optimizaciones que implementa XGBoost
 
