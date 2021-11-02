@@ -1,0 +1,40 @@
+---
+title: "Practica 3 Individual - Random Forest / XGBoost"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidymodels)
+```
+
+
+## Dataset
+
+
+El dataset es el mismo del TP1/TP2  y se encuentra disponible en: 
+
+https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data
+
+Lo podemos ingresar mediante el siguiente comando
+
+```{r}
+train <- read_csv("https://raw.githubusercontent.com/data-datum/datasets/main/train_house.csv")
+```
+
+
+**La variable a predecir es la de SalePrice.**
+
+
+## Consignas
+
+1. Implemente un modelo de Random Forest, puede ser con o sin Tunning de Hiperparámetros, siguiendo alguna de las prácticas guiadas. 
+
+2. Implemente un modelo de XGBoost con Tunning siguiendo la práctica guiada correspondiente. 
+
+3. ¿Con qué modelo obtuvo menor error? ¿Es conveniente un modelo más complejo? Discuta. 
