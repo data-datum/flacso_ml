@@ -45,7 +45,9 @@
 
 * Clase 3: https://data-datum.github.io/flacso_ml/clases/clase03a.html#1
 
-* Práctica guiada 4:
+* Práctica guiada 4: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-4.html
+
+* Práctica guiada 4 (Rmd): https://github.com/data-datum/flacso_ml/blob/main/practicas/practica-guiada-4.Rmd
 
 * Práctica guiada 5: https://data-datum.github.io/flacso_ml/practicas/practica-guiada-5.html
 
