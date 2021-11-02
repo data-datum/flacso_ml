@@ -56,3 +56,7 @@
 * Práctica individual 3 (Rmd): https://github.com/data-datum/flacso_ml/blob/main/practicas/TP3.Rmd
 
 * Práctica individual 3 (html): https://data-datum.github.io/flacso_ml/practicas/TP3.html#1
+
+* Quizz (Random Forest): https://www.menti.com/t9wsdb4epy
+
+* Quizz (Adaboost): https://www.menti.com/ehuitqyua2
