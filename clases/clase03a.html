@@ -256,17 +256,21 @@ class: inverse, center, middle
 
 ---
 
+## ¿Cómo interpretar este gráfico?
+
+
+&lt;img src="img/amount-of-say.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
 ## Primer árbol de decisión
 
 
 &lt;img src="img/ada9.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
----
-
-
-## Segundo árbol de decisión
-&lt;img src="img/ada10.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -638,6 +642,7 @@ class: inverse, center, middle
 
 ---
 
+
 class: center, middle
 
 ## Optimizaciones que implementa XGBoost
@@ -647,6 +652,168 @@ class: center, middle
 
 ---
 
+class: inverse, center, middle
+
+## XGBoost
+
+--
+
+## Paso a paso
+
+
+---
+
+**Supongamos que nos interesa predecir la efectividad de una droga a partir de la dosis aplicada**
+
+&lt;img src="img/xgb1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Vamos a calcular la predicción por default
+
+&lt;img src="img/xgb2.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+### Calculamos los residuales para cada predicción
+
+&lt;img src="img/xgb3.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+## Similarity Score
+
+&lt;img src="img/xgb5.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+### Fijamos en cero la regularización
+
+&lt;img src="img/xgb6.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+
+&lt;img src="img/xgb7.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+
+&lt;img src="img/xgb8.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+
+&lt;img src="img/xgb9.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+&lt;img src="img/xgb10.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+
+&lt;img src="img/xgb11.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+class: inverse, center, middle
+
+
+## Este árbol lo creamos con un threshold &lt; 15
+
+--
+
+## Pero ese thresold podemos modificarlo
+
+---
+
+## Threshold &lt; 22.5
+
+
+&lt;img src="img/xgb12.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+
+&lt;img src="img/xgb-13.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+## Threshold &lt; 30
+
+
+
+&lt;img src="img/xgb-14.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+
+class: inverse, center, middle
+
+## Recien tenemos el nodo raíz de nuestro árbol
+
+---
+
+## Rama con Dosage &lt; 22.5
+
+
+&lt;img src="img/xgb15.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+## Rama con Dosage &lt; 30
+
+
+&lt;img src="img/xgb16.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+---
+
+class: inverse, center, middle
+
+
+## ¿Cómo actua el gamma?
+
+
+
+
+
+---
+
+
+&lt;img src="img/xgb-gamma.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+
+class: inverse, center, middle
+
+## Resumen
+
+
+---
 ### De árboles de decisión a XGBoost
 
 &lt;img src="img/boosting-hierarchy.jpeg" width="100%" style="display: block; margin: auto;" /&gt;
