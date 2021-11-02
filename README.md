@@ -51,4 +51,6 @@
 
 * Práctica guiada 5 (Rmd): https://data-datum.github.io/flacso_ml/practicas/practica-guiada-5.Rmd
 
-* Trabajo individual 3: 
+* Prácitca individual 3 (Rmd): https://github.com/data-datum/flacso_ml/blob/main/practicas/TP3.Rmd
+
+* Práctica individual 3 (html): https://data-datum.github.io/flacso_ml/practicas/TP3.html#1
