@@ -895,6 +895,11 @@ class: inverse, center, middle
 
 ## Recien tenemos el nodo raíz de nuestro árbol
 
+
+--
+
+## Sigamos construyendo
+
 ---
 
 ## Rama con Dosage < 22.5
