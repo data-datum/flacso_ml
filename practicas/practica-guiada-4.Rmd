@@ -188,9 +188,11 @@ collect_predictions(final_res) %>%
 ```{r message=FALSE, warning=FALSE}
 library(vip)
 
-final_model %>%
+final_random_forest <- finalize_model(rf_tune, best_rmse)
+
+final_random_forest %>%
   set_engine("ranger", importance = "permutation") %>%
   fit(medv ~ .,
-      data = juice(recipe_rf)) %>%
-  vip(geom = "point")
+      data = p_train) %>%
+  vip::vip(geom = "point")
 ```
