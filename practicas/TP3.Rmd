@@ -17,18 +17,18 @@ library(tidymodels)
 ## Dataset
 
 
-El dataset es el mismo del TP1/TP2  y se encuentra disponible en: 
+El dataset se encuentra disponible en: 
 
-https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data
+https://www.kaggle.com/camnugent/california-housing-prices
 
 Lo podemos ingresar mediante el siguiente comando
 
 ```{r}
-train <- read_csv("https://raw.githubusercontent.com/data-datum/datasets/main/train_house.csv")
+train <- read_csv("https://raw.githubusercontent.com/data-datum/datasets/main/housing.csv")
 ```
 
 
-**La variable a predecir es la de SalePrice.**
+**La variable a predecir es la de median_house_value.**
 
 
 ## Consignas
@@ -38,3 +38,4 @@ train <- read_csv("https://raw.githubusercontent.com/data-datum/datasets/main/tr
 2. Implemente un modelo de XGBoost con Tunning siguiendo la práctica guiada correspondiente. 
 
 3. ¿Con qué modelo obtuvo menor error? ¿Es conveniente un modelo más complejo? Discuta. 
+
