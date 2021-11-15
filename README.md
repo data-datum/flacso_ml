@@ -60,3 +60,8 @@
 * Quizz (Random Forest): https://www.menti.com/t9wsdb4epy
 
 * Quizz (Adaboost): https://www.menti.com/ehuitqyua2
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* Regresión logística https://data-datum.github.io/flacso_ml/practicas/clasificacion-LR.html
