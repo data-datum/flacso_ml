@@ -1,0 +1,344 @@
+---
+title: "Práctica guiada - Clasificación con Regresión logística"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+
+Vamos a realizar una regresión logística. La regresión logística se utiliza para clasificar, más allá que el nombre de "regresión" pueda parecer engañoso, lo usamos en ML para hacer clasificaciones ya sean binarias (2 clases) o multiclase (más de una clase). 
+El ejemplo que vamos a utilizar está disponible en este link, PERO se optimiza otro algoritmo, Random Forest. 
+
+https://juliasilge.com/blog/water-sources/
+
+Esto nos va a ser útil para poder comparar y ver qué modelo tiene menor error. 
+
+## Variables del dataset 
+
+Los datos están disponibles en este link: https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-05-04/readme.md 
+Se ofrece una descripción del dataset además de detallarse los pasos de limpieza que se realizan a la base de datos original. Para una descripción del problema visitar https://www.waterpointdata.org/  
+
+**La variable a predecir es status_id** y nos dice si hay o no disponibles agua, según diferentes variables. 
+
+Estas variables son:
+
+* row_id: id 
+
+* lat_deg: latitud
+
+* lon_deg: longitud
+
+* report_date: fecha en que se reporto esa fuente de agua.
+
+* status_id: identifica si está disponible esa fuente de agua, el dia de la visita (si/no). 
+
+* water_source_clean: describe la fuente de agua (variable categórica)
+
+* water_tech: describe si el sistema utilizado para transportar el agua desde la fuente al punto de recolección (incluye la posibilidad de q sea un distribuidor).
+
+* facility_type: 
+
+* country_name: pais
+
+* install_year: año de la instalación
+
+* installer: instalador
+
+* pago: como se realiza el pago. 
+
+* status: estado de la condición física / mecánica del punto de agua.
+
+
+## Ingresamos las librerias
+```{r message=FALSE, warning=FALSE}
+library(tidymodels)
+library(tidyverse)
+library(themis) #esta libreria me permite trabajar con datos desbalanceados
+```
+
+
+## Ingreso el dataset
+```{r}
+water_raw <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-04/water.csv")
+```
+
+
+
+```{r}
+water_raw %>%
+  glimpse()
+```
+
+
+## Graficamos
+```{r}
+water_raw %>%
+  filter(
+    country_name == "Sierra Leone",
+    lat_deg > 0, lat_deg < 15, lon_deg < 0,
+    status_id %in% c("y", "n")
+  ) %>%
+  ggplot(aes(lon_deg, lat_deg, color = status_id)) +
+  geom_point(alpha = 0.1) +
+  coord_fixed() +
+  guides(color = guide_legend(override.aes = list(alpha = 1)))
+```
+
+
+
+## Preprocesamiento de datos (limpieza)
+
+Este paso se realiza sobre el dataset entero, ya que recodifico variables, elijo filas, etc. 
+Es una etapa de limpieza previo al modelado, por eso lo hago sobre el dataset entero. 
+
+**Este preprocesamiento es específico para este set de datos en particular.** 
+
+```{r}
+water <- water_raw %>%
+  filter(
+    country_name == "Sierra Leone",
+    lat_deg > 0, lat_deg < 15, lon_deg < 0,
+    status_id %in% c("y", "n")
+  ) %>%
+  mutate(pay = case_when(
+    str_detect(pay, "^No") ~ "no",
+    str_detect(pay, "^Yes") ~ "yes",
+    is.na(pay) ~ pay,
+    TRUE ~ "it's complicated"
+  )) %>%
+  select(-country_name, -status, -report_date) %>%
+  mutate_if(is.character, as.factor)
+```
+
+Luego de realizar la limpieza de datos, nos queda este dataset. 
+**La variable a predecir es status_id**
+
+Finalmente nos quedamos con 10 variables para modelar. 
+```{r}
+water %>%
+  glimpse()
+```
+
+
+* Veamos cuantos casos tenemos en SI y en NO.
+```{r}
+water %>%
+  count(status_id)
+```
+
+
+## Modelado
+
+**Divido los datos**
+
+```{r}
+#seteo la semilla
+set.seed(123)
+#divido los datos
+water_split <- initial_split(water, strata = status_id) #estratificamos segun las clases 
+water_train <- training(water_split)
+water_test <- testing(water_split)
+
+#folds de validación cruzada
+set.seed(234)
+water_folds <- vfold_cv(water_train, strata = status_id)
+water_folds
+
+```
+
+
+```{r}
+water_train
+```
+
+```{r}
+water_test 
+```
+
+
+```{r}
+water_train %>%
+  count(status_id)
+```
+
+
+
+```{r}
+water_test %>%
+  count(status_id)
+```
+
+Como podemos ver las proporciones en las clases se conservan. 
+
+## Receta
+
+En esta etapa voy a PREPROCESAR los datos para el modelo de machine learning. 
+
+**La variable a predecir es status_id**
+
+Funciones:
+
+* recipe(): aca ponemos la formula que vamos a modelar, es decir, el status_id según todas las variables presentes en el dataset, los datos que uso son los de train. 
+
+* update_role(): asignar un nuevo rol a una nueva variable. 
+
+* step_unknown(): asignar "unknown" a valores perdidos. 
+
+* step_other(): para trabajar con las categorias que tienen poca ocurrencia. 
+
+* step_impute_linear(): imputa un valor numérico segun un modelo lineal. 
+
+* step_downsample(): para balancear las clases (disminuimos la clase mayoritaria).
+
+```{r message=FALSE, warning=FALSE}
+library(themis) #esta libreria me permite trabajar con datos desbalanceados
+logistic_recipe <-
+  recipe(formula = status_id ~ ., data = water_train) %>%
+  update_role(row_id, new_role = "id") %>%
+  step_unknown(all_nominal_predictors()) %>%
+  step_other(all_nominal_predictors(), threshold = 0.03) %>%
+  step_impute_linear(install_year) %>%
+  step_downsample(status_id)
+```
+
+
+
+## Modelo propiamente dicho
+
+Especificamos el modelo, en este caso, una regresión logística. El set_mode() puede omitirse ya que con regresion logistica siempre hacemos clasificación. 
+
+```{r}
+logistic_spec <- logistic_reg() %>%
+  set_mode("classification") # esta linea puede omitirse
+```
+
+
+
+## Workflow
+
+Procedemos igual que las veces anteriores, agregando la receta y el modelo. 
+
+```{r}
+log_workflow <- workflow() %>%
+  add_recipe(logistic_recipe) %>%
+  add_model(logistic_spec)
+
+```
+
+
+
+
+## Entrenamiento del algoritmo
+
+Con la función fit_resamples() hacemos el ajuste de la función. 
+
+```{r}
+doParallel::registerDoParallel()
+set.seed(7443)
+logistic_rs <-
+  fit_resamples(log_workflow,
+    resamples = water_folds,
+    control = control_resamples(save_pred = TRUE)
+  )
+
+```
+
+
+## Performance
+
+Mediante la función collect_metrics() vamos a ver la performance del modelo, en TRAIN. 
+```{r}
+logistic_rs %>%
+  collect_metrics()
+```
+
+```{r}
+collect_predictions(logistic_rs) %>%
+  group_by(id) %>%
+  roc_curve(status_id, .pred_n) %>%
+  autoplot()
+```
+
+## Predicción
+
+En esta etapa con la función last_fit elijo el mejor modelo y lo utilizo para predecir en el set de datos de TEST. 
+* last_fit(): toma como argumento el workflow q cree anteriormente y el split q tiene los datos de TRAIN y de TEST. 
+```{r}
+final_fitted <- last_fit(log_workflow, water_split)
+final_fitted #imprimo
+```
+
+
+## Métricas
+
+Voy a ver las métricas del modelo con collect_metrics().
+
+```{r}
+final_fitted %>%
+  collect_metrics()
+```
+
+
+Tengo un accuracy del modelo, igual a 87.4 %, para una clasificación binaria, es un valor aceptable. 
+El área bajo la curva es de 0.90, y es un valor muy bueno también. 
+
+## Predicciones del modelo
+
+Las dos columnas que interesa mirar son:
+
+* .pred_class: es la clase predicha por el modelo
+
+* status_id: es la clase verdadera. 
+
+
+```{r}
+final_fitted %>%
+  collect_predictions()
+```
+
+
+
+## Matriz de confusión
+
+Para ello, vamos a utilizar la función conf_mat(). 
+
+La matriz de confusión nos permite ver de manera resumida en cuantos casos el modelo "acertó" en la clase (realizando una predicción correcta), y que en que casos, no (predicción incorrecta). 
+```{r}
+final_fitted %>%
+  collect_predictions() %>%
+  conf_mat(status_id, .pred_class) 
+```
+
+
+
+Como podemos ver los casos clasificados correctamente estan en la diagonal principal de la matriz de confusión, quedando por fuera de la misma, los FP y los FN. 
+
+*Mas información sobre la matriz de confusión en las slides teóricas de la clase 1.*
+
+
+## Actividad Práctica
+
+El modelo anterior de regresión logística utiliza todas las variables del dataset para realizar una clasificación. Esto lo vemos en este chunk de código. En R, eso lo indicamos escribiendo
+
+* status_id ~ . 
+
+Esto nos indica que estamos utilizando todas las variables para modelar la regresión logística. 
+
+
+### Consigna
+En vez de utilizar todas las variables, elija 2 variables (lat y long) y realice los mismos cálculos de regresión logística. 
+**La pregunta a contestar es ¿obtengo los mismos resultados utilizando solo los datos espaciales?**
+
+Para ello reemplazar con el siguiente chunk de R que corresponde a la forma en que se preprocesan los datos. 
+
+```{r message=FALSE, warning=FALSE, eval=FALSE}
+library(themis) #esta libreria me permite trabajar con datos desbalanceados
+logistic_recipe <-
+  recipe(formula = status_id ~ lat_deg + lon_deg + row_id, data = water_train) %>%
+  update_role(row_id, new_role = "id") %>%
+  step_downsample(status_id)
+```
+
