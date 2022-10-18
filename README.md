@@ -65,3 +65,5 @@
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 
 * Regresión logística https://data-datum.github.io/flacso_ml/practicas/clasificacion-LR.html
+
+* Regresión logística con remuestreo espacial https://data-datum.github.io/flacso_ml/practicas/clasificacion-LR-spatial.html
